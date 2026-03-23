@@ -1,0 +1,754 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuantLab â€” De Vuelta a las Compras</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #D1121B;
+    --red-bright: #FF2030;
+    --red-dim: #8B0A12;
+    --black: #060606;
+    --near-black: #0E0E0E;
+    --card: #111111;
+    --card2: #161616;
+    --border: rgba(209, 18, 27, 0.18);
+    --border-strong: rgba(255, 255, 255, 0.08);
+    --text: #F0EDED;
+    --text-muted: #9A9A9A;
+    --text-dim: #595959;
+    --accent-green: #22C55E;
+    --accent-red: #FF2030;
+    --accent-gold: #F59E0B;
+    --accent-blue: #3B82F6;
+    --body: 'DM Sans', sans-serif;
+    --mono: 'Space Mono', monospace;
+    --display: 'Bebas Neue', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: linear-gradient(135deg, #050505 0%, #120407 100%);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 14px;
+    line-height: 1.8;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: .55;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.08) 2px,
+      rgba(0, 0, 0, 0.08) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+    opacity: .35;
+  }
+
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background: rgba(6, 6, 6, 0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--display);
+    font-size: 1.8rem;
+    letter-spacing: 0.1em;
+    color: var(--text);
+    line-height: 1;
+    cursor: pointer;
+  }
+  .logo span { color: var(--red-bright); }
+
+  nav {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+  }
+  nav a {
+    font-family: var(--mono);
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--red-bright); }
+
+  .nav-tag {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    padding: 6px 14px;
+    background: var(--red);
+    color: #fff;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 72px 24px 120px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .meta-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border: 1px solid;
+  }
+  .tag-long { border-color: var(--red-bright); color: var(--red-bright); }
+  .tag-nasdaq { border-color: var(--accent-blue); color: var(--accent-blue); background: rgba(59, 130, 246, 0.12); }
+  .tag-algo { border-color: var(--accent-gold); color: var(--accent-gold); background: rgba(245, 158, 11, 0.12); }
+
+  .meta-date {
+    font-family: var(--mono);
+    color: var(--text-muted);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    margin-left: auto;
+  }
+
+  h1 {
+    font-family: var(--display);
+    font-size: clamp(3rem, 9vw, 6rem);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  h1 em {
+    font-style: normal;
+    color: var(--red-bright);
+  }
+
+  .subtitle {
+    font-size: 0.96rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 56px;
+    max-width: 600px;
+    border-left: 2px solid var(--red);
+    padding-left: 20px;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    margin-top: 56px;
+  }
+  .section-label span {
+    font-family: var(--mono);
+    font-size: 0.63rem;
+    color: var(--red);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .body-text {
+    font-size: 0.95rem;
+    line-height: 2;
+    color: #B5B5B5;
+    margin-bottom: 28px;
+  }
+  .body-text strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+  .body-text .highlight-green { color: var(--accent-green); }
+  .body-text .highlight-red { color: var(--accent-red); }
+  .body-text .highlight-gold { color: var(--accent-gold); }
+
+  .chart-wrap {
+    position: relative;
+    margin: 32px 0;
+    border: 1px solid var(--border-strong);
+    background: var(--card);
+    overflow: hidden;
+  }
+
+  .chart-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(209, 18, 27, 0.14) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .chart-label {
+    position: absolute;
+    top: 12px;
+    left: 14px;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.72);
+    padding: 2px 8px;
+    border: 1px solid var(--border-strong);
+  }
+
+  .chart-wrap img {
+    width: 100%;
+    display: block;
+    opacity: 0.92;
+    filter: brightness(0.95) contrast(1.05);
+  }
+
+  .levels-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin: 32px 0;
+    overflow: hidden;
+  }
+
+  .levels-side {
+    background: var(--card);
+    padding: 24px;
+  }
+
+  .levels-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+  .dot-green { background: var(--accent-green); box-shadow: 0 0 8px var(--accent-green); }
+  .dot-red { background: var(--accent-red); box-shadow: 0 0 8px var(--accent-red); }
+
+  .levels-header h3 {
+    font-family: var(--display);
+    font-size: 1.15rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+
+  .level-row {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 8px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+  }
+  .level-row:last-child { border-bottom: none; }
+
+  .level-price {
+    font-size: 0.95rem;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .level-touches {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+
+  .level-dist-neg { color: var(--accent-red); font-size: 0.75rem; }
+  .level-dist-pos { color: var(--accent-green); font-size: 0.75rem; }
+
+  .level-row.strong .level-price { color: var(--red-bright); }
+
+  .callout {
+    border: 1px solid rgba(209, 18, 27, 0.4);
+    background: rgba(209, 18, 27, 0.09);
+    padding: 24px 28px;
+    margin: 32px 0;
+    position: relative;
+  }
+  .callout::before {
+    content: 'ANALISIS';
+    position: absolute;
+    top: -1px;
+    left: 20px;
+    transform: translateY(-50%);
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    color: var(--red-bright);
+    background: var(--near-black);
+    padding: 0 8px;
+  }
+
+  .callout p {
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.9;
+  }
+
+  .signal-box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin: 40px 0;
+    overflow: hidden;
+  }
+
+  .signal-cell {
+    background: var(--card2);
+    padding: 20px 18px;
+    text-align: center;
+  }
+
+  .signal-cell .s-label {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .signal-cell .s-value {
+    font-family: var(--display);
+    font-size: 1.6rem;
+    color: var(--text);
+  }
+  .signal-cell .s-value.up { color: var(--accent-green); }
+  .signal-cell .s-value.down { color: var(--accent-red); }
+  .signal-cell .s-value.neutral { color: var(--accent-gold); }
+
+  .strategy-list {
+    list-style: none;
+    margin: 0 0 28px;
+  }
+  .strategy-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-strong);
+    font-size: 0.9rem;
+    color: #B0B0B0;
+    line-height: 1.7;
+  }
+  .strategy-list li::before {
+    content: '>';
+    color: var(--red-bright);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .strategy-list li strong { color: var(--text); font-weight: 500; }
+
+  footer {
+    border-top: 1px solid var(--border);
+    background: var(--near-black);
+    padding: 32px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--text-dim);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    position: relative;
+    z-index: 2;
+  }
+
+  .footer-logo {
+    font-size: 1.2rem;
+    cursor: default;
+  }
+
+  .disclaimer {
+    max-width: 500px;
+    line-height: 1.7;
+    color: #7E7E7E;
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .anim { animation: fadeUp 0.6s ease both; }
+  .anim-1 { animation-delay: 0.05s; }
+  .anim-2 { animation-delay: 0.15s; }
+  .anim-3 { animation-delay: 0.25s; }
+  .anim-4 { animation-delay: 0.35s; }
+
+  @media (max-width: 640px) {
+    header {
+      padding: 12px 16px;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    nav {
+      width: 100%;
+      justify-content: flex-start;
+      gap: 14px;
+    }
+    .levels-grid { grid-template-columns: 1fr; }
+    .signal-box { grid-template-columns: 1fr; }
+    main { padding: 44px 16px 72px; }
+    footer { flex-direction: column; gap: 16px; padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo" onclick="window.location.href='quantlab.html'">Quant<span>Lab</span></div>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="quantlab.html">Plataforma</a>
+    <a href="blog.html">Blog</a>
+    <span class="nav-tag">Analisis</span>
+  </nav>
+</header>
+
+<main>
+
+  <!-- Meta -->
+  <div class="meta-bar anim anim-1">
+    <span class="tag tag-long">LONG</span>
+    <span class="tag tag-nasdaq">NASDAQ</span>
+    <span class="tag tag-algo">ALGO</span>
+    <span class="meta-date">21 MAR 2026 · NQ1! · 15M</span>
+  </div>
+
+  <!-- Title -->
+  <h1 class="anim anim-2">De vuelta a<br>las <em>compras</em></h1>
+
+  <p class="subtitle anim anim-3">
+    Despues de casi un mes bajista en Nasdaq y Dow Jones desde el 26 de febrero, volvemos a posicionarnos en largos tras el barrido de liquidez en la zona de los <strong style="color:#fff">24,039.5 - 23,973.1</strong>.
+  </p>
+
+  <!-- Signal summary -->
+  <div class="signal-box anim anim-4">
+    <div class="signal-cell">
+      <span class="s-label">Sesgo</span>
+      <span class="s-value up">LONG</span>
+    </div>
+    <div class="signal-cell">
+      <span class="s-label">Zona entrada</span>
+      <span class="s-value neutral">24,039-23,675.5</span>
+    </div>
+    <div class="signal-cell">
+      <span class="s-label">Objetivo</span>
+      <span class="s-value up">24,395.3/Nuevo ATH</span>
+    </div>
+  </div>
+
+  <!-- Section 1: Z-Score -->
+  <div class="section-label">
+    <span>01 · Z-Score Algoritmico</span>
+  </div>
+
+  <p class="body-text">
+    Aprovecho esta zona para buscar posibles compras. Segun uno de mis programas algori­tmicos desarrollados para <strong>QuantLab</strong>, el Z-Score del precio en velas de <strong>15m</strong> confirma que estamos en <span class="highlight-green">una de las mejores zonas estadisticas para tomar largos</span>. Las seÃ±ales verdes (flechas hacia abajo del Z-Score) indican zonas de sobreventa estadÃ­stica donde historicamente el precio ha revertido.
+  </p>
+
+  <div class="chart-wrap">
+    <span class="chart-label">Z-Score · Rolling · Feb 23  Mar 22</span>
+    <img src="/web/img/foto1.png" alt="Z-Score del Precio rolling NASDAQ">
+  </div>
+
+  <p class="body-text">
+    El Z-Score muestra que estamos cruzando el umbral de <span class="highlight-red">-2Ïƒ</span> de forma consistente en la zona actual, lo que histÃ³ricamente ha precedido reversiones de importancia. La señal mas reciente coincide con el barrido de liquidez observado en los minimos del 21 de marzo.
+  </p>
+
+  <!-- Section 2: Estructura de precio -->
+  <div class="section-label">
+    <span>02 · Estructura de Precio & Señales</span>
+  </div>
+
+  <p class="body-text">
+    El grafico de estructura de precio muestra con claridad como el mercado ha respetado los niveles algoritmicos. El <strong>POC (Point of Control)</strong> se ubica en <strong>$24,963.73</strong>, siendo la zona de mayor volumen negociado del utimo mes y un imÃ¡n de precio natural.
+  </p>
+
+  <div class="chart-wrap">
+    <span class="chart-label">Estructura · SeÃ±ales Algori­tmicas · NQ1!</span>
+    <img src="/web/img/foto2.png" alt="Estructura de precio NASDAQ con seÃ±ales">
+  </div>
+
+  <div class="callout">
+    <p>
+      Las zonas LZ 6.0% y LZ 5.3% marcadas por el algoritmo delimitan el rango de valor actual. El precio esta cotizando <strong>por debajo del POC</strong>, lo que aumenta la probabilidad de atraccion hacia arriba en el corto plazo.
+    </p>
+  </div>
+
+  <!-- Section 3: Niveles Clave -->
+  <div class="section-label">
+    <span>03 Â· Niveles Clave</span>
+  </div>
+
+  <p class="body-text">
+    A largo plazo, los niveles mas relevantes son los siguientes. La zona <span class="highlight-green">$24,799.06</span> acumula 40 toques en el ultimo mes, constituyendo el soporte mas salido del entorno actual. Junto a <span class="highlight-green">$24,991.88</span> con 23 toques, forman una base de demanda robusta. Del lado de la oferta, <span class="highlight-red">$25,099.71</span> con 45 toques es la resistencia clave mas testeada del periodo. A corto plazo, el nivel de <span class="highlight-green">$23,675.5</span> sera critico para confirmar la reversion hacia arriba.
+  </p>
+
+  <div class="chart-wrap">
+    <span class="chart-label">Niveles Clave · Soportes & Resistencias</span>
+    <img src="/web/img/foto3.png" alt="Tabla de niveles clave">
+  </div>
+
+  <!-- Levels table -->
+  <div class="levels-grid">
+    <div class="levels-side">
+      <div class="levels-header">
+        <div class="dot dot-green"></div>
+        <h3>Soportes</h3>
+      </div>
+      <div class="level-row strong">
+        <span class="level-price">$24,799.06</span>
+        <span class="level-touches">40 toques</span>
+        <span class="level-dist-neg">-2.40%</span>
+      </div>
+      <div class="level-row">
+        <span class="level-price">$24,991.88</span>
+        <span class="level-touches">23 toques</span>
+        <span class="level-dist-neg">-3.20%</span>
+      </div>
+      <div class="level-row">
+        <span class="level-price">$24,533.69</span>
+        <span class="level-touches">20 toques</span>
+        <span class="level-dist-neg">-1.31%</span>
+      </div>
+      <div class="level-row">
+        <span class="level-price">$24,324.92</span>
+        <span class="level-touches">12 toques</span>
+        <span class="level-dist-neg">-0.44%</span>
+      </div>
+      <div class="level-row">
+        <span class="level-price">$25,279.61</span>
+        <span class="level-touches">7 toques</span>
+        <span class="level-dist-neg">-4.39%</span>
+      </div>
+    </div>
+
+    <div class="levels-side">
+      <div class="levels-header">
+        <div class="dot dot-red"></div>
+        <h3>Resistencias</h3>
+      </div>
+      <div class="level-row strong">
+        <span class="level-price">$25,099.71</span>
+        <span class="level-touches">45 toques</span>
+        <span class="level-dist-pos">+3.64%</span>
+      </div>
+      <div class="level-row">
+        <span class="level-price">$24,855.59</span>
+        <span class="level-touches">31 toques</span>
+        <span class="level-dist-pos">+2.64%</span>
+      </div>
+      <div class="level-row">
+        <span class="level-price">$24,597.68</span>
+        <span class="level-touches">19 toques</span>
+        <span class="level-dist-pos">+1.57%</span>
+      </div>
+      <div class="level-row">
+        <span class="level-price">$25,350.40</span>
+        <span class="level-touches">5 toques</span>
+        <span class="level-dist-pos">+4.68%</span>
+      </div>
+      <div class="level-row">
+        <span class="level-price">$24,296.58</span>
+        <span class="level-touches">3 toques</span>
+        <span class="level-dist-pos">+0.33%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4: PredicciÃ³n -->
+  <div class="section-label">
+    <span>04 Â· PredicciÃ³n Espectral</span>
+  </div>
+
+  <p class="body-text">
+    Tomando como base las velas de <strong>15m</strong> de este ultimo mes, el modelo de prediccion espectral sugiere que estamos en una <span class="highlight-green">reversion hacia un possible nuevo ciclo alcista</span>. La estimacion (linea roja discontinua) proyecta un giro al alza desde los niveles actuales, alineandose con el analisis de estructura y Z-Score.
+  </p>
+
+  <div class="chart-wrap">
+    <span class="chart-label">Prediccion Espectral · Precio Observado vs Estimacion · 15M</span>
+    <img src="/web/img/foto4.png" alt="Prediccion espectral NASDAQ 15m">
+  </div>
+
+  <p class="body-text">
+    La magnitud espectral (cuadrados rojos) identifica los pivotes de mayor energia alcista. El modelo filtra el ruido de corto plazo y expone la <strong>tendencia dominante subyacente</strong>, que actualmente apunta a un proceso de acumulacion con sesgo alcista de cara a las proximas semanas.
+  </p>
+
+  <!-- Strategy -->
+  <div class="section-label">
+    <span>05 · Estrategia</span>
+  </div>
+
+  <ul class="strategy-list">
+    <li>
+      <strong>Sesgo de corto plazo:</strong> Posiciones largas intradía aprovechando las reacciones desde los soportes algorítmicos, especialmente $24,799 y $23,675.5.
+    </li>
+    <li>
+      <strong>Sesgo swing:</strong> Mantener orientación long mientras el precio se mantenga sobre $23,675.5. El barrido de liquidez ya fue ejecutado.
+    </li>
+    <li>
+      <strong>Target primario:</strong> Recapturar el rango $24,991-$25,099 en primera instancia, con vista a extensiÃ³n hacia un nuevo ATH.
+    </li>
+    <li>
+      <strong>Gestion del riesgo:</strong> Invalidacion del escenario largo por debajo de $23,675.5. Aunque historicamente he demostrado mayor rentabilidad en cortos, el contexto tecnico actual favorece los largos.
+    </li>
+    <li>
+      <strong>Confirmacion algori­tmica:</strong> Esperar cierre de vela de 15m por encima de $24,296 ($24,296.58 resistencia con 3 toques) para confirmar entrada.
+    </li>
+  </ul>
+
+
+  <!-- Section 6: Resultados -->
+  <div class="section-label">
+    <span>06 · Resultados</span>
+  </div>
+
+  <p class="body-text">
+    La operacion fue ejecutada buscando un ratio de <strong>1:7</strong> desde la zona de resistencia en <span class="highlight-gold">$23,675.5</span>, promediando contratos en cada descuento hacia las zonas de compra definidas por el algoritmo. La gestion de posicion siguio un protocolo escalonado: entrada inicial en resistencia y adiciones progresivas conforme el precio ofrecia nuevos descuentos.
+  </p>
+
+  <!-- Trade result summary box -->
+  <div class="signal-box">
+    <div class="signal-cell">
+      <span class="s-label">Entrada</span>
+      <span class="s-value neutral">~23,675.5</span>
+    </div>
+    <div class="signal-cell">
+      <span class="s-label">TP alcanzado</span>
+      <span class="s-value up">+$3,130</span>
+    </div>
+    <div class="signal-cell">
+      <span class="s-label">Ratio R:R</span>
+      <span class="s-value up">1:7</span>
+    </div>
+  </div>
+
+  <p class="body-text">
+    El grafico de estructura de mercado (imagen 1) muestra la zona operada en contexto macro: el precio se encontraba en el extremo inferior del rango de valor, con el <strong>VAL (Value Area Low) en $23,854.5</strong> y el <strong>PDC en $24,388.2</strong> como targets naturales de recuperacion. La operacion aprovecho el barrido de liquidez en los minimos para posicionarse con el viento macro a favor.
+  </p>
+
+  <div class="chart-wrap">
+    <span class="chart-label">Contexto Macro · Estructura & Volume Profile · NQ1!</span>
+    <img src="/web/img/resultado1.png" alt="Estructura macro NASDAQ con zonas de valor">
+  </div>
+
+  <p class="body-text">
+    El modelo espectral (imagen 2) confirmo el sesgo bajista residual al momento de la entrada, con una <strong>prediccion siguiente de 24,032.9</strong> y direccion de estado <span class="highlight-red">Bajista</span>. Sin embargo, la lectura  indicaba <em>"Precio alineado con el estado filtrado"</em>, lo que en contexto de zona extrema de demanda representa una señal contraria de alta probabilidad. El modelo espectral actuo como filtro de confirmacion, no como bloqueador de la entrada.
+  </p>
+
+  <div class="chart-wrap">
+    <span class="chart-label">Prediccion Espectral · NASDAQ 15M</span>
+    <img src="/web/img/resultado2.png" alt="Prediccion espectral ">
+  </div>
+
+  <div class="callout" style="--callout-label: 'RESULTADO';">
+    <p>
+      El precio reacciono desde los minimos del <strong>23 de marzo</strong> generando un movimiento explosivo hacia arriba que alcanzo los niveles de TP proyectados. Las zonas de compra escalonadas (<strong>$24,078 → $24,179 → $24,204 → $24,286</strong>) fueron activadas en la recuperacion, cerrando la operacion compuesta con <span class="highlight-green">+$3,130 netos</span> antes del cierre de sesion.
+    </p>
+  </div>
+
+  <div class="chart-wrap">
+    <span class="chart-label">Ejecucion · USTECm M1 · 23 Mar 2026</span>
+    <img src="/web/img/resultado3.png" alt="Grafico de ejecucion con zonas BUY activadas">
+  </div>
+
+  <p class="body-text">
+    La imagen de ejecucion en M1 ilustra el barrido previo a la expansion alcista. Las zonas <strong>BUY</strong> marcadas por el algoritmo en <span class="highlight-gold">$23,800 · $23,897 · $24,078 · $24,179 · $24,204 · $24,286</span> actuaron como magnetes de precio en la recuperacion. El precio cerro la sesion en <strong>$24,404</strong>, completando el recorrido proyectado desde el analisis del dia anterior.
+  </p>
+
+  <!-- Final result callout -->
+  <div style="
+    border: 1px solid rgba(34,197,94,0.35);
+    background: rgba(34,197,94,0.07);
+    padding: 28px 32px;
+    margin: 40px 0 0;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 24px;
+  ">
+    <div>
+      <p style="font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; color: var(--accent-green); text-transform: uppercase; margin-bottom: 10px;">Trade Cerrado · 23 Mar 2026</p>
+      <p style="font-size: 0.92rem; color: #C0C0C0; line-height: 1.8;">
+        Entrada en resistencia <strong style="color:#fff">$23,675.5</strong> con promediado de contratos. Target primario alcanzado. El analisis algoritmico, la estructura de precio y el modelo espectral conflueron en una de las mejores entradas del mes.
+      </p>
+    </div>
+    <div style="text-align: right; flex-shrink: 0;">
+      <p style="font-family: var(--display); font-size: 3rem; color: var(--accent-green); line-height: 1; letter-spacing: 0.04em;">+$3,130</p>
+      <p style="font-family: var(--mono); font-size: 0.6rem; color: var(--text-muted); letter-spacing: 0.1em; margin-top: 4px;">NETO · 1 SESION</p>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="logo footer-logo">Quant<span>Lab</span></div>
+  <p class="disclaimer">Este analisis es de caracter informativo y no constituye asesoramiento financiero. El trading conlleva riesgo de perdida de capital. Opera siempre con gestion de riesgo adecuada.</p>
+</footer>
+
+</body>
+</html>
