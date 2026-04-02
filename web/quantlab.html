@@ -535,7 +535,8 @@ function loadSubscriptionSdk() {
     }
 
     const script = document.createElement('script');
-    script.src = 'https://www.paypal.com/sdk/js?client-id=Adh3H_4ZOSynAQDBuTa-A0eeKS2dKI4KKvaY5HPpUBx5X4HU3VOKG97Q5IsW054CluCfMBqm2uOg-JlZ&vault=true&intent=subscription&data-namespace=paypalSubscription';
+    script.src = 'https://www.paypal.com/sdk/js?client-id=Adh3H_4ZOSynAQDBuTa-A0eeKS2dKI4KKvaY5HPpUBx5X4HU3VOKG97Q5IsW054CluCfMBqm2uOg-JlZ&vault=true&intent=subscription';
+    script.dataset.namespace = 'paypalSubscription';
     script.dataset.sdkIntegrationSource = 'button-factory';
     script.dataset.paypalSubscriptionSdk = 'true';
     script.onload = () => resolve(window.paypalSubscription);
