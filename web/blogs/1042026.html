@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuantLab - Semana 6: Rebote Estructural, Sesgo Bajista</title>
+<link rel="shortcut icon" href="ico.ico" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T5TCQ0Q5K5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-T5TCQ0Q5K5');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #D1121B;
+    --red-bright: #FF2030;
+    --red-dim: #8B0A12;
+    --near-black: #0E0E0E;
+    --card: #111111;
+    --card2: #161616;
+    --border: rgba(209, 18, 27, 0.18);
+    --border-strong: rgba(255, 255, 255, 0.08);
+    --text: #F0EDED;
+    --text-muted: #9A9A9A;
+    --text-dim: #595959;
+    --accent-green: #22C55E;
+    --accent-red: #FF2030;
+    --accent-gold: #F59E0B;
+    --accent-blue: #3B82F6;
+    --body: 'DM Sans', sans-serif;
+    --mono: 'Space Mono', monospace;
+    --display: 'Bebas Neue', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: linear-gradient(135deg, #050505 0%, #120407 100%);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 14px;
+    line-height: 1.8;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: .55;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.08) 2px, rgba(0, 0, 0, 0.08) 4px);
+    pointer-events: none;
+    z-index: 1;
+    opacity: .35;
+  }
+
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background: rgba(6, 6, 6, 0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo { font-family: var(--display); font-size: 1.8rem; letter-spacing: 0.1em; color: var(--text); line-height: 1; cursor: pointer; }
+  .logo span { color: var(--red-bright); }
+
+  nav { display: flex; gap: 32px; align-items: center; }
+  nav a { font-family: var(--mono); color: var(--text-muted); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; }
+  nav a:hover { color: var(--red-bright); }
+
+  .nav-tag { font-family: var(--mono); font-size: 0.62rem; padding: 6px 14px; background: var(--red); color: #fff; letter-spacing: 0.14em; text-transform: uppercase; }
+
+  main { max-width: 860px; margin: 0 auto; padding: 72px 24px 120px; position: relative; z-index: 2; }
+
+  .meta-bar { display: flex; align-items: center; gap: 16px; margin-bottom: 40px; flex-wrap: wrap; }
+
+  .tag { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 5px 12px; border: 1px solid; }
+  .tag-short { border-color: var(--red-bright); color: var(--red-bright); background: rgba(255, 32, 48, 0.08); }
+  .tag-nasdaq { border-color: var(--accent-blue); color: var(--accent-blue); background: rgba(59, 130, 246, 0.12); }
+  .tag-algo { border-color: var(--accent-gold); color: var(--accent-gold); background: rgba(245, 158, 11, 0.12); }
+  .meta-date { font-family: var(--mono); color: var(--text-muted); font-size: 0.65rem; letter-spacing: 0.08em; margin-left: auto; }
+
+  h1 { font-family: var(--display); font-size: clamp(3rem, 9vw, 6rem); line-height: 0.92; letter-spacing: 0.02em; color: var(--text); margin-bottom: 20px; }
+  h1 em { font-style: normal; color: var(--red-bright); }
+
+  .subtitle { font-size: 0.96rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 56px; max-width: 650px; border-left: 2px solid var(--red); padding-left: 20px; }
+
+  .section-label { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; margin-top: 56px; }
+  .section-label span { font-family: var(--mono); font-size: 0.63rem; color: var(--red); letter-spacing: 0.18em; text-transform: uppercase; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .body-text { font-size: 0.95rem; line-height: 2; color: #B5B5B5; margin-bottom: 28px; }
+  .body-text strong { color: var(--text); font-weight: 500; }
+  .highlight-green { color: var(--accent-green); }
+  .highlight-red { color: var(--accent-red); }
+  .highlight-gold { color: var(--accent-gold); }
+
+  .signal-box { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin: 40px 0; overflow: hidden; }
+  .signal-cell { background: var(--card2); padding: 20px 18px; text-align: center; }
+  .signal-cell .s-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px; display: block; }
+  .signal-cell .s-value { font-family: var(--display); font-size: 1.6rem; color: var(--text); }
+  .signal-cell .up { color: var(--accent-green); }
+  .signal-cell .down { color: var(--accent-red); }
+  .signal-cell .neutral { color: var(--accent-gold); }
+
+  .callout { border: 1px solid rgba(209, 18, 27, 0.4); background: rgba(209, 18, 27, 0.09); padding: 24px 28px; margin: 32px 0; position: relative; }
+  .callout::before { content: 'ANALISIS'; position: absolute; top: -1px; left: 20px; transform: translateY(-50%); font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.18em; color: var(--red-bright); background: var(--near-black); padding: 0 8px; }
+  .callout p { font-size: 0.9rem; color: var(--text); line-height: 1.9; }
+
+  .callout-warning { border: 1px solid rgba(245, 158, 11, 0.4); background: rgba(245, 158, 11, 0.07); padding: 24px 28px; margin: 32px 0; position: relative; }
+  .callout-warning::before { content: 'TIMING'; position: absolute; top: -1px; left: 20px; transform: translateY(-50%); font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.18em; color: var(--accent-gold); background: var(--near-black); padding: 0 8px; }
+  .callout-warning p { font-size: 0.9rem; color: var(--text); line-height: 1.9; }
+
+  .levels-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); margin: 32px 0; overflow: hidden; }
+  .levels-side { background: var(--card); padding: 24px; }
+  .levels-header { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .dot-red { background: var(--accent-red); box-shadow: 0 0 8px var(--accent-red); }
+  .dot-green { background: var(--accent-green); box-shadow: 0 0 8px var(--accent-green); }
+  .levels-header h3 { font-family: var(--display); font-size: 1.15rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); }
+
+  .level-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 10px 0; border-bottom: 1px solid var(--border); align-items: center; }
+  .level-row:last-child { border-bottom: none; }
+  .level-price { font-size: 0.95rem; color: var(--text); font-weight: 500; }
+  .level-tag { font-family: var(--mono); font-size: 0.62rem; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; }
+
+  .confidence-bar { background: var(--card2); border: 1px solid var(--border); padding: 24px 28px; margin: 32px 0; }
+  .conf-header { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red-bright); margin-bottom: 14px; }
+  .conf-title { font-family: var(--display); font-size: 1.8rem; letter-spacing: 0.06em; color: var(--text); margin-bottom: 18px; }
+  .bar-track { height: 6px; background: rgba(255, 255, 255, 0.08); width: 100%; overflow: hidden; }
+  .bar-fill { height: 100%; background: linear-gradient(90deg, var(--red-dim), var(--red-bright)); width: 82%; }
+  .conf-meta { font-family: var(--mono); font-size: 0.62rem; color: var(--text-muted); margin-top: 10px; }
+
+  .strategy-list { list-style: none; margin: 0 0 28px; }
+  .strategy-list li { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border-strong); font-size: 0.9rem; color: #B0B0B0; line-height: 1.7; }
+  .strategy-list li::before { content: '>'; color: var(--red-bright); flex-shrink: 0; margin-top: 2px; }
+  .strategy-list li strong { color: var(--text); font-weight: 500; }
+
+  footer { border-top: 1px solid var(--border); background: var(--near-black); padding: 32px 48px; display: flex; align-items: center; justify-content: space-between; color: var(--text-dim); font-size: 10px; letter-spacing: 0.1em; position: relative; z-index: 2; }
+  .footer-logo { font-size: 1.2rem; cursor: default; }
+  .disclaimer { max-width: 520px; line-height: 1.7; color: #7E7E7E; font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .anim { animation: fadeUp 0.6s ease both; }
+  .anim-1 { animation-delay: 0.05s; }
+  .anim-2 { animation-delay: 0.15s; }
+  .anim-3 { animation-delay: 0.25s; }
+  .anim-4 { animation-delay: 0.35s; }
+
+  @media (max-width: 640px) {
+    header { padding: 12px 16px; flex-wrap: wrap; gap: 14px; }
+    nav { width: 100%; justify-content: flex-start; gap: 14px; }
+    .signal-box { grid-template-columns: 1fr; }
+    .levels-grid { grid-template-columns: 1fr; }
+    main { padding: 44px 16px 72px; }
+    footer { flex-direction: column; gap: 16px; padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo" onclick="window.location.href='quantlab.html'">Quant<span>Lab</span></div>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="quantlab.html">Plataforma</a>
+    <a href="blog.html">Blog</a>
+    <span class="nav-tag">Analisis</span>
+  </nav>
+</header>
+
+<main>
+  <div class="meta-bar anim anim-1">
+    <span class="tag tag-short">SHORT</span>
+    <span class="tag tag-nasdaq">NASDAQ</span>
+    <span class="tag tag-algo">QUANTLAB</span>
+    <span class="meta-date">01 APR 2026 - NQ - 15M</span>
+  </div>
+
+  <h1 class="anim anim-2">Semana 6:<br>rebote <em>estructural</em></h1>
+
+  <p class="subtitle anim anim-3">
+    El mercado completa seis semanas consecutivas de caida. Aunque en promedio la semana seis suele cerrar en verde cerca del 62% de las veces, este rebote no cambia la tesis principal: el impulso actual responde a flujos de cierre de trimestre y no a un cambio real de tendencia.
+  </p>
+
+  <div class="signal-box anim anim-4">
+    <div class="signal-cell">
+      <span class="s-label">Sesgo</span>
+      <span class="s-value down">SELL</span>
+    </div>
+    <div class="signal-cell">
+      <span class="s-label">Zona de venta</span>
+      <span class="s-value neutral">24008.8 - 24045.5</span>
+    </div>
+    <div class="signal-cell">
+      <span class="s-label">Invalidacion</span>
+      <span class="s-value up">24141.7</span>
+    </div>
+  </div>
+
+  <div class="section-label">
+    <span>01 - Contexto de mercado</span>
+  </div>
+
+  <p class="body-text">
+    Ver una sexta semana potencialmente verde no significa que el mercado este listo para subir de forma sostenida. La estadistica del <strong>62%</strong> describe un comportamiento frecuente de corto plazo, pero no explica por si sola el origen del movimiento.
+  </p>
+
+  <p class="body-text">
+    En este caso, el factor dominante es el cambio de trimestre: <strong>hoy cierra Q1 y abre Q2</strong>. Al final de cada trimestre, fondos y bancos deben rebalancear su exposicion. Si sus carteras 60/40 quedan desbalanceadas por una caida agresiva en renta variable, se ven forzados a recomprar activos para volver al peso objetivo. Ese flujo puede provocar un rally rapido, pero sigue siendo un movimiento <span class="highlight-gold">estructural de rebalanceo</span>, no una validacion fundamental ni tecnica.
+  </p>
+
+  <div class="callout-warning">
+    <p>
+      Este texto fue escrito el <strong>1 de abril de 2026</strong>, antes de la apertura del Nasdaq del <strong>2 de abril de 2026</strong>. La lectura central es clara: <span class="highlight-red">comprar en euforia de cierre trimestral es una mala decision de timing</span>.
+    </p>
+  </div>
+
+  <div class="section-label">
+    <span>02 - Analisis tecnico en venta</span>
+  </div>
+
+  <p class="body-text">
+    Dentro del Nasdaq, la zona de <span class="highlight-red">24008.8</span> se mantiene como resistencia de alto volumen. El escenario mas probable es un <strong>liquidity sweep</strong> sobre esa franja para luego retomar presion bajista hacia <span class="highlight-green">23491.7</span>, idealmente antes de la apertura oficial de la sesion siguiente.
+  </p>
+
+  <div class="levels-grid">
+    <div class="levels-side">
+      <div class="levels-header">
+        <div class="dot dot-red"></div>
+        <h3>Plan de venta</h3>
+      </div>
+      <div class="level-row">
+        <span class="level-price">24008.8 - 24045.5</span>
+        <span class="level-tag">Zona de entrada</span>
+      </div>
+      <div class="level-row">
+        <span class="level-price">24141.7</span>
+        <span class="level-tag">Stop (ultimo higher high)</span>
+      </div>
+      <div class="level-row">
+        <span class="level-price">23678.8</span>
+        <span class="level-tag">TP1</span>
+      </div>
+      <div class="level-row">
+        <span class="level-price">23491.7</span>
+        <span class="level-tag">TP2</span>
+      </div>
+      <div class="level-row">
+        <span class="level-price">23334.8</span>
+        <span class="level-tag">TP3</span>
+      </div>
+    </div>
+
+    <div class="levels-side">
+      <div class="levels-header">
+        <div class="dot dot-green"></div>
+        <h3>Tesis operativa</h3>
+      </div>
+      <div class="level-row">
+        <span class="level-price">Sesgo primario</span>
+        <span class="level-tag">Bajista</span>
+      </div>
+      <div class="level-row">
+        <span class="level-price">Catalizador del rebote</span>
+        <span class="level-tag">Rebalanceo Q1/Q2</span>
+      </div>
+      <div class="level-row">
+        <span class="level-price">Lectura del impulso actual</span>
+        <span class="level-tag">Momentum temporal</span>
+      </div>
+      <div class="level-row">
+        <span class="level-price">Postura</span>
+        <span class="level-tag">Conservar liquidez</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">
+    <span>03 - QuantLab system</span>
+  </div>
+
+  <p class="body-text">
+    QuantLab marca un impulso bajista dominante previo al 2 de abril, con confluencia en la zona de <strong>24008.8 - 24045.5</strong> para buscar incorporacion en corto. La proyeccion mantiene objetivos escalonados y gestion por estructura, no por emociones de corto plazo.
+  </p>
+
+  <div class="confidence-bar">
+    <div class="conf-header">Signal Strength</div>
+    <div class="conf-title">Probabilidad de continuidad bajista</div>
+    <div class="bar-track">
+      <div class="bar-fill"></div>
+    </div>
+    <div class="conf-meta">Modelos cuantitativos alineados en venta - Sesgo activo antes de apertura Nasdaq 02 APR 2026</div>
+  </div>
+
+  <ul class="strategy-list">
+    <li><strong>Entrada:</strong> Esperar extension a la zona 24008.8 - 24045.5 para ejecutar ventas con mejor precio promedio.</li>
+    <li><strong>Gestion de riesgo:</strong> Stop en 24141.7 para proteger capital si el mercado invalida el maximo estructural.</li>
+    <li><strong>Tomas parciales:</strong> TP1 en 23678.8, TP2 en 23491.7 y TP3 en 23334.8.</li>
+    <li><strong>Disciplina:</strong> Evitar compras impulsivas durante rebotes de cierre trimestral.</li>
+    <li><strong>Liquidez:</strong> Mantener caja para la verdadera fase de acumulacion cuando el mercado confirme piso.</li>
+  </ul>
+
+  <div class="callout">
+    <p>
+      Seguimos en estructura bajista. El rebote actual se interpreta como una absorcion de flujo institucional y no como un giro real. La prioridad es <strong>preservar capital</strong>, sostener el sesgo en venta y esperar confirmacion antes de volver a compras.
+    </p>
+  </div>
+</main>
+
+<footer>
+  <div class="logo footer-logo">Quant<span>Lab</span></div>
+  <p class="disclaimer">Este analisis es informativo y no constituye asesoria financiera. Operar en mercados financieros implica riesgo de perdida de capital. Usa siempre gestion de riesgo.</p>
+</footer>
+
+</body>
+</html>
