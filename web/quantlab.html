@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<link rel="shortcut icon" href="ico.ico" />
 <title>QuantLab — Sistema Cuantitativo de Trading</title>
 <link rel="shortcut icon" href="ico.ico" />
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
@@ -87,8 +86,16 @@ nav{position:sticky;top:0;z-index:200;background:rgba(6,6,6,.96);border-bottom:1
 .feature-list li{display:flex;align-items:flex-start;gap:10px;font-size:.88rem;color:#bbb;line-height:1.45}
 .feature-list li::before{content:'✓';color:var(--red-bright);font-weight:700;flex-shrink:0;margin-top:1px}
 
-#paypal-button-container{margin-top:4px}
-#paypal-button-container .paypal-button{border-radius:0 !important}
+.payment-switch{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px;margin-bottom:14px}
+.payment-switch-btn{border:1px solid var(--border2);background:#0b0b0b;color:#c8c8c8;padding:10px 14px;font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+.payment-switch-btn:hover{border-color:var(--red-dim);color:#fff}
+.payment-switch-btn.active{background:var(--red);border-color:var(--red);color:#fff}
+.payment-pane{display:none}
+.payment-pane.active{display:block}
+.payment-status{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--grey);letter-spacing:.06em}
+.payment-status-error{color:#f87171}
+#paypal-container-FT3F9CDED9438,#paypal-subscription-container{margin-top:4px}
+#paypal-container-FT3F9CDED9438 .paypal-button,#paypal-subscription-container .paypal-button{border-radius:0 !important}
 
 .secure-badge{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:16px;font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--grey)}
 .secure-badge::before{content:'🔒'}
@@ -253,7 +260,7 @@ footer{background:var(--near-black);border-top:1px solid var(--border);padding:3
       <span class="price">50</span>
       <span class="price-currency">USD</span>
     </div>
-    <div class="price-note">Pago único · Acceso permanente</div>
+    <div class="price-note">Selecciona suscripcion o pago unico</div>
 
     <ul class="feature-list">
       <li>7 módulos de análisis cuantitativo integrados</li>
@@ -268,15 +275,20 @@ footer{background:var(--near-black);border-top:1px solid var(--border);padding:3
     </ul>
 
     <div class="divider"></div>
+    <div class="payment-switch" role="tablist" aria-label="Tipo de pago">
+      <button type="button" class="payment-switch-btn active" data-payment-mode="subscription" aria-pressed="true">suscripcion</button>
+      <button type="button" class="payment-switch-btn" data-payment-mode="single" aria-pressed="false">pago unico</button>
+    </div>
 
-    <div id="paypal-button-container"></div>
+    <div class="payment-pane active" id="payment-pane-subscription">
+      <div id="paypal-subscription-container">
+        <div class="payment-status">Cargando suscripcion...</div>
+      </div>
+    </div>
 
-    <div id="paypal-container-FT3F9CDED9438"></div>
-    <script>
-      paypal.HostedButtons({
-        hostedButtonId: "FT3F9CDED9438",
-      }).render("#paypal-container-FT3F9CDED9438")
-    </script>
+    <div class="payment-pane" id="payment-pane-single">
+      <div id="paypal-container-FT3F9CDED9438"></div>
+    </div>
 
     <div class="divider"></div>
 
@@ -435,96 +447,165 @@ footer{background:var(--near-black);border-top:1px solid var(--border);padding:3
 </footer>
 
 <script>
-// ── CAROUSEL
-const slides = document.querySelectorAll('#mainCarousel img');
-const thumbs = document.querySelectorAll('#thumbs .thumb');
-const counter = document.getElementById('curSlide');
+// CAROUSEL
+const slides = Array.from(document.querySelectorAll('#mainCarousel img'));
+const thumbs = Array.from(document.querySelectorAll('#thumbs .thumb'));
+const curSlideEl = document.getElementById('curSlide');
 let cur = 0;
-const total = slides.length;
 
-function goTo(n) {
-  slides[cur].classList.remove('active');
-  thumbs[cur].classList.remove('active');
-  cur = (n + total) % total;
-  slides[cur].classList.add('active');
-  thumbs[cur].classList.add('active');
-  counter.textContent = cur + 1;
+function goTo(idx) {
+  if (!slides.length) return;
+  cur = (idx + slides.length) % slides.length;
+  slides.forEach((img, i) => img.classList.toggle('active', i === cur));
+  thumbs.forEach((thumb, i) => thumb.classList.toggle('active', i === cur));
+  if (curSlideEl) curSlideEl.textContent = String(cur + 1);
 }
 
-document.getElementById('carNext').addEventListener('click', () => goTo(cur + 1));
-document.getElementById('carPrev').addEventListener('click', () => goTo(cur - 1));
-thumbs.forEach((t, i) => t.addEventListener('click', () => goTo(i)));
+if (slides.length) {
+  goTo(0);
+  document.getElementById('carNext').addEventListener('click', () => goTo(cur + 1));
+  document.getElementById('carPrev').addEventListener('click', () => goTo(cur - 1));
+  thumbs.forEach((thumb, i) => thumb.addEventListener('click', () => goTo(i)));
 
-// Auto-advance
-let autoTimer = setInterval(() => goTo(cur + 1), 3800);
-document.getElementById('mainCarousel').addEventListener('mouseenter', () => clearInterval(autoTimer));
-document.getElementById('mainCarousel').addEventListener('mouseleave', () => {
-  clearInterval(autoTimer);
-  autoTimer = setInterval(() => goTo(cur + 1), 3800);
-});
+  // Auto-advance
+  let autoTimer = setInterval(() => goTo(cur + 1), 3800);
+  document.getElementById('mainCarousel').addEventListener('mouseenter', () => clearInterval(autoTimer));
+  document.getElementById('mainCarousel').addEventListener('mouseleave', () => {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(() => goTo(cur + 1), 3800);
+  });
 
-// Keyboard
-document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowRight') goTo(cur + 1);
-  if (e.key === 'ArrowLeft')  goTo(cur - 1);
-});
+  // Keyboard
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowRight') goTo(cur + 1);
+    if (event.key === 'ArrowLeft') goTo(cur - 1);
+  });
+}
 
-// ── SCROLL REVEAL
+// SCROLL REVEAL
 const reveals = document.querySelectorAll('.reveal');
-const ro = new IntersectionObserver(entries => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('on'), (i % 3) * 80);
-      ro.unobserve(e.target);
+const ro = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('on'), (i % 3) * 80);
+      ro.unobserve(entry.target);
     }
   });
 }, { threshold: 0.1 });
-reveals.forEach(r => ro.observe(r));
+reveals.forEach((item) => ro.observe(item));
 
-// ── PAYPAL
-paypal.Buttons({
-  style: {
-    layout: 'vertical',
-    color: 'black',
-    shape: 'rect',
-    label: 'pay',
-    height: 48
-  },
-  createOrder: function(data, actions) {
-    return actions.order.create({
-      purchase_units: [{
-        description: 'QuantLab Trading System — Acceso Permanente',
-        amount: {
-          currency_code: 'USD',
-          value: '50.00'
-        }
-      }],
-      application_context: {
-        brand_name: 'QuantLab',
-        shipping_preference: 'NO_SHIPPING'
-      }
-    });
-  },
-  onApprove: function(data, actions) {
-    return actions.order.capture().then(function(details) {
-      const name = details.payer.name.given_name;
-      document.getElementById('paypal-button-container').innerHTML = `
-        <div style="background:#0a1f0a;border:1px solid #22C55E;padding:20px 24px;text-align:center">
-          <div style="font-size:1.8rem;margin-bottom:8px">✅</div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:#22C55E;letter-spacing:.05em">¡Pago Exitoso, ${name}!</div>
-          <div style="font-family:'Space Mono',monospace;font-size:.7rem;color:#888;margin-top:6px;letter-spacing:.08em">
-            Recibirás acceso en los próximos minutos.<br>
-            ID: ${details.id}
-          </div>
-        </div>
-      `;
-    });
-  },
-  onError: function(err) {
-    console.error('PayPal error:', err);
+// PAYPAL
+const paymentButtons = document.querySelectorAll('.payment-switch-btn');
+const paymentPanes = {
+  subscription: document.getElementById('payment-pane-subscription'),
+  single: document.getElementById('payment-pane-single')
+};
+
+let singlePaymentRendered = false;
+let subscriptionRendered = false;
+
+function renderSinglePayment() {
+  if (singlePaymentRendered) return;
+
+  if (!window.paypal || !window.paypal.HostedButtons) {
+    document.getElementById('paypal-container-FT3F9CDED9438').innerHTML =
+      '<div class="payment-status payment-status-error">No se pudo cargar el pago unico.</div>';
+    return;
   }
-}).render('#paypal-button-container');
+
+  window.paypal.HostedButtons({
+    hostedButtonId: 'FT3F9CDED9438'
+  }).render('#paypal-container-FT3F9CDED9438');
+
+  singlePaymentRendered = true;
+}
+
+function loadSubscriptionSdk() {
+  return new Promise((resolve, reject) => {
+    if (window.paypalSubscription && window.paypalSubscription.Buttons) {
+      resolve(window.paypalSubscription);
+      return;
+    }
+
+    const existingScript = document.querySelector('script[data-paypal-subscription-sdk="true"]');
+    if (existingScript) {
+      existingScript.addEventListener('load', () => resolve(window.paypalSubscription));
+      existingScript.addEventListener('error', () => reject(new Error('subscription-sdk-error')));
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = 'https://www.paypal.com/sdk/js?client-id=Adh3H_4ZOSynAQDBuTa-A0eeKS2dKI4KKvaY5HPpUBx5X4HU3VOKG97Q5IsW054CluCfMBqm2uOg-JlZ&vault=true&intent=subscription&data-namespace=paypalSubscription';
+    script.dataset.sdkIntegrationSource = 'button-factory';
+    script.dataset.paypalSubscriptionSdk = 'true';
+    script.onload = () => resolve(window.paypalSubscription);
+    script.onerror = () => reject(new Error('subscription-sdk-error'));
+    document.head.appendChild(script);
+  });
+}
+
+function renderSubscriptionPayment() {
+  if (subscriptionRendered) return;
+
+  loadSubscriptionSdk()
+    .then((paypalSubscription) => {
+      if (!paypalSubscription || !paypalSubscription.Buttons) {
+        throw new Error('subscription-buttons-unavailable');
+      }
+
+      return paypalSubscription.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'subscribe'
+        },
+        createSubscription: function(data, actions) {
+          return actions.subscription.create({
+            plan_id: 'P-94S23902KY8025417NHGVNZA'
+          });
+        },
+        onApprove: function(data) {
+          alert(data.subscriptionID);
+        }
+      }).render('#paypal-subscription-container');
+    })
+    .then(() => {
+      subscriptionRendered = true;
+    })
+    .catch((error) => {
+      console.error('Subscription PayPal error:', error);
+      document.getElementById('paypal-subscription-container').innerHTML =
+        '<div class="payment-status payment-status-error">No se pudo cargar la suscripcion. Recarga la pagina e intenta de nuevo.</div>';
+    });
+}
+
+function setPaymentMode(mode) {
+  paymentButtons.forEach((button) => {
+    const isActive = button.dataset.paymentMode === mode;
+    button.classList.toggle('active', isActive);
+    button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+  });
+
+  paymentPanes.subscription.classList.toggle('active', mode === 'subscription');
+  paymentPanes.single.classList.toggle('active', mode === 'single');
+
+  if (mode === 'subscription') {
+    renderSubscriptionPayment();
+    return;
+  }
+
+  renderSinglePayment();
+}
+
+paymentButtons.forEach((button) => {
+  button.addEventListener('click', () => setPaymentMode(button.dataset.paymentMode));
+});
+
+setPaymentMode('subscription');
 </script>
 
 </body>
 </html>
+
+
