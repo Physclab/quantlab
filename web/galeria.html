@@ -14,13 +14,6 @@
 
   gtag('config', 'G-T5TCQ0Q5K5');
 </script>
-<script>
-  // Redirect mobile users to galeria.html
-  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-    window.location.href = "galeria.html";
-  }
-</script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
   :root {
     --red: #D1121B;
@@ -121,18 +114,6 @@
   }
 
   nav a:hover { color: var(--red-bright); }
-
-  /* --- CONTADOR / STATS BAR (Responsive) --- */
-  .stats-bar {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    background: rgba(209, 18, 27, 0.05);
-    border-bottom: 1px solid var(--border);
-    padding: 20px 5%;
-    text-align: center;
-  }
-  .stat-item .val { display: block; font-family: var(--display); font-size: 2rem; color: var(--red-bright); line-height: 1; }
-  .stat-item .lbl { font-family: var(--mono); font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
 
   .nav-tag {
     font-family: var(--mono);
@@ -428,44 +409,6 @@
     transform: scale(1.1);
   }
 
-  /* --- TABLA DE TRADES (Scroll en Móvil) --- */
-  .table-wrapper {
-    width: 100%;
-    overflow-x: auto; /* Permite scroll horizontal en móviles */
-    background: var(--card);
-    border: 1px solid var(--border-strong);
-    margin-bottom: 30px;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    min-width: 500px; /* Asegura que no se encoja demasiado */
-  }
-  th { background: rgba(209, 18, 27, 0.1); color: var(--red-bright); padding: 15px; text-align: left; border-bottom: 1px solid var(--border); }
-  td { padding: 15px; border-bottom: 1px solid var(--border-strong); }
-  .win { color: #22C55E; font-weight: bold; }
-
-  /* --- SECCIÓN GRÁFICOS (Grid Responsivo) --- */
-  .charts-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* 2 columnas en PC */
-    gap: 20px;
-  }
-  .chart-container {
-    background: var(--card);
-    border: 1px solid var(--border-strong);
-    padding: 20px;
-    height: 350px;
-  }
-  .chart-container h3 {
-    font-family: var(--display);
-    font-size: 1.2rem;
-    margin-bottom: 15px;
-    color: var(--text-muted);
-  }
-
   body.modal-open {
     overflow: hidden;
   }
@@ -719,10 +662,6 @@
       margin-bottom: 14px;
     }
 
-    .stats-bar { grid-template-columns: 1fr; gap: 20px; } /* Apila los contadores */
-    .charts-grid { grid-template-columns: 1fr; } /* Apila los gráficos */
-    .stat-item .val { font-size: 2.5rem; }
-
     footer {
       flex-direction: column;
       gap: 16px;
@@ -742,21 +681,6 @@
     <span class="nav-tag">Galeria</span>
   </nav>
 </header>
-
-<section class="stats-bar">
-  <div class="stat-item">
-    <span class="val">4</span>
-    <span class="lbl">Recaps Totales</span>
-  </div>
-  <div class="stat-item">
-    <span class="val">3/4</span>
-    <span class="lbl">Precisión</span>
-  </div>
-  <div class="stat-item">
-    <span class="val">10,441.6</span>
-    <span class="lbl">Puntos Ganados</span>
-  </div>
-</section>
 
 <main>
   <div class="meta-bar">
@@ -792,7 +716,7 @@
       </article>
 
       <article class="slide">
-        <a class="trade-slide" href="/web/blogs/29032026.html" data-target="traderecap.html" aria-label="Ir al Trade Recap de compras BTC">
+        <a class="trade-slide" href="/web/blogs/29032026.html" data-target="/web/blogs/29032026.html" aria-label="Ir al Trade Recap de compras BTC">
           <img src="/img/290326.png" onerror="this.onerror=null;this.src='img/290326.png';" alt="Trade de compras BTC con resultado positivo">
           <div class="trade-overlay">
             <div class="trade-line">
@@ -810,7 +734,7 @@
       </article>
 
       <article class="slide">
-        <a class="trade-slide" href="/web/blogs/24032026.html" data-target="traderecap.html" aria-label="Ir al Trade Recap de compras">
+        <a class="trade-slide" href="/web/blogs/21032026.html" data-target="/web/blogs/24032026.html" aria-label="Ir al Trade Recap de compras">
           <img src="/img/compras21.png" onerror="this.onerror=null;this.src='img/compras21.png';" alt="Trade de compras con resultado positivo">
           <div class="trade-overlay">
             <div class="trade-line">
@@ -828,7 +752,7 @@
       </article>
 
       <article class="slide">
-        <a class="trade-slide" href="/web/blogs/26032026.html" data-target="traderecap.html" aria-label="Ir al Trade Recap de ventas">
+        <a class="trade-slide" href="/web/blogs/26032026.html" data-target="/web/blogs/26032026.html" aria-label="Ir al Trade Recap de ventas">
           <img src="/img/ventas24.png" onerror="this.onerror=null;this.src='img/ventas24.png';" alt="Trade de ventas con objetivo bajista alcanzado">
           <div class="trade-overlay">
             <div class="trade-line">
@@ -855,37 +779,6 @@
       </div>
     </div>
   </section>
-
-  <div class="table-wrapper">
-    <table>
-      <thead>
-        <tr>
-          <th>PAR</th>
-          <th>TIPO</th>
-          <th>ENTRADA</th>
-          <th>SALIDA</th>
-          <th>PUNTOS</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>NASDAQ</td><td>SELL</td><td>24,045.5</td><td>23,491.7</td><td class="win">+553.8</td></tr>
-        <tr><td>BTC/USD</td><td>BUY</td><td>65,483.0</td><td>69,692.0</td><td class="win">+4,209.0</td></tr>
-        <tr><td>BTC/USD</td><td>SELL</td><td>71,434.0</td><td>66,475.0</td><td class="win">+4,959.0</td></tr>
-        <tr><td>NASDAQ</td><td>BUY</td><td>23,675.5</td><td>24,395.3</td><td class="win">+719.8</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="charts-grid">
-    <div class="chart-container">
-      <h3>Pares Operados</h3>
-      <canvas id="chartPares"></canvas>
-    </div>
-    <div class="chart-container">
-      <h3>Puntos por Activo</h3>
-      <canvas id="chartPuntos"></canvas>
-    </div>
-  </div>
 </main>
 
 <div class="newsletter-modal" id="newsletterModal" aria-hidden="true">
@@ -1214,67 +1107,5 @@
   goTo(0);
   startAutoPlay();
 </script>
-
-<script>
-  // Configuración de colores globales
-  const colorRed = '#FF2030';
-  const colorGold = '#F59E0B';
-
-  // 1. Gráfico de Rosca (Pares)
-  const ctx1 = document.getElementById('chartPares').getContext('2d');
-  new Chart(ctx1, {
-    type: 'doughnut',
-    data: {
-      labels: ['NASDAQ', 'BTC'],
-      datasets: [{
-        data: [2, 2], // 2 trades cada uno
-        backgroundColor: [colorRed, colorGold],
-        borderColor: '#050505',
-        borderWidth: 2
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { position: 'bottom', labels: { color: '#9A9A9A', font: { family: 'Space Mono' } } }
-      }
-    }
-  });
-
-  // 2. Gráfico de Barras (Puntos por Par)
-  // Calculo: NASDAQ (553.8 + 719.8 = 1273.6) | BTC (4209 + 4959 = 9168)
-  const ctx2 = document.getElementById('chartPuntos').getContext('2d');
-  new Chart(ctx2, {
-    type: 'bar',
-    data: {
-      labels: ['NASDAQ', 'BTC'],
-      datasets: [{
-        label: 'Puntos Acumulados',
-        data: [1273.6, 9168],
-        backgroundColor: [colorRed, colorGold],
-        borderRadius: 5
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        y: { 
-          beginAtZero: true, 
-          grid: { color: 'rgba(255,255,255,0.05)' },
-          ticks: { color: '#9A9A9A' }
-        },
-        x: { 
-          ticks: { color: '#9A9A9A', font: { family: 'Space Mono' } }
-        }
-      },
-      plugins: {
-        legend: { display: false }
-      }
-    }
-  });
-</script>
-
 </body>
 </html>
