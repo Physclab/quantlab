@@ -93,3 +93,17 @@
     const y = (e.clientY / window.innerHeight - 0.5) * 40;
     glow.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
   });
+  // â”€â”€ TESTIMONIALS SLIDER
+  const testimonials = document.querySelectorAll('.testimonial');
+  let currentTestimonial = 0;
+
+  function showTestimonial(index) {
+    testimonials.forEach((t, i) => {
+      t.classList.toggle('active', i === index);
+    });
+  }
+
+  setInterval(() => {
+    currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+    showTestimonial(currentTestimonial);
+  }, 5000);
