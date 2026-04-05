@@ -508,3 +508,47 @@
     footer { padding: 32px 20px; }
     .hero-stats { gap: 24px; flex-wrap: wrap; justify-content: center; }
   }
+
+ /* â”€â”€ TESTIMONIALS â”€â”€ */
+  .testimonials-section {
+    padding: 40px 48px;
+    text-align: center;
+    background: var(--card-bg);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .testimonials-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .testimonial {
+    display: none;
+    padding: 20px;
+  }
+  .testimonial.active {
+    display: block;
+  }
+  .testimonial p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+  .testimonial cite {
+    font-weight: bold;
+    color: var(--red-bright);
+  }
+
+  /* â”€â”€ RESPONSIVE â”€â”€ */
+  @media (max-width: 900px) {
+    :root { --nav-clearance: 88px; }
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .hero { padding: var(--nav-clearance) 20px 20px; }
+    section { padding: 64px 20px; }
+    .formulas-grid { grid-template-columns: 1fr; }
+    .carousel-slide { flex: 0 0 calc(85% - 12px); }
+    footer { padding: 32px 20px; }
+    .hero-stats { gap: 24px; flex-wrap: wrap; justify-content: center; }
+  }
+
