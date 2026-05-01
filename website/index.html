@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tripitaka General Mechanic | Bronx, NY</title>
+    <meta name="description"
+        content="Honest, reliable, affordable and fast auto repair service at Tripitaka General Mechanic in the Bronx, NYC.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <span class="logo-accent">Tripitaka</span> <span class="translatable" data-en="Mechanic"
+                    data-es="Mecánica">Mechanic</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#services" class="translatable" data-en="Services" data-es="Servicios">Services</a></li>
+                <li><a href="#reviews" class="translatable" data-en="Reviews" data-es="Reseñas">Reviews</a></li>
+                <li><a href="#contact" class="btn btn-primary translatable" data-en="Book Appointment"
+                        data-es="Agendar Cita">Book Appointment</a></li>
+            </ul>
+            <button id="langToggle" class="btn btn-outline lang-btn">ES</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1 class="translatable" data-en='Expert Care for <br> <span class="text-accent">Your Vehicle</span>'
+                data-es='Cuidado Experto para <br> <span class="text-accent">Tu Vehículo</span>'>Expert Care for <br>
+                <span class="text-accent">Your Vehicle</span>
+            </h1>
+            <p class="hero-subtitle translatable"
+                data-en="Honest, reliable, affordable, and fast auto repair service in the heart of the Bronx."
+                data-es="Servicio mecánico honesto, confiable, asequible y rápido en el corazón del Bronx.">Honest,
+                reliable, affordable, and fast auto repair service in the heart of the
+                Bronx.</p>
+            <div class="hero-actions">
+                <a href="#contact" class="btn btn-primary translatable" data-en="Schedule Service"
+                    data-es="Programar Servicio">Schedule Service</a>
+                <a href="#services" class="btn btn-secondary translatable" data-en="Learn More"
+                    data-es="Saber Más">Learn More</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Image Carousel Section -->
+    <section class="image-carousel-section">
+        <div class="carousel-container" id="photoCarousel">
+            <div class="carousel-track">
+                <img src="foto.png" alt="Mechanic Shop Image 1" class="carousel-img">
+                <img src="foto2.png" alt="Mechanic Shop Image 2" class="carousel-img">
+                <img src="foto3.png" alt="Mechanic Shop Image 3" class="carousel-img">
+                <img src="foto4.png" alt="Mechanic Shop Image 4" class="carousel-img">
+                <!-- Duplicate group for infinite scroll effect -->
+                <img src="foto.png" alt="Mechanic Shop Image 1" class="carousel-img">
+                <img src="foto2.png" alt="Mechanic Shop Image 2" class="carousel-img">
+                <img src="foto3.png" alt="Mechanic Shop Image 3" class="carousel-img">
+                <img src="foto4.png" alt="Mechanic Shop Image 4" class="carousel-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features / Services Section -->
+    <section id="services" class="services section">
+        <div class="container">
+            <h2 class="section-title translatable" data-en="Why Choose Us?" data-es="¿Por Qué Elegirnos?">Why Choose Us?
+            </h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🛠️</div>
+                    <h3 class="translatable" data-en="Reliable Repairs" data-es="Reparaciones Confiables">Reliable
+                        Repairs</h3>
+                    <p class="translatable"
+                        data-en="Over 20 years of trustworthy experience fixing all sorts of car problems efficiently."
+                        data-es="Más de 20 años de experiencia confiable solucionando todo tipo de problemas del automóvil eficientemente.">
+                        Over 20 years of trustworthy experience fixing all sorts of car problems efficiently.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⏱️</div>
+                    <h3 class="translatable" data-en="Fast Turnaround" data-es="Servicio Rápido">Fast Turnaround</h3>
+                    <p class="translatable"
+                        data-en="With 7 lifts in our shop, we service multiple vehicles simultaneously so you get back on the road faster."
+                        data-es="Con 7 plataformas en nuestro taller, atendemos múltiples vehículos a la vez para que vuelvas al camino más rápido.">
+                        With 7 lifts in our shop, we service multiple vehicles simultaneously so you get back on the
+                        road
+                        faster.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💵</div>
+                    <h3 class="translatable" data-en="Affordable Pricing" data-es="Precios Asequibles">Affordable
+                        Pricing</h3>
+                    <p class="translatable"
+                        data-en="Honest service, fair prices. We offer excellent service with a smile that won't break the bank."
+                        data-es="Servicio honesto y precios justos. Ofrecemos excelente calidad con una sonrisa sin arruinar tu bolsillo.">
+                        Honest service, fair prices. We offer excellent service with a smile that won't break the bank.
+                    </p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">👨‍👩‍👧‍👦</div>
+                    <h3 class="translatable" data-en="Family Oriented" data-es="Ambiente Familiar">Family Oriented</h3>
+                    <p class="translatable"
+                        data-en="A welcoming environment focused on great customer service and pointing you in the right direction."
+                        data-es="Un ambiente acogedor enfocado en un excelente servicio al cliente y en encaminarte a la solución correcta.">
+                        A welcoming environment focused on great customer service and pointing you in the right
+                        direction.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="reviews section">
+        <div class="container reviews-container">
+            <h2 class="section-title translatable" data-en="What Our Customers Say"
+                data-es="Lo Que Dicen Nuestros Clientes">What Our Customers Say</h2>
+            <div class="reviews-slider">
+                <div class="review-slide active" id="review-display">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">...</p>
+                    <div class="review-author">- <span>Author</span></div>
+                </div>
+            </div>
+            <div class="slider-dots" id="slider-dots">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Booking Section -->
+    <section id="contact" class="contact section">
+        <div class="container contact-container">
+            <div class="contact-info">
+                <h2 class="translatable" data-en="Book Your Appointment" data-es="Reserva Tu Cita">Book Your Appointment
+                </h2>
+                <p class="translatable"
+                    data-en="Have a problem with your vehicle? Leave us your details and a description of the issue, and we'll get back to you to schedule an appointment."
+                    data-es="¿Problemas con tu vehículo? Déjanos tus datos y la descripción de la falla y te responderemos para agendar la cita.">
+                    Have a problem with your vehicle? Leave us your details and a description of the issue, and we'll
+                    get
+                    back to you to schedule an appointment.</p>
+                <div class="info-block">
+                    <h3 class="translatable" data-en="Location" data-es="Ubicación">Location</h3>
+                    <p>1590 Jerome Ave 10452<br>Bronx, New York</p>
+                </div>
+                <div class="info-block">
+                    <h3 class="translatable" data-en="Contact" data-es="Contacto">Contact</h3>
+                    <p>gmtripitaka@hotmail.com<br>+1 718-367-0709</p>
+                </div>
+            </div>
+            <div class="contact-form-wrapper">
+                <form action="https://formspree.io/gmtripitaka@hotmail.com" method="POST" class="contact-form"
+                    id="contactForm">
+                    <div class="form-group">
+                        <label for="name" class="translatable" data-en="Full Name" data-es="Nombre Completo">Full
+                            Name</label>
+                        <input type="text" id="name" name="name" class="translatable-placeholder" data-en="John Doe"
+                            data-es="Juan Pérez" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" class="translatable" data-en="Phone Number"
+                            data-es="Número de Teléfono">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="problem" class="translatable" data-en="Car Problem / Message"
+                            data-es="Problema del Auto / Mensaje">Car Problem / Message</label>
+                        <textarea id="problem" name="message" rows="5" class="translatable-placeholder"
+                            data-en="Please describe the issue with your car..."
+                            data-es="Por favor, describe el problema con tu carro..."
+                            placeholder="Please describe the issue with your car..." required></textarea>
+                    </div>
+                    <button type="submit" id="submitBtnTranslatable" class="btn btn-primary submit-btn translatable"
+                        data-en="Request Appointment" data-es="Solicitar Cita">Request Appointment</button>
+                    <!-- Success/Error Messages -->
+                    <p id="form-status" class="form-status translatable" data-en="" data-es=""></p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h2>Tripitaka <span class="translatable" data-en="Mechanic" data-es="Mecánica">Mechanic</span></h2>
+                    <p class="translatable" data-en="Honest and professional automotive care in NYC."
+                        data-es="Cuidado automotriz honesto y profesional en NYC.">Honest and professional automotive
+                        care in NYC.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Tripitaka General Mechanic. <span class="translatable" data-en="All rights reserved."
+                        data-es="Todos los derechos reservados.">All rights reserved.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
