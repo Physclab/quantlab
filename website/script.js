@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const reviewsData = [
         {
             author: "Loul Almonte",
-            textEn: "Ask for Ramon or Flaco - Friendly, honest, reliable, affordable and fast service, I try to go to other mechanics to shop for price/service and at the end I have to come back to Nuñez Auto Inc - for my experience they are one of the best in the Bronx. Note: I been coming here for more than 20 years now, looks like they will be my mechanic by the end of days.",
+            textEn: "Ask for Ramon or Flaco - Friendly, honest, reliable, affordable and fast service, I try to go to other mechanics to shop for price/service and at the end I have to come back to Tripitaka General Mechanic - for my experience they are one of the best in the Bronx. Note: I been coming here for more than 20 years now, looks like they will be my mechanic by the end of days.",
             textEs: "Pregunte por Ramón o Flaco - Servicio amable, honesto, confiable, económico y rápido. He ido a otros mecánicos buscando precio y servicio, pero al final siempre vuelvo. Por mi experiencia, son de los mejores del Bronx. Llevo viniendo más de 20 años y parece que serán mis mecánicos hasta el final."
         },
         {
