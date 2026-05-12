@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>QuantLab — Plan Standard</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<script src="https://www.paypal.com/sdk/js?client-id=Adh3H_4ZOSynAQDBuTa-A0eeKS2dKI4KKvaY5HPpUBx5X4HU3VOKG97Q5IsW054CluCfMBqm2uOg-JlZ&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+<style>
+:root{
+  --red:#D1121B;
+  --red-bright:#FF2030;
+  --black:#000000;
+  --card:#0a0a0a;
+  --card2:#0f0f0f;
+  --border:rgba(209,18,27,0.14);
+  --border2:rgba(255,255,255,0.06);
+  --white:#F0EDEC;
+  --grey:#888;
+  --grey2:#444;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--black);
+  color:var(--white);
+  font-family:'Syne',sans-serif;
+  overflow-x:hidden;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;width:100%;z-index:200;
+  background:rgba(0,0,0,.95);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(14px);
+  padding:16px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:.1em;text-decoration:none;color:var(--white)}
+.nav-logo span{color:var(--red-bright)}
+.nav-back{
+  font-family:'Space Mono',monospace;font-size:.62rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--grey);text-decoration:none;
+  display:flex;align-items:center;gap:8px;
+  transition:color .2s;
+}
+.nav-back:hover{color:var(--red-bright)}
+.nav-back svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+@media(max-width:700px){nav{padding:14px 16px}}
+
+/* HERO */
+.hero{
+  padding:140px 24px 70px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(209,18,27,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(209,18,27,.025) 1px,transparent 1px);
+  background-size:80px 80px;
+  animation:grid-move 55s linear infinite;
+  pointer-events:none;
+}
+@keyframes grid-move{from{background-position:0 0}to{background-position:80px 80px}}
+
+.plan-badge{
+  display:inline-block;
+  font-family:'Space Mono',monospace;font-size:.62rem;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--red-bright);
+  border:1px solid rgba(209,18,27,.35);
+  background:rgba(209,18,27,.08);
+  padding:6px 18px;border-radius:999px;
+  margin-bottom:20px;
+}
+.popular-tag{
+  display:inline-block;
+  font-family:'Space Mono',monospace;font-size:.58rem;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:#000;background:var(--red-bright);
+  padding:4px 14px;border-radius:999px;
+  margin-left:10px;vertical-align:middle;
+}
+.hero h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3rem,7vw,5.5rem);
+  letter-spacing:.06em;line-height:1;
+  margin-bottom:16px;
+}
+.hero h1 em{color:var(--red-bright);font-style:normal}
+.hero-sub{
+  font-size:1rem;color:var(--grey);
+  max-width:560px;margin:0 auto 40px;
+  line-height:1.75;
+}
+.hero-currency{
+  font-family:'Space Mono',monospace;
+  font-size:1.1rem;color:var(--grey);
+  align-self:flex-start;margin-top:8px;
+}
+.hero-amount{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:4rem;letter-spacing:.02em;color:var(--white);
+}
+.hero-unit{
+  font-family:'Space Mono',monospace;
+  font-size:.7rem;color:var(--grey);
+  letter-spacing:.08em;
+  align-self:flex-end;margin-bottom:8px;
+}
+.hero-from{
+  font-family:'Space Mono',monospace;
+  font-size:.65rem;letter-spacing:.1em;
+  color:var(--grey2);text-transform:uppercase;
+  display:block;margin-top:4px;
+}
+
+/* LAYOUT */
+.page-wrap{
+  max-width:1060px;
+  margin:0 auto;
+  padding:0 24px 80px;
+  display:grid;
+  grid-template-columns:1fr 420px;
+  gap:40px;
+  align-items:start;
+}
+@media(max-width:860px){.page-wrap{grid-template-columns:1fr}}
+
+/* FEATURES SIDE */
+.block-label{
+  font-family:'Space Mono',monospace;
+  font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--red-bright);
+  margin-bottom:16px;display:block;
+}
+.block-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2rem;letter-spacing:.07em;
+  margin-bottom:24px;
+}
+
+.features-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin-bottom:40px;
+}
+@media(max-width:540px){.features-grid{grid-template-columns:1fr}}
+
+.feat-card{
+  background:var(--card);
+  border:1px solid var(--border2);
+  border-radius:12px;
+  padding:20px 18px;
+  transition:border-color .2s;
+  position:relative;
+}
+.feat-card:hover{border-color:rgba(209,18,27,.25)}
+.feat-card.highlight{
+  border-color:rgba(209,18,27,.2);
+  background:rgba(209,18,27,.04);
+}
+.new-tag{
+  position:absolute;top:12px;right:12px;
+  font-family:'Space Mono',monospace;font-size:.5rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--red-bright);
+  border:1px solid rgba(209,18,27,.3);
+  padding:2px 8px;border-radius:999px;
+}
+.feat-icon{
+  width:36px;height:36px;
+  background:rgba(209,18,27,.1);
+  border:1px solid rgba(209,18,27,.2);
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:12px;
+}
+.feat-icon svg{width:18px;height:18px;stroke:var(--red-bright);fill:none;stroke-width:1.8}
+.feat-card h3{font-size:.88rem;font-weight:700;margin-bottom:6px;color:var(--white)}
+.feat-card p{font-size:.78rem;color:var(--grey);line-height:1.6}
+
+/* UPGRADE HIGHLIGHT */
+.upgrade-block{
+  background:var(--card);
+  border:1px solid rgba(209,18,27,.2);
+  border-radius:12px;
+  padding:22px 22px;
+  margin-bottom:40px;
+}
+.upgrade-block h3{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.2rem;letter-spacing:.07em;
+  color:var(--red-bright);margin-bottom:14px;
+}
+.upgrade-list{
+  list-style:none;display:flex;flex-direction:column;gap:9px;
+}
+.upgrade-list li{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:.83rem;color:rgba(240,237,236,.8);line-height:1.5;
+}
+.up-icon{
+  width:18px;height:18px;border-radius:50%;
+  background:rgba(209,18,27,.12);
+  border:1px solid rgba(209,18,27,.35);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:1px;
+}
+.up-icon svg{width:9px;height:9px;stroke:var(--red-bright);fill:none;stroke-width:2.5}
+
+/* MARKETS */
+.markets-wrap{margin-bottom:40px}
+.markets-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.market-tag{
+  font-family:'Space Mono',monospace;
+  font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--white);
+  background:var(--card);
+  border:1px solid var(--border2);
+  padding:7px 14px;border-radius:8px;
+}
+
+/* DIVIDER */
+.section-divider{
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--border),rgba(209,18,27,.3),var(--border),transparent);
+  margin:40px 0;
+}
+
+/* INCLUDES LIST */
+.includes-list{
+  list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:14px;
+}
+.includes-list li{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:.85rem;color:rgba(240,237,236,.75);line-height:1.5;
+}
+.check-circle{
+  width:18px;height:18px;border-radius:50%;
+  background:rgba(209,18,27,.12);
+  border:1px solid rgba(209,18,27,.35);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:1px;
+}
+.check-circle svg{width:9px;height:9px;stroke:var(--red-bright);fill:none;stroke-width:2.5}
+
+/* PAYMENT SIDE */
+.payment-side{position:sticky;top:90px}
+.payment-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:28px 24px;
+}
+.payment-card-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.5rem;letter-spacing:.07em;margin-bottom:6px;
+}
+.payment-card-sub{
+  font-family:'Space Mono',monospace;
+  font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--grey);margin-bottom:24px;
+}
+
+/* PERIOD TOGGLE */
+.period-toggle{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:24px}
+.period-btn{
+  padding:12px 8px;border-radius:10px;
+  border:1px solid var(--border2);
+  background:transparent;cursor:pointer;
+  transition:all .2s;text-align:center;
+}
+.period-btn.active{border-color:var(--red);background:rgba(209,18,27,.08)}
+.period-btn-name{
+  font-family:'Syne',sans-serif;font-weight:700;
+  font-size:.85rem;color:var(--white);display:block;margin-bottom:4px;
+}
+.period-btn-price{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.4rem;letter-spacing:.05em;color:var(--white);display:block;
+}
+.period-btn-save{
+  font-family:'Space Mono',monospace;
+  font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;
+  color:#4ade80;display:block;margin-top:3px;
+}
+.period-btn.active .period-btn-name{color:var(--red-bright)}
+
+/* PRICE DISPLAY */
+.price-display{
+  background:var(--card2);
+  border:1px solid var(--border2);
+  border-radius:10px;
+  padding:16px 18px;
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:20px;
+}
+.price-display-label{
+  font-family:'Space Mono',monospace;
+  font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--grey);
+}
+.price-display-amount{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.8rem;letter-spacing:.04em;color:var(--white);
+}
+.price-display-period{
+  font-family:'Space Mono',monospace;
+  font-size:.58rem;color:var(--grey);letter-spacing:.08em;
+}
+
+/* PAYPAL */
+.paypal-wrap{display:none}
+.paypal-wrap.visible{display:block}
+.paypal-label{
+  font-family:'Space Mono',monospace;
+  font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--grey);text-align:center;margin-bottom:12px;
+}
+.guarantee{
+  display:flex;align-items:center;gap:8px;
+  margin-top:16px;
+  font-family:'Space Mono',monospace;
+  font-size:.58rem;letter-spacing:.08em;
+  color:var(--grey2);text-transform:uppercase;
+}
+.guarantee svg{width:14px;height:14px;stroke:var(--grey2);fill:none;stroke-width:1.8;flex-shrink:0}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="quantlab-pricing.html">Quant<span>Lab</span></a>
+  <a class="nav-back" href="quantlab-pricing.html">
+    <svg viewBox="0 0 14 14"><polyline points="9,2 4,7 9,12"/></svg>
+    Ver todos los planes
+  </a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="plan-badge">Plan Standard <span class="popular-tag">Más popular</span></div>
+  <h1>Análisis cuantitativo<br><em>completo</em> para tu trading</h1>
+  <p class="hero-sub">El plan más elegido por traders activos. 8 módulos de análisis, predicción cuantitativa de ciclos institucionales, dashboard personalizable y acceso a 6 mercados clave.</p>
+  <span class="hero-from">Desde $35 USD/mes con plan trimestral</span>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="page-wrap">
+
+  <!-- LEFT: FEATURES -->
+  <div class="features-side">
+
+    <span class="block-label">Qué incluye</span>
+    <h2 class="block-title">Todo lo que obtienes con Standard</h2>
+
+    <div class="features-grid">
+      <div class="feat-card">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12h8M8 8h8M8 16h5"/></svg>
+        </div>
+        <h3>8 Módulos de Análisis</h3>
+        <p>Un módulo adicional frente al plan Basic, ampliando la cobertura de señales cuantitativas disponibles.</p>
+      </div>
+      <div class="feat-card highlight">
+        <div class="new-tag">Exclusivo</div>
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3>Predicción Cuantitativa</h3>
+        <p>Sistemas de predicción de ciclos institucionales ocultos. Anticipa movimientos antes de que sean visibles.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <h3>Anomalías Estadísticas</h3>
+        <p>Detección de anomalías con ventana móvil adaptativa para identificar desvíos relevantes del precio.</p>
+      </div>
+      <div class="feat-card highlight">
+        <div class="new-tag">Exclusivo</div>
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        </div>
+        <h3>Dashboard Personalizable</h3>
+        <p>Organiza tus favoritos y configura tu espacio de trabajo cuantitativo a tu medida.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </div>
+        <h3>Soportes & Resistencias</h3>
+        <p>Clustering adaptativo que identifica zonas de precio relevantes con base estadística robusta.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <h3>Soporte 24/7</h3>
+        <p>Acceso a soporte continuo para resolver cualquier duda sobre la plataforma y sus módulos.</p>
+      </div>
+    </div>
+
+    <!-- UPGRADE NOTE -->
+    <div class="upgrade-block">
+      <h3>Lo que ganas vs Plan Basic</h3>
+      <ul class="upgrade-list">
+        <li>
+          <div class="up-icon"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>
+          Sistemas de predicción cuantitativa — ciclos institucionales ocultos
+        </li>
+        <li>
+          <div class="up-icon"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>
+          2 mercados adicionales (DJI y Oro) → 6 mercados en total
+        </li>
+        <li>
+          <div class="up-icon"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>
+          Dashboard personalizable con favoritos
+        </li>
+        <li>
+          <div class="up-icon"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>
+          Un módulo de análisis adicional (8 en total)
+        </li>
+      </ul>
+    </div>
+
+    <!-- MARKETS -->
+    <div class="markets-wrap">
+      <span class="block-label">Mercados disponibles</span>
+      <h2 class="block-title" style="font-size:1.4rem">6 mercados incluidos</h2>
+      <div class="markets-list">
+        <span class="market-tag">NASDAQ</span>
+        <span class="market-tag">S&P 500</span>
+        <span class="market-tag">DJI</span>
+        <span class="market-tag">Bitcoin (BTC)</span>
+        <span class="market-tag">Oro</span>
+        <span class="market-tag">Futuros</span>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- FULL INCLUDES LIST -->
+    <span class="block-label">Lista completa</span>
+    <ul class="includes-list">
+      <li><div class="check-circle"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>8 módulos de análisis cuantitativo integrados</li>
+      <li><div class="check-circle"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>Sistemas de predicción cuantitativa — ciclos institucionales ocultos</li>
+      <li><div class="check-circle"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>Anomalías estadísticas con ventana móvil adaptativa</li>
+      <li><div class="check-circle"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>Soportes & resistencias con clustering adaptativo</li>
+      <li><div class="check-circle"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>6 mercados: NASDAQ, S&P 500, DJI, BTC, Oro, Futuros</li>
+      <li><div class="check-circle"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>Dashboard personalizable — Dashboard de favoritos</li>
+      <li><div class="check-circle"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>Soporte 24/7 por canal de comunidad</li>
+      <li><div class="check-circle"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>Actualizaciones de plataforma incluidas</li>
+      <li><div class="check-circle"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>Acceso inmediato tras confirmación de pago</li>
+    </ul>
+
+  </div>
+
+  <!-- RIGHT: PAYMENT -->
+  <div class="payment-side">
+    <div class="payment-card">
+      <div class="payment-card-title">Suscribirse al Plan Standard</div>
+      <div class="payment-card-sub">Selecciona tu período de facturación</div>
+
+      <div class="period-toggle">
+        <button class="period-btn active" data-period="monthly" onclick="selectPeriod('monthly')">
+          <span class="period-btn-name">1 Mes</span>
+          <span class="period-btn-price">$50 <span style="font-family:'Space Mono',monospace;font-size:.6rem;font-weight:400">USD</span></span>
+          <span class="period-btn-save">&nbsp;</span>
+        </button>
+        <button class="period-btn" data-period="quarterly" onclick="selectPeriod('quarterly')">
+          <span class="period-btn-name">3 Meses</span>
+          <span class="period-btn-price">$40 <span style="font-family:'Space Mono',monospace;font-size:.6rem;font-weight:400">USD</span></span>
+          <span class="period-btn-save">Ahorras un 20%</span>
+        </button>
+      </div>
+
+      <div class="price-display">
+        <div>
+          <div class="price-display-label">Total a pagar</div>
+          <div class="price-display-period" id="priceNote">Facturado mensualmente</div>
+        </div>
+        <div>
+          <span class="price-display-amount" id="priceAmount">$50 USD</span>
+        </div>
+      </div>
+
+      <!-- PAYPAL MONTHLY -->
+      <div class="paypal-wrap visible" id="pp-monthly">
+        <div class="paypal-label">Pago seguro con PayPal</div>
+        <div id="paypal-button-container-P-5BT09749LU734070RNIBGN4I"></div>
+      </div>
+
+      <!-- PAYPAL QUARTERLY -->
+      <div class="paypal-wrap" id="pp-quarterly">
+        <div class="paypal-label">Pago seguro con PayPal</div>
+        <div id="paypal-button-container-P-5ML75076L80016435NIBGO5A"></div>
+      </div>
+
+      <div class="guarantee">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Pago 100% seguro · Cancela cuando quieras
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer style="border-top:1px solid var(--border);padding:32px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;position:relative;z-index:1;">
+  <a class="nav-logo" href="quantlab-pricing.html" style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.1em;text-decoration:none;color:var(--white)">Quant<span style="color:var(--red-bright)">Lab</span></a>
+  <div style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.08em;color:var(--grey2)">© 2025 Geremy Gomez · QuantLab</div>
+</footer>
+
+<script>
+const priceMap = {
+  monthly:   { label: 'Facturado mensualmente',        amount: '$50 USD' },
+  quarterly: { label: 'Facturado cada 3 meses ($120)', amount: '$40 USD/mes' }
+};
+
+function selectPeriod(period) {
+  document.querySelectorAll('.period-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.period === period);
+  });
+  document.getElementById('priceNote').textContent   = priceMap[period].label;
+  document.getElementById('priceAmount').textContent = priceMap[period].amount;
+  document.getElementById('pp-monthly').classList.toggle('visible',   period === 'monthly');
+  document.getElementById('pp-quarterly').classList.toggle('visible', period === 'quarterly');
+}
+
+/* PAYPAL MONTHLY */
+paypal.Buttons({
+  style: { shape: 'pill', color: 'blue', layout: 'vertical', label: 'subscribe' },
+  createSubscription: function(data, actions) {
+    return actions.subscription.create({ plan_id: 'P-5BT09749LU734070RNIBGN4I' });
+  },
+  onApprove: function(data, actions) {
+    alert('¡Suscripción activada! ID: ' + data.subscriptionID);
+  }
+}).render('#paypal-button-container-P-5BT09749LU734070RNIBGN4I');
+
+/* PAYPAL QUARTERLY */
+paypal.Buttons({
+  style: { shape: 'pill', color: 'blue', layout: 'vertical', label: 'subscribe' },
+  createSubscription: function(data, actions) {
+    return actions.subscription.create({ plan_id: 'P-5ML75076L80016435NIBGO5A' });
+  },
+  onApprove: function(data, actions) {
+    alert('¡Suscripción activada! ID: ' + data.subscriptionID);
+  }
+}).render('#paypal-button-container-P-5ML75076L80016435NIBGO5A');
+</script>
+</body>
+</html>
