@@ -1,19 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<link rel="shortcut icon" href="ico.ico" />
 <title>QuantLab Sistema Avanzado de Analisis de Mercados</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="style.css" />
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-T5TCQ0Q5K5"></script><script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-T5TCQ0Q5K5');
-</script>
 </head>
 <body>
 
@@ -30,7 +22,7 @@
     <a href="#mercados">Mercados</a>
     <a href="#como-funciona">Como Funciona</a>
   </div>
-  <button class="nav-cta" onclick="window.location.href='gallery.html'">Trades Recaps</button>
+  <button class="nav-cta" onclick="window.location.href='quantlab.html'">Iniciar App</button>
 </nav>
 
 <!-- HERO -->
@@ -91,7 +83,7 @@
     <span class="ticker-item">RSI <span>$</span> MACD <span>€</span> BOLLINGER <span>$</span> ADX <span>€</span> ATR</span>
   </div>
 </div>
-  
+
 <!-- TESTIMONIALS SECTION -->
 <section class="testimonials-section">
   <div class="testimonials-container">
@@ -99,72 +91,171 @@
       <p>"He estado en la priview de este sistema, y es una locura lo que cambio mi trading a base de estos sistemas"</p>
       <cite>joshuafx</cite>
     </div>
-    <div class="testimonial">
-      <p>"Es otro nivel, me ha ayudado muchisimo a tener mejor precision y mayor efectividad, supera por mucho a un simple análisis discresional, y operar con datos y confluencias mas sólidas es increible"</p>
-      <cite>Bryan C.</cite>
+          <div class="testimonial">
+      <p>"Es otro nivel, me ha ayudado muchisimo a tener mejor precision y mayor efectividad, supera por mucho a un simple análisis discresional, y operar con datos y confluencias mas sólidas es increible""</p>
+      <cite>Bryan rodriguez</cite>
     </div>
     <div class="testimonial">
       <p>"Este sistema ha revolucionado mi forma de operar en criptomonedas. Las señales son muy precisas. Otro nivel de precisión"</p>
       <cite>cryppto_boy</cite>
     </div>
+  </div>
     <div class="testimonial">
       <p>"Increíble herramienta para traders profesionales. Me ha permitido maximizar mis ganancias con análisis avanzado."</p>
       <cite>mauro rodriguez</cite>
     </div>
-  </div>
+
 </section>
 
-<!-- TOOLS SECTION -->
 <section class="tools-section" id="herramientas">
+
+  
   <div class="section-label">Módulos</div>
   <h2 class="section-title reveal">Arsenal <em>Cuantitativo</em></h2>
   <p class="reveal" style="color:#888; max-width:560px; line-height:1.6; font-size:.95rem;">
-    Siete módulos de análisis independientes que trabajan en conjunto para ofrecer una lectura completa del mercado en cualquier temporalidad.
+    Selecciona un módulo para explorar sus capacidades de ingeniería financiera avanzada en tiempo real.
   </p>
-  <div class="tools-grid">
-    <div class="tool-card reveal">
-      <div class="tool-number">01</div>
-      <div class="tool-name">Análisis de Confluencias</div>
-      <p class="tool-desc">Sistema de señales integrado que combina múltiples indicadores para identificar zonas de alta probabilidad operativa.</p>
-      <span class="tool-tag">Multi-señal</span>
+
+  <div class="modules-container reveal">
+    <div class="modules-menu">
+      <div class="module-tab active-tab" onclick="switchModule(0)">
+        <span class="tab-num">01</span>
+        <span class="tab-name">Análisis de Confluencias</span>
+      </div>
+      <div class="module-tab" onclick="switchModule(1)">
+        <span class="tab-num">02</span>
+        <span class="tab-name">Soportes & Resistencias</span>
+      </div>
+      <div class="module-tab" onclick="switchModule(2)">
+        <span class="tab-num">03</span>
+        <span class="tab-name">Análisis de Volumen</span>
+      </div>
+      <div class="module-tab" onclick="switchModule(3)">
+        <span class="tab-num">04</span>
+        <span class="tab-name">Indicadores Técnicos</span>
+      </div>
+      <div class="module-tab" onclick="switchModule(4)">
+        <span class="tab-num">05</span>
+        <span class="tab-name">Detección de Patrones</span>
+      </div>
+      <div class="module-tab" onclick="switchModule(5)">
+        <span class="tab-num">06</span>
+        <span class="tab-name">Anomalías Estadísticas</span>
+      </div>
+      <div class="module-tab" onclick="switchModule(6)">
+        <span class="tab-num">07</span>
+        <span class="tab-name">Ingeniería Avanzada</span>
+      </div>
     </div>
-    <div class="tool-card reveal">
-      <div class="tool-number">02</div>
-      <div class="tool-name">Soportes & Resistencias</div>
-      <p class="tool-desc">Detección automática de niveles clave mediante extremos locales y clustering adaptativo con validación por número de toques.</p>
-      <span class="tool-tag">Dinámico</span>
-    </div>
-    <div class="tool-card reveal">
-      <div class="tool-number">03</div>
-      <div class="tool-name">Análisis de Volumen</div>
-      <p class="tool-desc">OBV, Point of Control (POC) y Volume Climax para identificar zonas de acumulación y distribución institucional.</p>
-      <span class="tool-tag">Institucional</span>
-    </div>
-    <div class="tool-card reveal">
-      <div class="tool-number">04</div>
-      <div class="tool-name">Indicadores Técnicos</div>
-      <p class="tool-desc">Suite completa: RSI, MACD, Bandas de Bollinger, ADX y ATR calculados con precisión vectorial sobre series de tiempo.</p>
-      <span class="tool-tag">Suite completa</span>
-    </div>
-    <div class="tool-card reveal">
-      <div class="tool-number">05</div>
-      <div class="tool-name">Detección de Patrones</div>
-      <p class="tool-desc">Identificación automática de divergencias de precio-momentum y breakouts de rangos consolidados con confirmación estadística.</p>
-      <span class="tool-tag">Patrones</span>
-    </div>
-    <div class="tool-card reveal">
-      <div class="tool-number">06</div>
-      <div class="tool-name">Anomalías Estadísticas</div>
-      <p class="tool-desc">Detección de eventos extremos mediante ventana móvil de 50 períodos con umbrales dinámicos de desviación estándar.</p>
-      <span class="tool-tag">Rolling Window</span>
-    </div>
-    <div class="tool-card reveal" style="grid-column: span 1;">
-      <div class="tool-number">07</div>
-      <div class="tool-name">Ingenieria</div>
-      <p class="tool-desc">Transformada de fisicas para detectar ciclos ocultos y filtro de quantitativos para estimacion optima del estado real del precio.</p>
-      <span class="tool-tag">Avanzado</span>
+
+    <div class="modules-display-wrapper">
+      
+      <button class="nav-arrow arrow-left" onclick="prevModule()" aria-label="Módulo anterior">&#8592;</button>
+      <button class="nav-arrow arrow-right" onclick="nextModule()" aria-label="Siguiente módulo">&#8594;</button>
+
+      <div class="modules-display">
+        <div class="module-panel active-panel" id="panel-1">
+          <div class="panel-layout">
+            <div class="panel-info">
+              <div class="panel-num">01</div>
+              <h3 class="panel-title">Análisis de Confluencias</h3>
+              <p class="panel-desc">Sistema de señales integrado que combina múltiples indicadores para identificar zonas de alta probabilidad operativa.</p>
+              <span class="tool-tag">Multi-señal</span>
+            </div>
+            <div class="panel-image-wrapper">
+              <img src="img/modulo1.png" alt="Análisis de Confluencias" class="panel-img">
+            </div>
+          </div>
+        </div>
+
+        <div class="module-panel" id="panel-2">
+          <div class="panel-layout">
+            <div class="panel-info">
+              <div class="panel-num">02</div>
+              <h3 class="panel-title">Soportes & Resistencias</h3>
+              <p class="panel-desc">Detección automática de niveles clave mediante extremos locales y clustering adaptativo con validación por número de toques.</p>
+              <span class="tool-tag">Dinámico</span>
+            </div>
+            <div class="panel-image-wrapper">
+              <img src="img/modulo2.png" alt="Soportes y Resistencias" class="panel-img">
+            </div>
+          </div>
+        </div>
+
+        <div class="module-panel" id="panel-3">
+          <div class="panel-layout">
+            <div class="panel-info">
+              <div class="panel-num">03</div>
+              <h3 class="panel-title">Análisis de Volumen</h3>
+              <p class="panel-desc">OBV, Point of Control (POC) y Volume Climax para identificar zonas de acumulación y distribución institucional.</p>
+              <span class="tool-tag">Institucional</span>
+            </div>
+            <div class="panel-image-wrapper">
+              <img src="img/modulo3.png" alt="Análisis de Volumen" class="panel-img">
+            </div>
+          </div>
+        </div>
+
+        <div class="module-panel" id="panel-4">
+          <div class="panel-layout">
+            <div class="panel-info">
+              <div class="panel-num">04</div>
+              <h3 class="panel-title">Indicadores Técnicos</h3>
+              <p class="panel-desc">Suite completa: RSI, MACD, Bandas de Bollinger, ADX y ATR calculados con precisión vectorial sobre series de tiempo.</p>
+              <span class="tool-tag">Suite completa</span>
+            </div>
+            <div class="panel-image-wrapper">
+              <img src="img/modulo4.png" alt="Indicadores Técnicos" class="panel-img">
+            </div>
+          </div>
+        </div>
+
+        <div class="module-panel" id="panel-5">
+          <div class="panel-layout">
+            <div class="panel-info">
+              <div class="panel-num">05</div>
+              <h3 class="panel-title">Anomalías Estadísticas</h3>
+              <p class="panel-desc">Detección de eventos extremos mediante ventana móvil de 50 períodos con umbrales dinámicos de desviación estándar.</p>
+              <span class="tool-tag">Rolling Window</span>
+            </div>
+            <div class="panel-image-wrapper">
+              <img src="img/modulos5.png" alt="Anomalías Estadísticas" class="panel-img">
+            </div>
+          </div>
+        </div>
+
+        <div class="module-panel" id="panel-6">
+          <div class="panel-layout">
+            <div class="panel-info">
+              <div class="panel-num">06</div>
+              <h3 class="panel-title">Estadísticas Avanzadas</h3>
+              <p class="panel-desc">Análisis detallado de distribuciones, correlaciones y tendencias con métodos estadísticos avanzados.</p>
+              <span class="tool-tag">Avanzado</span>
+            </div>
+            <div class="panel-image-wrapper">
+              <img src="img/modulo6.png" alt="Estadísticas Avanzadas" class="panel-img">
+            </div>
+          </div>
+        </div>
+
+        <div class="module-panel" id="panel-7">
+          <div class="panel-layout">
+            <div class="panel-info">
+              <div class="panel-num">07</div>
+              <h3 class="panel-title">Ingeniería Avanzada</h3>
+              <p class="panel-desc">Transformada de físicas para detectar ciclos ocultos y filtro cuantitativo para estimación óptima del estado real del precio.</p>
+              <span class="tool-tag">Avanzado</span>
+            </div>
+            <div class="panel-image-wrapper">
+              <img src="img/modulo7.png" alt="Ingeniería Financiera" class="panel-img">
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
+</div>
 </section>
 
 <!-- CAROUSEL -->
@@ -221,7 +312,7 @@
         <div class="slide-info">
           <span class="slide-tag">Anomalias Estadísticas</span>
           <div class="slide-title">Detección de Eventos Extremos</div>
-          <p class="slide-desc">Ventana móvil de 50 períodos identifica movimientos fuera del rango de 2σ con límites dinámicos.</p>
+          <p class="slide-desc">Entiende cuándo el mercado se aleja de su Fair Value y opera sus reversiones a la media con base estadística como en Wall Street»</p>
         </div>
       </div>
 
@@ -259,9 +350,9 @@
           </svg>
         </div>
         <div class="slide-info">
-          <span class="slide-tag">Análisis de Fourier</span>
+          <span class="slide-tag">Análisis Cuantitativo</span>
           <div class="slide-title">Espectro de Frecuencias</div>
-          <p class="slide-desc">Descomposición FFT para aislar tendencia lenta, ciclos institucionales y ruido de mercado.</p>
+          <p class="slide-desc">Disipa el ruido del mercado y toma trades con más calidad. Obtén una operativa más eficiente donde no dudes de tus entradas</p>
         </div>
       </div>
 
@@ -315,7 +406,7 @@
         <div class="slide-info">
           <span class="slide-tag">Soportes & Resistencias</span>
           <div class="slide-title">Niveles Clave Validados</div>
-          <p class="slide-desc">Clustering adaptativo agrupa niveles similares dentro del 0.5%, validando por nÃºmero de toques.</p>
+          <p class="slide-desc">Clustering adaptativo agrupa niveles similares dentro del 0.5%, validando por datos.</p>
         </div>
       </div>
 
@@ -459,7 +550,7 @@
         <div class="slide-info">
           <span class="slide-tag">Dashboard de Confluencias</span>
           <div class="slide-title">Señal Integrada Multi-Indicador</div>
-          <p class="slide-desc">Vista unificada de todos los modulos: RSI, MACD, Bollinger, Quant, ciclos quantitativos y patrones activos.</p>
+          <p class="slide-desc">Vista unificada de indicadores Quant, ciclos quantitativos y patrones activos.</p>
         </div>
       </div>
 
@@ -527,19 +618,19 @@
       <div class="step-num">01</div>
       <div class="step-icon">Mercado</div>
       <div class="step-title">Selecciona Mercado y Período</div>
-      <p class="step-text">Elige entre 6 mercados globales y 5 temporalidades. Los datos se obtienen vía yFinance en tiempo real.</p>
+      <p class="step-text">Elige entre 6 mercados globales y 5 temporalidades.</p>
     </div>
     <div class="step">
       <div class="step-num">02</div>
       <div class="step-icon">Análisis</div>
       <div class="step-title">Motor de Análisis</div>
-      <p class="step-text">Los 7 módulos se ejecutan en paralelo sobre los datos descargados, calculando cada métrica vectorialmente con NumPy y SciPy.</p>
+      <p class="step-text">Los 7 módulos se ejecutan en paralelo sobre los datos descargados, calculando cada métrica vectorialmente.</p>
     </div>
     <div class="step">
       <div class="step-num">03</div>
       <div class="step-icon">Estudio</div>
       <div class="step-title">Visualización Interactiva</div>
-      <p class="step-text">Plotly genera graficos interactivos con zoom, tooltips y anotaciones automáticas de niveles y ciclos detectados.</p>
+      <p class="step-text">Nuestras herramientas generan gráficos interactivos con zoom, tooltips y anotaciones automáticas de niveles y ciclos detectados.</p>
     </div>
     <div class="step">
       <div class="step-num">04</div>
@@ -561,16 +652,17 @@
 <footer>
   <div class="footer-logo">Quant<span>Lab</span></div>
   <div class="footer-stack">
-    <span class="stack-badge">Python</span>
-    <span class="stack-badge">Flask</span>
-    <span class="stack-badge">NumPy</span>
-    <span class="stack-badge">Plotly</span>
-    <span class="stack-badge">yFinance</span>
-    <span class="stack-badge">SciPy</span>
+    <span class="stack-badge">Quant</span>
+    <span class="stack-badge">Stocks</span>
+    <span class="stack-badge">Futuros</span>
+    <span class="stack-badge">CFD</span>
+    <span class="stack-badge">Crypto</span>
+    <span class="stack-badge">Oro</span>
   </div>
-  <div class="footer-copy">© 2025 QuantLab Sistema Cuantitativo de Trading</div>
+  <div class="footer-copy">© 2026 QuantLab Sistema Cuantitativo de Trading</div>
 </footer>
 
 <script src="script.js"></script>
+
 </body>
 </html>
