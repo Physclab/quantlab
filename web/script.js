@@ -1,4 +1,4 @@
-﻿// â”€â”€ CURSOR
+// â”€â”€ CURSOR
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursor-ring');
   document.addEventListener('mousemove', e => {
@@ -7,6 +7,7 @@
     ring.style.left = e.clientX + 'px';
     ring.style.top = e.clientY + 'px';
   });
+
 
   // â”€â”€ COUNTER ANIMATION
   function animateCounter(el, target, duration = 1400) {
@@ -93,6 +94,7 @@
     const y = (e.clientY / window.innerHeight - 0.5) * 40;
     glow.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
   });
+
   // â”€â”€ TESTIMONIALS SLIDER
   const testimonials = document.querySelectorAll('.testimonial');
   let currentTestimonial = 0;
@@ -107,3 +109,55 @@
     currentTestimonial = (currentTestimonial + 1) % testimonials.length;
     showTestimonial(currentTestimonial);
   }, 5000);
+
+  function switchModule(index) {
+    // Obtener todas las pestañas y todos los paneles
+    const tabs = document.querySelectorAll('.module-tab');
+    const panels = document.querySelectorAll('.module-panel');
+    
+    // Remover clases activas de los elementos previos
+    tabs.forEach(tab => tab.classList.remove('active-tab'));
+    panels.forEach(panel => panel.classList.remove('active-panel'));
+    
+    // Activar la pestaña y el panel correspondiente con la animación
+    tabs[index].classList.add('active-tab');
+    panels[index].classList.add('active-panel');
+}
+// Variable global para rastrear el índice del módulo actual
+let currentModuleIndex = 0;
+
+// Reemplaza o complementa tu función original para actualizar el índice global
+function switchModule(index) {
+    currentModuleIndex = index; // Sincroniza el índice
+    
+    const tabs = document.querySelectorAll('.module-tab');
+    const panels = document.querySelectorAll('.module-panel');
+    
+    tabs.forEach(tab => tab.classList.remove('active-tab'));
+    panels.forEach(panel => panel.classList.remove('active-panel'));
+    
+    tabs[index].classList.add('active-tab');
+    panels[index].classList.add('active-panel');
+}
+
+// Función para ir al módulo anterior
+function prevModule() {
+    const totalModules = document.querySelectorAll('.module-tab').length;
+    let newIndex = currentModuleIndex - 1;
+    
+    if (newIndex < 0) {
+        newIndex = totalModules - 1; // Si baja de 0, va al último
+    }
+    switchModule(newIndex);
+}
+
+// Función para ir al siguiente módulo
+function nextModule() {
+    const totalModules = document.querySelectorAll('.module-tab').length;
+    let newIndex = currentModuleIndex + 1;
+    
+    if (newIndex >= totalModules) {
+        newIndex = 0; // Si pasa del límite, vuelve al primero
+    }
+    switchModule(newIndex);
+}
