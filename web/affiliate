@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>QuantLab — Programa de Referidos</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --red: #D1121B;
+  --red-bright: #FF2030;
+  --red-dim: #6B0810;
+  --black: #000000;
+  --near-black: #000000;
+  --card: #080808;
+  --card2: #111111;
+  --border: rgba(209,18,27,0.14);
+  --border2: rgba(255,255,255,0.05);
+  --white: #F0EDEC;
+  --grey: #888;
+  --grey2: #555;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--black);
+  color:var(--white);
+  font-family:'Syne',sans-serif;
+  overflow-x:hidden;
+}
+
+/* GRAIN */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:.6;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;width:100%;z-index:200;
+  background:rgba(0,0,0,.85);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(14px);
+  padding:16px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:.1em;cursor:pointer;text-decoration:none;color:var(--white)}
+.nav-logo span{color:var(--red-bright)}
+.nav-links{display:flex;gap:32px}
+.nav-links a{
+  font-family:'Space Mono',monospace;font-size:.65rem;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--grey);text-decoration:none;
+  transition:color .2s;
+}
+.nav-links a:hover{color:var(--red-bright)}
+@media(max-width:700px){nav{padding:14px 16px}.nav-links{display:none}}
+
+/* TICKER */
+.ticker{background:var(--red);overflow:hidden;padding:9px 0;position:relative;z-index:10;margin-top:61px}
+.ticker-inner{display:flex;width:max-content;animation:tick 22s linear infinite;white-space:nowrap}
+.ticker-item{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.12em;color:#fff;text-transform:uppercase;padding:0 24px}
+.ticker-item span{opacity:.5;margin:0 5px}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* HERO */
+.hero{
+  min-height:70vh;
+  display:flex;align-items:center;
+  padding:80px 48px 60px;
+  position:relative;z-index:1;
+  overflow:hidden;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(209,18,27,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(209,18,27,.03) 1px, transparent 1px);
+  background-size:80px 80px;
+  animation:grid-move 50s linear infinite;
+  pointer-events:none;
+}
+@keyframes grid-move{from{background-position:0 0}to{background-position:80px 80px}}
+
+.hero-line{
+  position:absolute;
+  width:2px;height:60%;
+  background:linear-gradient(180deg,transparent,var(--red),transparent);
+  left:44%;top:20%;
+  opacity:.18;
+  transform:rotate(15deg);
+}
+
+.hero-inner{
+  max-width:1200px;margin:0 auto;width:100%;
+  text-align:center;
+}
+
+.hero-eyebrow{
+  font-family:'Space Mono',monospace;
+  font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--red);margin-bottom:20px;
+  display:flex;align-items:center;gap:10px;justify-content:center;
+}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';display:inline-block;width:28px;height:1px;background:var(--red)}
+
+.hero-headline{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3.5rem,7vw,7rem);
+  line-height:.92;
+  margin-bottom:28px;
+  letter-spacing:.02em;
+}
+.hero-headline em{color:var(--red-bright);font-style:normal}
+.hero-headline .outline{
+  -webkit-text-stroke:1px rgba(240,237,236,.22);
+  color:transparent;
+}
+
+.hero-sub{
+  font-size:1.05rem;font-weight:400;line-height:1.72;
+  color:#b0aaa8;max-width:580px;margin:0 auto 40px;
+}
+
+/* STATS ROW */
+.stats-row{
+  display:flex;gap:0;flex-wrap:wrap;
+  justify-content:center;
+  margin-top:48px;
+  border:1px solid var(--border);
+  max-width:700px;
+  margin-left:auto;margin-right:auto;
+}
+.stat-item{
+  flex:1;min-width:140px;
+  padding:28px 24px;
+  border-right:1px solid var(--border);
+  text-align:center;
+}
+.stat-item:last-child{border-right:none}
+.stat-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2.6rem;color:var(--red-bright);
+  letter-spacing:.04em;display:block;line-height:1;
+}
+.stat-lbl{
+  font-family:'Space Mono',monospace;
+  font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--grey);margin-top:6px;display:block;
+}
+
+/* SECTION LAYOUT */
+.section-divider{
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--red-dim),transparent);
+  position:relative;z-index:1;
+  margin:0 48px;
+}
+@media(max-width:700px){.section-divider{margin:0 16px}}
+
+.main-section{
+  padding:80px 48px;
+  position:relative;z-index:1;
+  max-width:1200px;margin:0 auto;
+}
+@media(max-width:700px){.main-section{padding:60px 16px}}
+
+.section-label{
+  font-family:'Space Mono',monospace;
+  font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--red);margin-bottom:14px;
+  display:flex;align-items:center;gap:10px;
+}
+.section-label::before{content:'';display:inline-block;width:28px;height:1px;background:var(--red)}
+
+.section-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.4rem,4.5vw,4rem);
+  line-height:1;margin-bottom:10px;
+}
+.section-title em{color:var(--red-bright);font-style:normal}
+.section-sub{
+  font-size:.9rem;color:var(--grey);max-width:560px;line-height:1.6;
+  margin-bottom:48px;
+}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
+.reveal.on{opacity:1;transform:translateY(0)}
+
+/* ======== POINTS TABLE ======== */
+.points-table-wrap{
+  border:1px solid var(--border);
+  overflow:hidden;
+  margin-bottom:60px;
+}
+.points-table{
+  width:100%;
+  border-collapse:collapse;
+}
+.points-table th{
+  font-family:'Space Mono',monospace;
+  font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--red);
+  padding:16px 20px;
+  border-bottom:1px solid var(--border);
+  text-align:left;
+  background:var(--card);
+}
+.points-table td{
+  padding:14px 20px;
+  font-size:.88rem;
+  color:#b0aaa8;
+  border-bottom:1px solid var(--border2);
+  vertical-align:middle;
+}
+.points-table tr:last-child td{border-bottom:none}
+.points-table tr:hover td{background:var(--card2)}
+
+.plan-badge{
+  display:inline-block;
+  font-family:'Space Mono',monospace;
+  font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:3px 10px;
+  border:1px solid var(--border);
+  color:var(--grey);
+}
+.plan-basic .plan-badge{border-color:rgba(209,18,27,.2);color:#888}
+.plan-standard .plan-badge{border-color:rgba(209,18,27,.35);color:#bbb}
+.plan-advanced .plan-badge{border-color:var(--red);color:var(--white)}
+.plan-referral .plan-badge{border-color:var(--red-bright);color:var(--red-bright);background:rgba(255,32,48,.06)}
+
+.pts-value{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.6rem;
+  color:var(--red-bright);
+  letter-spacing:.04em;
+}
+.pts-value.infinite{
+  color:var(--red-bright);
+  font-size:2rem;
+  text-shadow:0 0 20px rgba(255,32,48,.4);
+}
+.row-referral td{background:rgba(255,32,48,.03) !important}
+.row-referral:hover td{background:rgba(255,32,48,.07) !important}
+
+/* ======== REWARDS TABLE ======== */
+.rewards-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+  margin-bottom:60px;
+}
+.reward-card{
+  background:var(--card);
+  padding:32px 26px;
+  position:relative;overflow:hidden;
+  transition:background .25s;
+  cursor:default;
+}
+.reward-card:hover{background:var(--card2)}
+.reward-card::after{
+  content:'';position:absolute;
+  bottom:0;left:0;right:0;height:2px;
+  background:var(--red);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .35s;
+}
+.reward-card:hover::after{transform:scaleX(1)}
+
+.reward-pts{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:3rem;color:var(--red-bright);
+  letter-spacing:.04em;display:block;line-height:1;
+  margin-bottom:4px;
+}
+.reward-pts-lbl{
+  font-family:'Space Mono',monospace;
+  font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--red);margin-bottom:16px;display:block;
+}
+.reward-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.35rem;letter-spacing:.04em;
+  color:var(--white);margin-bottom:8px;display:block;
+}
+.reward-desc{
+  font-size:.82rem;color:var(--grey);line-height:1.55;
+}
+.reward-icon{font-size:1.6rem;margin-bottom:14px;display:block}
+
+/* ======== HOW IT WORKS ======== */
+.steps-row{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:24px;
+  margin-bottom:60px;
+}
+.step-item{
+  position:relative;
+  padding:28px 24px;
+  border:1px solid var(--border);
+  background:var(--card);
+  transition:border-color .25s,background .25s;
+}
+.step-item:hover{border-color:var(--red-dim);background:var(--card2)}
+.step-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:4rem;color:rgba(209,18,27,.12);
+  letter-spacing:.04em;line-height:1;
+  position:absolute;top:16px;right:20px;
+}
+.step-icon{font-size:1.5rem;margin-bottom:14px;display:block}
+.step-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.25rem;letter-spacing:.04em;
+  color:var(--white);margin-bottom:8px;
+}
+.step-desc{font-size:.82rem;color:var(--grey);line-height:1.55}
+
+/* ======== AFFILIATE FORM ======== */
+.affiliate-form-wrap{
+  max-width:620px;
+  margin:0 auto;
+}
+.form-card{
+  border:1px solid var(--border);
+  background:var(--card);
+  padding:40px;
+}
+@media(max-width:700px){.form-card{padding:24px 18px}}
+
+.form-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2rem;letter-spacing:.04em;
+  color:var(--white);margin-bottom:6px;
+}
+.form-title em{color:var(--red-bright);font-style:normal}
+.form-sub{
+  font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grey);margin-bottom:28px;display:block;
+}
+
+.form-group{margin-bottom:18px}
+.form-label{
+  font-family:'Space Mono',monospace;
+  font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--red);display:block;margin-bottom:8px;
+}
+.form-input{
+  width:100%;
+  background:var(--near-black);
+  border:1px solid var(--border);
+  color:var(--white);
+  font-family:'Syne',sans-serif;font-size:.9rem;
+  padding:12px 16px;
+  outline:none;
+  transition:border-color .2s,box-shadow .2s;
+}
+.form-input:focus{
+  border-color:var(--red);
+  box-shadow:0 0 0 1px rgba(209,18,27,.2);
+}
+.form-input::placeholder{color:var(--grey2)}
+
+/* DISCLAIMER BOX */
+.disclaimer-box{
+  border:1px solid var(--border);
+  background:rgba(209,18,27,.04);
+  padding:16px;
+  max-height:130px;
+  overflow-y:auto;
+  margin-bottom:18px;
+  font-size:.78rem;
+  color:#888;
+  line-height:1.65;
+  scrollbar-width:thin;
+  scrollbar-color:var(--red-dim) transparent;
+}
+.disclaimer-box::-webkit-scrollbar{width:4px}
+.disclaimer-box::-webkit-scrollbar-track{background:transparent}
+.disclaimer-box::-webkit-scrollbar-thumb{background:var(--red-dim);border-radius:2px}
+
+.disclaimer-box strong{color:#aaa}
+
+/* CHECKBOX */
+.checkbox-row{
+  display:flex;align-items:flex-start;gap:12px;
+  margin-bottom:24px;
+  cursor:pointer;
+}
+.checkbox-row input[type="checkbox"]{
+  width:16px;height:16px;
+  accent-color:var(--red-bright);
+  margin-top:2px;flex-shrink:0;cursor:pointer;
+}
+.checkbox-label{
+  font-size:.82rem;color:var(--grey);line-height:1.5;
+  cursor:pointer;
+}
+
+/* SUBMIT BTN */
+.btn-submit{
+  width:100%;
+  background:var(--red);
+  color:#fff;
+  border:none;cursor:pointer;
+  font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:16px;
+  transition:background .2s,box-shadow .2s;
+  position:relative;overflow:hidden;
+}
+.btn-submit:hover{
+  background:var(--red-bright);
+  box-shadow:0 0 24px rgba(255,32,48,.3);
+}
+.btn-submit:disabled{
+  opacity:.5;cursor:not-allowed;
+}
+.btn-submit::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);
+  transform:translateX(-100%);
+  transition:transform .6s;
+}
+.btn-submit:hover::before{transform:translateX(100%)}
+
+.form-success{
+  text-align:center;padding:32px 0;
+  display:none;
+}
+.form-success-icon{font-size:2.5rem;margin-bottom:12px;display:block}
+.form-success-title{
+  font-family:'Bebas Neue',sans-serif;font-size:1.8rem;
+  color:var(--red-bright);letter-spacing:.06em;margin-bottom:8px;
+}
+.form-success-msg{font-size:.88rem;color:var(--grey);line-height:1.6}
+
+/* FOOTER */
+footer{
+  background:var(--near-black);
+  border-top:1px solid var(--border);
+  padding:32px 48px;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:16px;
+  position:relative;z-index:1;
+}
+@media(max-width:700px){footer{padding:24px 16px}}
+.footer-copy{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.08em;color:var(--grey)}
+
+/* ACCENT DIVIDER (full bleed) */
+.full-divider{
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--red-dim),transparent);
+  position:relative;z-index:1;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">Quant<span>Lab</span></a>
+  <div class="nav-links">
+    <a href="#como-funciona">Cómo Funciona</a>
+    <a href="#puntos">Tabla de Puntos</a>
+    <a href="#premios">Premios</a>
+    <a href="#afiliado">Ser Afiliado</a>
+  </div>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">Referidos <span>·</span></span>
+    <span class="ticker-item">1 Referido = 1 Punto <span>·</span></span>
+    <span class="ticker-item">Puntos Canjeables por Premios <span>·</span></span>
+    <span class="ticker-item">Cuentas de Fondeo <span>·</span></span>
+    <span class="ticker-item">Asesorías Personalizadas <span>·</span></span>
+    <span class="ticker-item">Meses Gratuitos <span>·</span></span>
+    <span class="ticker-item">Dinero Real <span>·</span></span>
+    <span class="ticker-item">Referidos <span>·</span></span>
+    <span class="ticker-item">1 Referido = 1 Punto <span>·</span></span>
+    <span class="ticker-item">Puntos Canjeables por Premios <span>·</span></span>
+    <span class="ticker-item">Cuentas de Fondeo <span>·</span></span>
+    <span class="ticker-item">Asesorías Personalizadas <span>·</span></span>
+    <span class="ticker-item">Meses Gratuitos <span>·</span></span>
+    <span class="ticker-item">Dinero Real <span>·</span></span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-line"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow reveal">Programa de Lealtad & Referidos</div>
+    <h1 class="hero-headline reveal">
+      Gana Puntos,<br>
+      <em>Canjea</em> <span class="outline">Premios</span>
+    </h1>
+    <p class="hero-sub reveal">
+      QuantLab premia tu fidelidad y a quienes traes al equipo. Acumula puntos por tu tiempo en la plataforma y por cada referido que incorpores al proyecto.
+    </p>
+    <div class="stats-row reveal">
+      <div class="stat-item">
+        <span class="stat-num">1</span>
+        <span class="stat-lbl">Pto. por mes (Basic)</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">3</span>
+        <span class="stat-lbl">Ptos. por mes (Advanced)</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">∞</span>
+        <span class="stat-lbl">Ptos. por referidos</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">5</span>
+        <span class="stat-lbl">Ptos. mínimos p/ canjear</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- CÓMO FUNCIONA -->
+<section class="main-section" id="como-funciona">
+  <div class="section-label reveal">Sistema</div>
+  <h2 class="section-title reveal">¿Cómo <em>Funciona?</em></h2>
+  <p class="section-sub reveal">En cuatro pasos ya estás acumulando puntos y acercándote a tus premios.</p>
+
+  <div class="steps-row">
+    <div class="step-item reveal">
+      <span class="step-num">01</span>
+      <span class="step-icon">🪪</span>
+      <div class="step-title">Recibe tu Código</div>
+      <p class="step-desc">Al unirte como afiliado, QuantLab te asigna un <strong style="color:var(--white)">código de referido único</strong>. Ese código es tuyo para compartir.</p>
+    </div>
+    <div class="step-item reveal">
+      <span class="step-num">02</span>
+      <span class="step-icon">📅</span>
+      <div class="step-title">Permanece en QuantLab</div>
+      <p class="step-desc">Cada mes activo en la plataforma te genera puntos automáticamente según tu plan. Sin hacer nada extra.</p>
+    </div>
+    <div class="step-item reveal">
+      <span class="step-num">03</span>
+      <span class="step-icon">🔗</span>
+      <div class="step-title">Comparte & Refiere</div>
+      <p class="step-desc">Tu referido usa <strong style="color:var(--white)">tu código al comprar</strong> QuantLab. Así se registra el referido y recibes 1 punto por cada persona que se una, sin límite.</p>
+    </div>
+    <div class="step-item reveal">
+      <span class="step-num">04</span>
+      <span class="step-icon">🎁</span>
+      <div class="step-title">Canjea tus Premios</div>
+      <p class="step-desc">Al alcanzar el umbral de puntos requerido, escríbenos y gestionamos tu premio: asesorías, meses gratis, fondeo o dinero real.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- TABLA DE PUNTOS -->
+<section class="main-section" id="puntos">
+  <div class="section-label reveal">Acumulación</div>
+  <h2 class="section-title reveal">Tabla de <em>Puntos</em></h2>
+  <p class="section-sub reveal">Compara cuántos puntos acumulas según tu plan y tiempo de permanencia. Los referidos no tienen techo.</p>
+
+  <div class="points-table-wrap reveal">
+    <table class="points-table">
+      <thead>
+        <tr>
+          <th>Plan</th>
+          <th>Duración</th>
+          <th>Puntos Obtenidos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="plan-basic">
+          <td><span class="plan-badge">Basic</span></td>
+          <td>1 mes</td>
+          <td><span class="pts-value">1 pto</span></td>
+        </tr>
+        <tr class="plan-standard">
+          <td><span class="plan-badge">Standard</span></td>
+          <td>1 mes</td>
+          <td><span class="pts-value">2 ptos</span></td>
+        </tr>
+        <tr class="plan-advanced">
+          <td><span class="plan-badge">Advanced</span></td>
+          <td>1 mes</td>
+          <td><span class="pts-value">3 ptos</span></td>
+        </tr>
+        <tr class="plan-basic">
+          <td><span class="plan-badge">Basic</span></td>
+          <td>2 meses</td>
+          <td><span class="pts-value">2 ptos</span></td>
+        </tr>
+        <tr class="plan-standard">
+          <td><span class="plan-badge">Standard</span></td>
+          <td>2 meses</td>
+          <td><span class="pts-value">4 ptos</span></td>
+        </tr>
+        <tr class="plan-advanced">
+          <td><span class="plan-badge">Advanced</span></td>
+          <td>2 meses</td>
+          <td><span class="pts-value">6 ptos</span></td>
+        </tr>
+        <tr class="row-referral plan-referral">
+          <td><span class="plan-badge">Referidos</span></td>
+          <td>Por cada referido (cualquier plan)</td>
+          <td><span class="pts-value infinite">∞ ptos</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- PREMIOS -->
+<section class="main-section" id="premios">
+  <div class="section-label reveal">Recompensas</div>
+  <h2 class="section-title reveal">Tabla de <em>Premios</em></h2>
+  <p class="section-sub reveal">Desde los 5 puntos ya puedes canjear. Cuanto más acumules, mayores serán tus recompensas.</p>
+
+  <div class="rewards-grid">
+    <div class="reward-card reveal">
+      <span class="reward-icon">🗓️</span>
+      <span class="reward-pts">5</span>
+      <span class="reward-pts-lbl">puntos</span>
+      <span class="reward-title">1 Mes Gratis (Basic o Escalado)</span>
+      <p class="reward-desc">Obtén un mes en tu plan actual o accede a un plan superior por el precio de tu plan vigente durante ese mes.</p>
+    </div>
+    <div class="reward-card reveal">
+      <span class="reward-icon">🧑‍💼</span>
+      <span class="reward-pts">10</span>
+      <span class="reward-pts-lbl">puntos</span>
+      <span class="reward-title">Asesoría con Experto</span>
+      <p class="reward-desc">Sesión de 1 hora con un especialista del equipo QuantLab para resolver todas tus dudas de trading, análisis o estrategia.</p>
+    </div>
+    <div class="reward-card reveal">
+      <span class="reward-icon">🏦</span>
+      <span class="reward-pts">15</span>
+      <span class="reward-pts-lbl">puntos</span>
+      <span class="reward-title">Cuenta de Fondeo</span>
+      <p class="reward-desc">Accede a una cuenta de fondeo en firmas verificadas: <strong>Apex</strong>, <strong>MyFunded Futures</strong> o <strong>Lucid</strong>. Trading profesional sin capital propio.</p>
+    </div>
+    <div class="reward-card reveal">
+      <span class="reward-icon">💵</span>
+      <span class="reward-pts">50</span>
+      <span class="reward-pts-lbl">puntos</span>
+      <span class="reward-title">Dinero Real</span>
+      <p class="reward-desc">Plan Advanced por 2 meses completos <strong>o</strong> pago en efectivo a razón de <strong>$2 USD por punto</strong> acumulado.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- FORMULARIO AFILIADO -->
+<section class="main-section" id="afiliado">
+  <div class="section-label reveal">Únete</div>
+  <h2 class="section-title reveal">Conviértete en <em>Afiliado</em></h2>
+  <p class="section-sub reveal">Completa el formulario y nuestro equipo se pondrá en contacto contigo para activar tu código de referido.</p>
+
+  <div class="affiliate-form-wrap">
+    <div class="form-card reveal">
+      <div class="form-title">Solicitud de <em>Afiliado</em></div>
+      <span class="form-sub">Acceso al programa de referidos QuantLab</span>
+
+      <form id="affiliateForm" action="https://formspree.io/f/mpqoqroj" method="POST">
+        <div class="form-group">
+          <label class="form-label" for="nombre">Nombre Completo</label>
+          <input class="form-input" type="text" id="nombre" name="nombre" placeholder="Tu nombre" required/>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="correo">Correo Electrónico</label>
+          <input class="form-input" type="email" id="correo" name="correo" placeholder="tu@correo.com" required/>
+        </div>
+
+        <!-- DISCLAIMER -->
+        <label class="form-label" style="margin-bottom:8px;">Términos y Condiciones del Programa</label>
+        <div class="disclaimer-box">
+          <strong>TÉRMINOS Y CONDICIONES — PROGRAMA DE REFERIDOS QUANTLAB</strong><br><br>
+          El presente programa de referidos y fidelidad (en adelante, "el Programa") está sujeto a los siguientes términos y condiciones, los cuales el participante acepta de forma expresa al solicitar su incorporación.<br><br>
+          <strong>1. Elegibilidad y Canje.</strong> Los puntos acumulados podrán ser canjeados únicamente una vez alcanzada la cantidad mínima especificada para cada recompensa. QuantLab se reserva el derecho de verificar la autenticidad e integridad de los puntos antes de autorizar cualquier canje. Los puntos no son transferibles, no tienen valor monetario intrínseco salvo en los términos expresamente indicados, y no podrán cederse a terceros.<br><br>
+          <strong>2. Código de Conducta.</strong> La participación en el Programa implica el compromiso irrevocable de actuar conforme al Código de Ética de QuantLab. Queda estrictamente prohibido: (a) realizar spam o envío masivo no solicitado de mensajes en grupos, canales, comunidades o plataformas digitales; (b) difundir contenido engañoso, desinformativo o que tergiverse las características, alcances o resultados de QuantLab con el propósito de captar referidos; (c) utilizar cualquier mecanismo artificial, automatizado o fraudulento para inflar el número de referidos o puntos acumulados.<br><br>
+          <strong>3. Sanciones.</strong> El incumplimiento de cualquiera de las disposiciones anteriores faculta a QuantLab a, de forma unilateral e inmediata: (a) cancelar permanentemente el acceso del participante a la plataforma; (b) anular la totalidad de los puntos acumulados sin posibilidad de recuperación ni compensación; (c) rechazar cualquier solicitud de canje pendiente. QuantLab se reserva el derecho de detectar, mediante los mecanismos que estime pertinentes, cualquier anomalía, abuso o incumplimiento de las normas del Programa, tomando las medidas disciplinarias correspondientes sin previo aviso.<br><br>
+          <strong>4. Modificaciones.</strong> QuantLab podrá modificar los términos del Programa, los umbrales de canje o las recompensas disponibles en cualquier momento, con notificación previa a los participantes activos.
+        </div>
+
+        <label class="checkbox-row">
+          <input type="checkbox" id="acepta" name="acepta" required/>
+          <span class="checkbox-label">He leído y acepto los Términos y Condiciones del Programa de Referidos QuantLab, y me comprometo a cumplir el Código de Ética de la plataforma.</span>
+        </label>
+
+        <input type="hidden" name="_subject" value="Nueva solicitud de afiliado - QuantLab"/>
+        <input type="hidden" name="_next" value=""/>
+
+        <button type="submit" class="btn-submit" id="submitBtn">
+          Enviar Solicitud de Afiliado
+        </button>
+      </form>
+
+      <div class="form-success" id="formSuccess">
+        <span class="form-success-icon">✅</span>
+        <div class="form-success-title">¡Solicitud Enviada!</div>
+        <p class="form-success-msg">Recibimos tu solicitud. Nuestro equipo revisará tus datos y se pondrá en contacto contigo a la brevedad para activar tu acceso al programa de referidos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- FOOTER -->
+<footer>
+  <a class="nav-logo" href="index.html">Quant<span>Lab</span></a>
+  <div style="font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.08em;color:var(--grey)">
+    Programa de Referidos & Fidelidad
+  </div>
+  <div class="footer-copy">© 2025 Geremy Gomez · QuantLab</div>
+</footer>
+
+<script>
+// SCROLL REVEAL
+const reveals = document.querySelectorAll('.reveal');
+const ro = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('on'), (i % 4) * 90);
+      ro.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(r => ro.observe(r));
+
+// Trigger hero reveals on load
+window.addEventListener('load', () => {
+  const heroReveals = document.querySelectorAll('.hero .reveal');
+  heroReveals.forEach((el, i) => {
+    setTimeout(() => el.classList.add('on'), 200 + i * 120);
+  });
+});
+
+// FORM SUBMIT via fetch (Formspree AJAX)
+const form = document.getElementById('affiliateForm');
+const successDiv = document.getElementById('formSuccess');
+const submitBtn = document.getElementById('submitBtn');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Enviando...';
+
+  const data = new FormData(form);
+
+  try {
+    const res = await fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (res.ok) {
+      form.style.display = 'none';
+      successDiv.style.display = 'block';
+    } else {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Enviar Solicitud de Afiliado';
+      alert('Hubo un problema al enviar. Por favor intenta nuevamente.');
+    }
+  } catch (err) {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Enviar Solicitud de Afiliado';
+    alert('Error de conexión. Verifica tu internet e intenta nuevamente.');
+  }
+});
+</script>
+</body>
+</html>
