@@ -4,24 +4,17 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Physco — Sobre Mí</title>
-<link rel="shortcut icon" href="ico.ico" />
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-T5TCQ0Q5K5"></script><script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-T5TCQ0Q5K5');
-</script>
 <style>
 :root {
   --red: #D1121B;
   --red-bright: #FF2030;
   --red-dim: #6B0810;
-  --black: #050505;
-  --near-black: #0C0C0C;
-  --card: #101010;
-  --card2: #161616;
+  /* CAMBIO: Color negro absoluto estilo OLED (#000000) */
+  --black: #000000;
+  --near-black: #000000;
+  --card: #080808;
+  --card2: #111111;
   --border: rgba(209,18,27,0.14);
   --border2: rgba(255,255,255,0.05);
   --white: #F0EDEC;
@@ -47,7 +40,8 @@ body::before{
 /* NAV */
 nav{
   position:fixed;top:0;width:100%;z-index:200;
-  background:rgba(5,5,5,.92);
+  /* CAMBIO: Se ajusta el fondo de la navegación para que combine con el negro OLED */
+  background:rgba(0,0,0,.85);
   border-bottom:1px solid var(--border);
   backdrop-filter:blur(14px);
   padding:16px 48px;
@@ -294,7 +288,8 @@ nav{
 .proof-overlay{
   position:absolute;bottom:0;left:0;right:0;
   padding:16px 18px;
-  background:linear-gradient(0deg,rgba(5,5,5,.95) 0%,transparent 100%);
+  /* CAMBIO: Se ajusta el gradiente para que termine en negro absoluto */
+  background:linear-gradient(0deg,rgba(0,0,0,.95) 0%,transparent 100%);
 }
 .proof-label{
   font-family:'Space Mono',monospace;
@@ -452,7 +447,7 @@ footer{
       </h1>
       <div class="bio-text">
         <p>
-            Soy un <strong>ingeniero en Computer Science</strong> y analista de datos certificado, especializado en el desarrollo de inteligencia artificial, con <strong>8 certificaciones en inteligencia artificial</strong>, 2 certificaciones en <strong>finanzas</strong>, y amante del trading. He desarrollado múltiples sistemas algorítmicos que han dado increíbles retornos. Me he fondeado con múltiples cuentas de 50K en MFF, compartiendo mis retiros con transparencia. Actualmente manejo capital privado con un retorno increíble que todo el mundo puede auditar, ya que mi trayecto es público.
+            Soy un <strong>ingeniero en Computer Science</strong> y analista de datos certificado, especializado en el desarrollo de inteligencia artificial, con <strong>8 certificaciones en inteligencia artificial</strong>, 2 certificaciones en <strong>finanzas</strong>, y amante del trading. Estudie en Stanford, University of Michigan y UNAM, luego he desarrollado múltiples sistemas algorítmicos que han dado increíbles retornos. Me he fondeado con múltiples cuentas de 50K en MFF, compartiendo mis retiros con transparencia. Actualmente manejo capital privado con un retorno increíble que todo el mundo puede auditar, ya que mi trayecto es público.
         </p>
         <p>
             Pero todo esto no lo he logrado con <strong>SMC, ICT o acción del precio</strong>. Estos resultados se consiguen cuando entiendes que para los bancos eres liquidez, y estar en su contra es regalar dinero al mercado. Ahí fue donde empecé a aplicar mis conocimientos en inteligencia artificial y programación y desarrollé <strong>QuantLab</strong>, un proyecto propio que me permitió incrementar mis ratios a la vez que aumentaba mi winrate. Ya no operaba con líneas sin sentido, sino que operaba con base, volumen y datos.
@@ -475,11 +470,11 @@ footer{
           <span class="stat-lbl">Cert. Finanzas</span>
         </div>
         <div class="stat-item">
-          <span class="stat-num">+300K</span>
-          <span class="stat-lbl">Cuentas MFF</span>
+          <span class="stat-num">3</span>
+          <span class="stat-lbl">Especializaciones</span>
         </div>
         <div class="stat-item">
-          <span class="stat-num">+$15.4K</span>
+          <span class="stat-num">$+65.4K</span>
           <span class="stat-lbl">Retiro Verificado</span>
         </div>
       </div>
@@ -713,6 +708,4 @@ const statRo = new IntersectionObserver(entries => {
 statNums.forEach(s => statRo.observe(s));
 </script>
 </body>
-
 </html>
-
