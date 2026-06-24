@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>QuantLab — Plan Basic</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
-<script src="https://www.paypal.com/sdk/js?client-id=Adh3H_4ZOSynAQDBuTa-A0eeKS2dKI4KKvaY5HPpUBx5X4HU3VOKG97Q5IsW054CluCfMBqm2uOg-JlZ&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+
 <style>
 :root{
   --red:#D1121B;
@@ -282,14 +282,29 @@ nav{
   font-size:.58rem;color:var(--grey);letter-spacing:.08em;
 }
 
-.paypal-wrap{ display:none; }
-.paypal-wrap.visible{ display:block; }
-.paypal-label{
+.whop-wrap{ display:none; }
+.whop-wrap.visible{ display:block; }
+.whop-label{
   font-family:'Space Mono',monospace;
   font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;
   color:var(--grey);text-align:center;
   margin-bottom:12px;
 }
+.whop-btn{
+  display:block;width:100%;
+  padding:14px 20px;
+  background:var(--red);
+  color:var(--white);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.1rem;letter-spacing:.1em;
+  text-align:center;
+  text-decoration:none;
+  border-radius:10px;
+  border:none;cursor:pointer;
+  transition:background .2s,transform .1s;
+}
+.whop-btn:hover{background:var(--red-bright);transform:translateY(-1px)}
+.whop-btn:active{transform:translateY(0)}
 
 .guarantee{
   display:flex;align-items:center;gap:8px;
@@ -673,20 +688,24 @@ nav{
         </div>
       </div>
 
-      <!-- PAYPAL CONTAINERS (intercepted by disclaimer modal) -->
-      <div class="paypal-wrap visible" id="pp-monthly">
-        <div class="paypal-label">Pago seguro con PayPal</div>
-        <div id="paypal-button-container-P-4D14164073822802ENIBGDFI"></div>
+      <!-- WHOP CONTAINERS (interceptados por modal disclaimer) -->
+      <div class="whop-wrap visible" id="pp-monthly">
+        <div class="whop-label">Pago seguro con Whop</div>
+        <button class="whop-btn" id="whop-btn-monthly" onclick="handleWhopClick('https://whop.com/checkout/plan_RZIIO7UeQIsbM', 'monthly')">
+          Suscribirse — $25 USD / mes
+        </button>
       </div>
 
-      <div class="paypal-wrap" id="pp-quarterly">
-        <div class="paypal-label">Pago seguro con PayPal</div>
-        <div id="paypal-button-container-P-54C04900XW975494KNIBGHXA"></div>
+      <div class="whop-wrap" id="pp-quarterly">
+        <div class="whop-label">Pago seguro con Whop</div>
+        <button class="whop-btn" id="whop-btn-quarterly" onclick="handleWhopClick('https://whop.com/checkout/plan_VvJCDuqJsy0cd', 'quarterly')">
+          Suscribirse — $20 USD / mes (3 meses)
+        </button>
       </div>
 
       <div class="guarantee">
         <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        Pago 100% seguro · Cancela cuando quieras
+        Pago 100% seguro con Whop · Cancela cuando quieras
       </div>
     </div>
   </div>
@@ -810,7 +829,7 @@ nav{
         <svg viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>
       </div>
       <div class="success-title">Términos Aceptados</div>
-      <p class="success-sub">Tu firma ha sido registrada. Ahora puedes completar tu suscripción de forma segura con PayPal.</p>
+      <p class="success-sub">Tu firma ha sido registrada. Ahora puedes completar tu suscripción de forma segura con Whop.</p>
     </div>
 
   </div>
@@ -839,12 +858,12 @@ function selectPeriod(period) {
 /* ============================================================
    DISCLAIMER MODAL
    ============================================================ */
-let currentPlanId   = null;
+let pendingWhopUrl  = null;
 let disclaimerSigned = false;
 let accepted = false;
 
-function openModal(planId) {
-  currentPlanId = planId;
+function openModal(whopUrl) {
+  pendingWhopUrl = whopUrl;
   document.getElementById('disclaimerOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
   // Reset state
@@ -932,10 +951,13 @@ async function handleAccept() {
     document.getElementById('modalSuccess').classList.add('visible');
     disclaimerSigned = true;
 
-    // Auto-close after 2.2s and proceed to PayPal
+    // Auto-close after 2.2s and redirect to Whop
     setTimeout(() => {
       closeModal();
-      // PayPal buttons are already rendered; user can now click them
+      if (pendingWhopUrl) {
+        window.open(pendingWhopUrl, '_blank');
+        pendingWhopUrl = null;
+      }
     }, 2200);
 
   } catch (err) {
@@ -946,48 +968,14 @@ async function handleAccept() {
 }
 
 /* ============================================================
-   PAYPAL — intercept with disclaimer modal
+   WHOP — intercept with disclaimer modal
    ============================================================ */
-
-// We wrap the PayPal render with an overlay interceptor.
-// After the disclaimer is signed, the overlay is removed and PayPal works normally.
-
-function renderPaypalButtons() {
-  /* ---- MONTHLY ---- */
-  paypal.Buttons({
-    style: { shape: 'pill', color: 'blue', layout: 'vertical', label: 'subscribe' },
-    onClick: function(data, actions) {
-      if (!disclaimerSigned) {
-        openModal('P-4D14164073822802ENIBGDFI');
-        return actions.reject();
-      }
-      return actions.resolve();
-    },
-    createSubscription: function(data, actions) {
-      return actions.subscription.create({ plan_id: 'P-4D14164073822802ENIBGDFI' });
-    },
-    onApprove: function(data, actions) {
-      alert('¡Suscripción activada! ID: ' + data.subscriptionID);
-    }
-  }).render('#paypal-button-container-P-4D14164073822802ENIBGDFI');
-
-  /* ---- QUARTERLY ---- */
-  paypal.Buttons({
-    style: { shape: 'rect', color: 'blue', layout: 'vertical', label: 'subscribe' },
-    onClick: function(data, actions) {
-      if (!disclaimerSigned) {
-        openModal('P-54C04900XW975494KNIBGHXA');
-        return actions.reject();
-      }
-      return actions.resolve();
-    },
-    createSubscription: function(data, actions) {
-      return actions.subscription.create({ plan_id: 'P-54C04900XW975494KNIBGHXA' });
-    },
-    onApprove: function(data, actions) {
-      alert('¡Suscripción activada! ID: ' + data.subscriptionID);
-    }
-  }).render('#paypal-button-container-P-54C04900XW975494KNIBGHXA');
+function handleWhopClick(whopUrl, period) {
+  if (!disclaimerSigned) {
+    openModal(whopUrl);
+  } else {
+    window.open(whopUrl, '_blank');
+  }
 }
 
 // Close modal on overlay click (outside modal box)
@@ -999,9 +987,6 @@ document.getElementById('disclaimerOverlay').addEventListener('click', function(
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeModal();
 });
-
-// Init PayPal
-renderPaypalButtons();
 </script>
 </body>
 </html>
