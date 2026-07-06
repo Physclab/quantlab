@@ -740,18 +740,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
+  z-index: 100000; /* Por encima del cursor custom y todo lo demás */
   opacity: 0;
   visibility: hidden;
-  pointer-events: none; /* <-- CLAVE: permite clicks atravesar cuando está oculto */
+  pointer-events: none;
   transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 .discord-popup.active {
   opacity: 1;
   visibility: visible;
-  pointer-events: auto; /* <-- CLAVE: recupera interacción cuando está visible */
+  pointer-events: auto;
 }
 .discord-popup-content {
+  position: relative;
+  z-index: 100001; /* Contenido por encima del overlay */
   background: #0f0f0f;
   border: 1px solid #2a2a2a;
   border-radius: 16px;
@@ -759,10 +761,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   max-width: 420px;
   width: 90%;
   text-align: center;
-  position: relative;
   transform: translateY(20px);
   transition: transform 0.4s ease;
   box-shadow: 0 0 60px rgba(88, 101, 242, 0.15);
+  pointer-events: auto; /* Asegura que el contenido reciba clicks */
 }
 .discord-popup.active .discord-popup-content {
   transform: translateY(0);
@@ -771,6 +773,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   position: absolute;
   top: 16px;
   right: 16px;
+  z-index: 100002; /* La X por encima de todo */
   background: none;
   border: none;
   color: #666;
@@ -783,6 +786,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   justify-content: center;
   border-radius: 8px;
   transition: all 0.2s;
+  pointer-events: auto;
 }
 .discord-popup-close:hover {
   background: #1a1a1a;
@@ -809,6 +813,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   color: #22C55E;
 }
 .discord-popup-btn {
+  position: relative;
+  z-index: 100002; /* Botón por encima de todo */
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -823,6 +829,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   transition: all 0.3s ease;
   border: none;
   cursor: pointer;
+  pointer-events: auto;
 }
 .discord-popup-btn:hover {
   background: #4752C4;
