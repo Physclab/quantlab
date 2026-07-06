@@ -744,8 +744,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.4s ease, visibility 0.4s ease;
+  pointer-events: none;
 }
 .discord-popup.active {
+  pointer-events: auto; 
   opacity: 1;
   visibility: visible;
 }
