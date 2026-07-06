@@ -743,13 +743,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   z-index: 9999;
   opacity: 0;
   visibility: hidden;
+  pointer-events: none; /* <-- CLAVE: permite clicks atravesar cuando está oculto */
   transition: opacity 0.4s ease, visibility 0.4s ease;
-  pointer-events: none;
 }
 .discord-popup.active {
-  pointer-events: auto; 
   opacity: 1;
   visibility: visible;
+  pointer-events: auto; /* <-- CLAVE: recupera interacción cuando está visible */
 }
 .discord-popup-content {
   background: #0f0f0f;
@@ -842,7 +842,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   const popup = document.getElementById('discord-popup');
   let hasShown = false;
   
-  // Detectar cuando el usuario llega a la sección de video
   const videoSection = document.getElementById('video');
   
   if (!videoSection || !popup) return;
@@ -850,22 +849,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting && !hasShown) {
-        // Mostrar popup con pequeño delay para naturalidad
         setTimeout(() => {
           popup.classList.add('active');
           hasShown = true;
-          // Guardar en sessionStorage para no mostrar de nuevo en esta sesión
           sessionStorage.setItem('discordPopupShown', 'true');
         }, 600);
       }
     });
   }, {
-    threshold: 0.4 // Se activa cuando el 40% del video es visible
+    threshold: 0.4
   });
   
   observer.observe(videoSection);
   
-  // Si ya se mostró en esta sesión, no mostrar
   if (sessionStorage.getItem('discordPopupShown') === 'true') {
     hasShown = true;
   }
