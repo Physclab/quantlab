@@ -713,6 +713,167 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="footer-copy">  2026 QuantLab Sistema Cuantitativo de Trading</div>
 </footer>
 
+<!-- POPUP DISCORD -->
+<div id="discord-popup" class="discord-popup">
+  <div class="discord-popup-content">
+    <button class="discord-popup-close" onclick="closeDiscordPopup()">&times;</button>
+    <div class="discord-popup-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.009c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.076.076 0 0 0-.04.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+      </svg>
+    </div>
+    <h3>Únete a la Comunidad QuantLab</h3>
+    <p>Conecta con traders de todo el mundo en el Discord del mejor sistema de trading cuantitativo. Como miembro de la comunidad, obtén un <strong>15% de descuento</strong> en tu primera compra.</p>
+    <a href="https://discord.gg/F3z6p7fPbb" target="_blank" rel="noopener noreferrer" class="discord-popup-btn">
+      Unirme a Discord
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+  </div>
+</div>
+
+<style>
+.discord-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+.discord-popup.active {
+  opacity: 1;
+  visibility: visible;
+}
+.discord-popup-content {
+  background: #0f0f0f;
+  border: 1px solid #2a2a2a;
+  border-radius: 16px;
+  padding: 40px;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  transform: translateY(20px);
+  transition: transform 0.4s ease;
+  box-shadow: 0 0 60px rgba(88, 101, 242, 0.15);
+}
+.discord-popup.active .discord-popup-content {
+  transform: translateY(0);
+}
+.discord-popup-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 24px;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+.discord-popup-close:hover {
+  background: #1a1a1a;
+  color: #fff;
+}
+.discord-popup-icon {
+  color: #5865F2;
+  margin-bottom: 16px;
+}
+.discord-popup-content h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  color: #fff;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+.discord-popup-content p {
+  color: #aaa;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+.discord-popup-content p strong {
+  color: #22C55E;
+}
+.discord-popup-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #5865F2;
+  color: #fff;
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+.discord-popup-btn:hover {
+  background: #4752C4;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(88, 101, 242, 0.3);
+}
+.discord-popup-btn svg {
+  transition: transform 0.2s;
+}
+.discord-popup-btn:hover svg {
+  transform: translateX(3px);
+}
+</style>
+
+<script>
+(function() {
+  const popup = document.getElementById('discord-popup');
+  let hasShown = false;
+  
+  // Detectar cuando el usuario llega a la sección de video
+  const videoSection = document.getElementById('video');
+  
+  if (!videoSection || !popup) return;
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !hasShown) {
+        // Mostrar popup con pequeño delay para naturalidad
+        setTimeout(() => {
+          popup.classList.add('active');
+          hasShown = true;
+          // Guardar en sessionStorage para no mostrar de nuevo en esta sesión
+          sessionStorage.setItem('discordPopupShown', 'true');
+        }, 600);
+      }
+    });
+  }, {
+    threshold: 0.4 // Se activa cuando el 40% del video es visible
+  });
+  
+  observer.observe(videoSection);
+  
+  // Si ya se mostró en esta sesión, no mostrar
+  if (sessionStorage.getItem('discordPopupShown') === 'true') {
+    hasShown = true;
+  }
+})();
+
+function closeDiscordPopup() {
+  document.getElementById('discord-popup').classList.remove('active');
+}
+</script>
+
 <script src="script.js"></script>
 
 </body>
