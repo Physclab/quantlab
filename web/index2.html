@@ -31,7 +31,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 /* ===== TESTIMONIALS CAROUSEL ===== */
 .testimonials-carousel {
   position: relative;
-  max-width: 900px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 20px 0;
 }
@@ -40,18 +40,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   overflow: hidden;
   border-radius: 16px;
   position: relative;
+  padding: 10px 0;
 }
 
 .testimonials-track {
   display: flex;
-  gap: 24px;
-  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  padding: 10px 0;
+  gap: 20px;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
 }
 
+/* Default: 2 cards per view (desktop) */
 .testimonial-card {
-  min-width: 280px;
-  max-width: 280px;
+  flex: 0 0 calc((100% - 20px) / 2);
+  min-width: 0;
   background: #111;
   border: 1px solid #222;
   border-radius: 16px;
@@ -87,8 +89,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 .testimonial-img {
   width: 100%;
-  height: 380px;
+  height: 420px;
   object-fit: cover;
+  object-position: top center;
   display: block;
   transition: transform 0.5s ease;
 }
@@ -103,8 +106,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   bottom: 0;
   left: 0;
   right: 0;
-  height: 80px;
-  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+  height: 60px;
+  background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
   pointer-events: none;
 }
 
@@ -149,6 +152,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   justify-content: center;
   gap: 10px;
   margin-top: 20px;
+  flex-wrap: wrap;
 }
 
 .test-dot {
@@ -208,24 +212,40 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   color: #D1121B;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* ===== RESPONSIVE ===== */
+
+/* Tablet: 2 cards per view (same as desktop, larger) */
+@media (max-width: 992px) {
   .testimonial-card {
-    min-width: 240px;
-    max-width: 240px;
+    flex: 0 0 calc((100% - 20px) / 2);
   }
   .testimonial-img {
-    height: 320px;
+    height: 340px;
   }
 }
 
-@media (max-width: 480px) {
+/* Mobile: 1 card per view */
+@media (max-width: 600px) {
+  .testimonials-carousel {
+    padding: 10px 0;
+  }
   .testimonial-card {
-    min-width: 200px;
-    max-width: 200px;
+    flex: 0 0 100%;
   }
   .testimonial-img {
-    height: 280px;
+    height: 480px;
+  }
+  .testimonials-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 400px) {
+  .testimonial-img {
+    height: 400px;
   }
 }
 </style>
@@ -1142,51 +1162,82 @@ function closeDiscordPopup() {
   const dots = document.querySelectorAll('.test-dot');
   const cards = document.querySelectorAll('.testimonial-card');
 
-  if (!track || !prevBtn || !nextBtn) return;
+  if (!track || !prevBtn || !nextBtn || cards.length === 0) return;
 
   let currentIndex = 0;
   const totalCards = cards.length;
   let autoPlayInterval;
   let isDragging = false;
   let startX = 0;
-  let scrollLeft = 0;
+  let dragStartIndex = 0;
+
+  // Determine how many cards are visible based on viewport width
+  function getCardsPerView() {
+    const width = window.innerWidth;
+    if (width <= 600) return 1;
+    return 2;
+  }
+
+  // Calculate the step size (how many cards to advance)
+  function getStepSize() {
+    return getCardsPerView();
+  }
+
+  // Calculate max index (last valid starting position)
+  function getMaxIndex() {
+    const perView = getCardsPerView();
+    return Math.max(0, totalCards - perView);
+  }
 
   function getCardWidth() {
     const card = cards[0];
-    if (!card) return 304; // 280 + 24 gap
-    const style = window.getComputedStyle(card);
-    const width = card.offsetWidth;
-    const gap = 24;
-    return width + gap;
+    if (!card) return 0;
+    const gap = 20;
+    return card.offsetWidth + gap;
   }
 
   function updateCarousel() {
     const cardWidth = getCardWidth();
     track.style.transform = 'translateX(' + (-currentIndex * cardWidth) + 'px)';
 
-    // Update dots
+    // Update dots - highlight the dot corresponding to the leftmost visible card
     dots.forEach((dot, i) => {
       dot.classList.toggle('active', i === currentIndex);
     });
 
-    // Update active card highlight
+    // Update active card highlight on visible cards
+    const perView = getCardsPerView();
     cards.forEach((card, i) => {
-      card.classList.toggle('active-card', i === currentIndex);
+      const isVisible = i >= currentIndex && i < currentIndex + perView;
+      card.classList.toggle('active-card', isVisible);
     });
   }
 
   function nextSlide() {
-    currentIndex = (currentIndex + 1) % totalCards;
+    const maxIndex = getMaxIndex();
+    const step = getStepSize();
+    if (currentIndex >= maxIndex) {
+      currentIndex = 0; // Loop back to start
+    } else {
+      currentIndex = Math.min(currentIndex + step, maxIndex);
+    }
     updateCarousel();
   }
 
   function prevSlide() {
-    currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+    const maxIndex = getMaxIndex();
+    const step = getStepSize();
+    if (currentIndex <= 0) {
+      currentIndex = maxIndex; // Loop to end
+    } else {
+      currentIndex = Math.max(currentIndex - step, 0);
+    }
     updateCarousel();
   }
 
   function goToSlide(index) {
-    currentIndex = index;
+    const maxIndex = getMaxIndex();
+    currentIndex = Math.max(0, Math.min(index, maxIndex));
     updateCarousel();
   }
 
@@ -1209,7 +1260,7 @@ function closeDiscordPopup() {
     });
   });
 
-  // Card click - open lightbox effect (scale up)
+  // Card click
   cards.forEach((card, i) => {
     card.addEventListener('click', () => {
       goToSlide(i);
@@ -1227,50 +1278,55 @@ function closeDiscordPopup() {
     startAutoPlay();
   }
 
-  // Touch / drag support
+  // Mouse drag support
   track.addEventListener('mousedown', (e) => {
     isDragging = true;
-    startX = e.pageX - track.offsetLeft;
-    scrollLeft = currentIndex;
+    startX = e.pageX;
+    dragStartIndex = currentIndex;
     track.style.cursor = 'grabbing';
+    track.style.transition = 'none';
   });
 
-  track.addEventListener('mouseleave', () => {
-    if (isDragging) {
-      isDragging = false;
-      track.style.cursor = 'grab';
-    }
-  });
-
-  track.addEventListener('mouseup', () => {
+  document.addEventListener('mouseup', () => {
+    if (!isDragging) return;
     isDragging = false;
     track.style.cursor = 'grab';
+    track.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    updateCarousel();
+    resetAutoPlay();
   });
 
-  track.addEventListener('mousemove', (e) => {
+  document.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
     e.preventDefault();
-    const x = e.pageX - track.offsetLeft;
-    const walk = (x - startX);
-    if (Math.abs(walk) > 50) {
-      if (walk > 0) prevSlide();
-      else nextSlide();
-      isDragging = false;
-      track.style.cursor = 'grab';
-      resetAutoPlay();
-    }
+    const x = e.pageX;
+    const walk = startX - x;
+    const cardWidth = getCardWidth();
+    const maxIndex = getMaxIndex();
+
+    // Real-time drag visual
+    let tempIndex = dragStartIndex + (walk / cardWidth);
+    tempIndex = Math.max(0, Math.min(tempIndex, maxIndex));
+    track.style.transform = 'translateX(' + (-tempIndex * cardWidth) + 'px)';
   });
 
   // Touch events for mobile
   let touchStartX = 0;
+  let touchStartTime = 0;
+
   track.addEventListener('touchstart', (e) => {
     touchStartX = e.touches[0].clientX;
+    touchStartTime = Date.now();
   }, {passive: true});
 
   track.addEventListener('touchend', (e) => {
     const touchEndX = e.changedTouches[0].clientX;
     const diff = touchStartX - touchEndX;
-    if (Math.abs(diff) > 50) {
+    const elapsed = Date.now() - touchStartTime;
+    const velocity = Math.abs(diff) / elapsed;
+
+    // Swipe threshold: either distance > 50px or fast swipe
+    if (Math.abs(diff) > 50 || (Math.abs(diff) > 30 && velocity > 0.5)) {
       if (diff > 0) nextSlide();
       else prevSlide();
       resetAutoPlay();
@@ -1280,6 +1336,7 @@ function closeDiscordPopup() {
   // Keyboard navigation
   document.addEventListener('keydown', (e) => {
     const section = document.getElementById('como-funciona');
+    if (!section) return;
     const rect = section.getBoundingClientRect();
     const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
 
@@ -1301,12 +1358,18 @@ function closeDiscordPopup() {
     carousel.addEventListener('mouseleave', startAutoPlay);
   }
 
+  // Handle resize: adjust current index if out of bounds
+  window.addEventListener('resize', () => {
+    const maxIndex = getMaxIndex();
+    if (currentIndex > maxIndex) {
+      currentIndex = maxIndex;
+    }
+    updateCarousel();
+  });
+
   // Initialize
   updateCarousel();
   startAutoPlay();
-
-  // Re-calculate on resize
-  window.addEventListener('resize', updateCarousel);
 
 })();
 </script>
