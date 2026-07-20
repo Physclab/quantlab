@@ -26,6 +26,231 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   gtag('config', 'G-T5TCQ0Q5K5');
 </script>
+
+<style>
+/* ===== TESTIMONIALS CAROUSEL ===== */
+.testimonials-carousel {
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.testimonials-track-wrap {
+  overflow: hidden;
+  border-radius: 16px;
+  position: relative;
+  padding: 10px 0;
+}
+
+.testimonials-track {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+/* Default: 2 cards per view (desktop) */
+.testimonial-card {
+  flex: 0 0 calc((100% - 20px) / 2);
+  min-width: 0;
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.testimonial-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: #D1121B;
+  box-shadow: 0 12px 40px rgba(209, 18, 27, 0.15), 0 0 60px rgba(209, 18, 27, 0.05);
+}
+
+.testimonial-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(209,18,27,0.08), transparent);
+  transition: left 0.6s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.testimonial-card:hover::before {
+  left: 100%;
+}
+
+.testimonial-img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.testimonial-card:hover .testimonial-img {
+  transform: scale(1.05);
+}
+
+.testimonial-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+  pointer-events: none;
+}
+
+/* Controls */
+.testimonials-controls {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.testimonials-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid #333;
+  background: #0a0a0a;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Space Mono', monospace;
+}
+
+.testimonials-btn:hover {
+  border-color: #D1121B;
+  background: #D1121B;
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(209, 18, 27, 0.4);
+}
+
+.testimonials-btn:active {
+  transform: scale(0.95);
+}
+
+/* Dots */
+.testimonials-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.test-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.test-dot::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.test-dot.active {
+  background: #D1121B;
+  transform: scale(1.2);
+}
+
+.test-dot.active::after {
+  border-color: rgba(209, 18, 27, 0.4);
+}
+
+.test-dot:hover {
+  background: #555;
+}
+
+.test-dot.active:hover {
+  background: #D1121B;
+}
+
+/* Privacy message */
+.privacy-msg {
+  color: #555 !important;
+  margin-top: 20px;
+  font-size: 0.8rem;
+  text-align: center;
+  font-family: 'Space Mono', monospace;
+  letter-spacing: 0.5px;
+}
+
+/* Active card glow */
+.testimonial-card.active-card {
+  border-color: #D1121B;
+  box-shadow: 0 0 30px rgba(209, 18, 27, 0.1);
+}
+
+/* Section title accent */
+#como-funciona .section-title em {
+  color: #D1121B;
+}
+
+/* ===== RESPONSIVE ===== */
+
+/* Tablet: 2 cards per view (same as desktop, larger) */
+@media (max-width: 992px) {
+  .testimonial-card {
+    flex: 0 0 calc((100% - 20px) / 2);
+  }
+  .testimonial-img {
+    height: 340px;
+  }
+}
+
+/* Mobile: 1 card per view */
+@media (max-width: 600px) {
+  .testimonials-carousel {
+    padding: 10px 0;
+  }
+  .testimonial-card {
+    flex: 0 0 100%;
+  }
+  .testimonial-img {
+    height: 480px;
+  }
+  .testimonials-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 400px) {
+  .testimonial-img {
+    height: 400px;
+  }
+}
+</style>
+
+<base target="_blank">
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -654,39 +879,67 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
+<!-- TESTIMONIOS -->
 <section class="how-section" id="como-funciona">
-  <div class="section-label">Proceso</div>
-  <h2 class="section-title reveal">¿Como <em>Funciona</em>?</h2>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">01</div>
-      <div class="step-icon">Mercado</div>
-      <div class="step-title">Selecciona Mercado y Período</div>
-      <p class="step-text">Elige entre 6 mercados globales y 5 temporalidades.</p>
+  <div class="section-label">Testimonios</div>
+  <h2 class="section-title reveal">Nuestros <em>Usuarios</em></h2>
+
+  <div class="testimonials-carousel reveal">
+    <div class="testimonials-track-wrap">
+      <div class="testimonials-track" id="testimonials-track">
+        <div class="testimonial-card">
+          <img src="img/testimonio/testimonio3.png" alt="Testimonio 1" class="testimonial-img" loading="lazy">
+        </div>
+        <div class="testimonial-card">
+          <img src="img/testimonio/testimonio4.png" alt="Testimonio 2" class="testimonial-img" loading="lazy">
+        </div>
+        <div class="testimonial-card">
+          <img src="img/testimonio/testimonio5.png" alt="Testimonio 3" class="testimonial-img" loading="lazy">
+        </div>
+        <div class="testimonial-card">
+          <img src="img/testimonio/testimonio6.png" alt="Testimonio 4" class="testimonial-img" loading="lazy">
+        </div>
+        <div class="testimonial-card">
+          <img src="img/testimonio/testimonio7.png" alt="Testimonio 5" class="testimonial-img" loading="lazy">
+        </div>
+        <div class="testimonial-card">
+          <img src="img/testimonio/testimonio8.png" alt="Testimonio 6" class="testimonial-img" loading="lazy">
+        </div>
+        <div class="testimonial-card">
+          <img src="img/testimonio/testimonio9.png" alt="Testimonio 7" class="testimonial-img" loading="lazy">
+        </div>
+        <div class="testimonial-card">
+          <img src="img/testimonio/testimonio10.png" alt="Testimonio 8" class="testimonial-img" loading="lazy">
+        </div>
+                <div class="testimonial-card">
+          <img src="img/testimonio/testimonio1.png" alt="Testimonio 9" class="testimonial-img" loading="lazy">
+        </div>
+        <div class="testimonial-card">
+          <img src="img/testimonio/testimonio2.png" alt="Testimonio 9" class="testimonial-img" loading="lazy">
+        </div>
+      </div>
     </div>
-    <div class="step">
-      <div class="step-num">02</div>
-      <div class="step-icon">Análisis</div>
-      <div class="step-title">Motor de Análisis</div>
-      <p class="step-text">Los 7 módulos se ejecutan en paralelo sobre los datos descargados, calculando cada métrica vectorialmente.</p>
+    <div class="testimonials-controls">
+      <button class="testimonials-btn" id="test-prev" aria-label="Anterior testimonio">&#8592;</button>
+      <button class="testimonials-btn" id="test-next" aria-label="Siguiente testimonio">&#8594;</button>
     </div>
-    <div class="step">
-      <div class="step-num">03</div>
-      <div class="step-icon">Estudio</div>
-      <div class="step-title">Visualización Interactiva</div>
-      <p class="step-text">Nuestras herramientas generan gráficos interactivos con zoom, tooltips y anotaciones automáticas de niveles y ciclos detectados.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">04</div>
-      <div class="step-icon">Entrada</div>
-      <div class="step-title">Señal de Confluencia</div>
-      <p class="step-text">El sistema pondera todas las señales y emite una lectura integrada: dirección, fuerza y timing óptimo de entrada.</p>
+    <div class="testimonials-dots" id="test-dots">
+      <div class="test-dot active" data-index="0"></div>
+      <div class="test-dot" data-index="1"></div>
+      <div class="test-dot" data-index="2"></div>
+      <div class="test-dot" data-index="3"></div>
+      <div class="test-dot" data-index="4"></div>
+      <div class="test-dot" data-index="5"></div>
+      <div class="test-dot" data-index="6"></div>
+      <div class="test-dot" data-index="7"></div>
+      <div class="test-dot" data-index="8"></div>
     </div>
   </div>
-</section>
 
-<!-- CTA -->
+  <p class="privacy-msg">
+    * Por motivos de privacidad, algunos de los nombres están censurados.
+  </p>
+</section><!-- CTA -->
 <section class="cta-section">
   <h2>OPERA CON<br>VENTAJA CUANTITATIVA</h2>
     <p>Opten una ventaja cuantitativa en el mercado que te permita maximizar tus RR y Winrate</p>
@@ -900,6 +1153,228 @@ function closeDiscordPopup() {
     document.body.style.cursor = '';
   }, 100);
 }
+</script>
+
+
+<script>
+/* ===== TESTIMONIALS CAROUSEL ===== */
+(function() {
+  const track = document.getElementById('testimonials-track');
+  const prevBtn = document.getElementById('test-prev');
+  const nextBtn = document.getElementById('test-next');
+  const dots = document.querySelectorAll('.test-dot');
+  const cards = document.querySelectorAll('.testimonial-card');
+
+  if (!track || !prevBtn || !nextBtn || cards.length === 0) return;
+
+  let currentIndex = 0;
+  const totalCards = cards.length;
+  let autoPlayInterval;
+  let isDragging = false;
+  let startX = 0;
+  let dragStartIndex = 0;
+
+  // Determine how many cards are visible based on viewport width
+  function getCardsPerView() {
+    const width = window.innerWidth;
+    if (width <= 600) return 1;
+    return 2;
+  }
+
+  // Calculate the step size (how many cards to advance)
+  function getStepSize() {
+    return getCardsPerView();
+  }
+
+  // Calculate max index (last valid starting position)
+  function getMaxIndex() {
+    const perView = getCardsPerView();
+    return Math.max(0, totalCards - perView);
+  }
+
+  function getCardWidth() {
+    const card = cards[0];
+    if (!card) return 0;
+    const gap = 20;
+    return card.offsetWidth + gap;
+  }
+
+  function updateCarousel() {
+    const cardWidth = getCardWidth();
+    track.style.transform = 'translateX(' + (-currentIndex * cardWidth) + 'px)';
+
+    // Update dots - highlight the dot corresponding to the leftmost visible card
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentIndex);
+    });
+
+    // Update active card highlight on visible cards
+    const perView = getCardsPerView();
+    cards.forEach((card, i) => {
+      const isVisible = i >= currentIndex && i < currentIndex + perView;
+      card.classList.toggle('active-card', isVisible);
+    });
+  }
+
+  function nextSlide() {
+    const maxIndex = getMaxIndex();
+    const step = getStepSize();
+    if (currentIndex >= maxIndex) {
+      currentIndex = 0; // Loop back to start
+    } else {
+      currentIndex = Math.min(currentIndex + step, maxIndex);
+    }
+    updateCarousel();
+  }
+
+  function prevSlide() {
+    const maxIndex = getMaxIndex();
+    const step = getStepSize();
+    if (currentIndex <= 0) {
+      currentIndex = maxIndex; // Loop to end
+    } else {
+      currentIndex = Math.max(currentIndex - step, 0);
+    }
+    updateCarousel();
+  }
+
+  function goToSlide(index) {
+    const maxIndex = getMaxIndex();
+    currentIndex = Math.max(0, Math.min(index, maxIndex));
+    updateCarousel();
+  }
+
+  // Button events
+  nextBtn.addEventListener('click', () => {
+    nextSlide();
+    resetAutoPlay();
+  });
+
+  prevBtn.addEventListener('click', () => {
+    prevSlide();
+    resetAutoPlay();
+  });
+
+  // Dot events
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      goToSlide(i);
+      resetAutoPlay();
+    });
+  });
+
+  // Card click
+  cards.forEach((card, i) => {
+    card.addEventListener('click', () => {
+      goToSlide(i);
+      resetAutoPlay();
+    });
+  });
+
+  // Auto-play
+  function startAutoPlay() {
+    autoPlayInterval = setInterval(nextSlide, 4000);
+  }
+
+  function resetAutoPlay() {
+    clearInterval(autoPlayInterval);
+    startAutoPlay();
+  }
+
+  // Mouse drag support
+  track.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    startX = e.pageX;
+    dragStartIndex = currentIndex;
+    track.style.cursor = 'grabbing';
+    track.style.transition = 'none';
+  });
+
+  document.addEventListener('mouseup', () => {
+    if (!isDragging) return;
+    isDragging = false;
+    track.style.cursor = 'grab';
+    track.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    updateCarousel();
+    resetAutoPlay();
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX;
+    const walk = startX - x;
+    const cardWidth = getCardWidth();
+    const maxIndex = getMaxIndex();
+
+    // Real-time drag visual
+    let tempIndex = dragStartIndex + (walk / cardWidth);
+    tempIndex = Math.max(0, Math.min(tempIndex, maxIndex));
+    track.style.transform = 'translateX(' + (-tempIndex * cardWidth) + 'px)';
+  });
+
+  // Touch events for mobile
+  let touchStartX = 0;
+  let touchStartTime = 0;
+
+  track.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchStartTime = Date.now();
+  }, {passive: true});
+
+  track.addEventListener('touchend', (e) => {
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX - touchEndX;
+    const elapsed = Date.now() - touchStartTime;
+    const velocity = Math.abs(diff) / elapsed;
+
+    // Swipe threshold: either distance > 50px or fast swipe
+    if (Math.abs(diff) > 50 || (Math.abs(diff) > 30 && velocity > 0.5)) {
+      if (diff > 0) nextSlide();
+      else prevSlide();
+      resetAutoPlay();
+    }
+  }, {passive: true});
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    const section = document.getElementById('como-funciona');
+    if (!section) return;
+    const rect = section.getBoundingClientRect();
+    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+
+    if (isVisible) {
+      if (e.key === 'ArrowRight') {
+        nextSlide();
+        resetAutoPlay();
+      } else if (e.key === 'ArrowLeft') {
+        prevSlide();
+        resetAutoPlay();
+      }
+    }
+  });
+
+  // Pause on hover
+  const carousel = document.querySelector('.testimonials-carousel');
+  if (carousel) {
+    carousel.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+    carousel.addEventListener('mouseleave', startAutoPlay);
+  }
+
+  // Handle resize: adjust current index if out of bounds
+  window.addEventListener('resize', () => {
+    const maxIndex = getMaxIndex();
+    if (currentIndex > maxIndex) {
+      currentIndex = maxIndex;
+    }
+    updateCarousel();
+  });
+
+  // Initialize
+  updateCarousel();
+  startAutoPlay();
+
+})();
 </script>
 
 <script src="script.js"></script>
