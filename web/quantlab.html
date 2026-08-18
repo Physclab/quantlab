@@ -301,6 +301,144 @@ nav{
 }
 .feat-check svg{width:9px;height:9px;stroke:var(--red-bright);fill:none;stroke-width:2.5}
 
+/* ADD-ONS TOGGLE */
+.addon-box{
+  border:1px solid rgba(209,18,27,.25);
+  background:rgba(209,18,27,.06);
+  border-radius:10px;
+  padding:12px 14px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:10px;
+  margin:16px 0 4px;
+}
+.addon-label-wrap{display:flex;flex-direction:column;gap:2px}
+.addon-label{
+  font-family:'Space Mono',monospace;
+  font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--white);
+}
+.addon-sublabel{
+  font-family:'Space Mono',monospace;
+  font-size:.56rem;letter-spacing:.05em;
+  color:var(--grey);
+}
+.addon-switch{
+  position:relative;display:inline-block;
+  width:40px;height:22px;flex-shrink:0;
+}
+.addon-switch input{opacity:0;width:0;height:0}
+.addon-slider{
+  position:absolute;cursor:pointer;inset:0;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.15);
+  transition:.2s;border-radius:999px;
+}
+.addon-slider:before{
+  position:absolute;content:"";
+  height:14px;width:14px;left:3px;top:3px;
+  background:var(--white);
+  transition:.2s;border-radius:50%;
+}
+.addon-switch input:checked + .addon-slider{
+  background:var(--red);border-color:var(--red-bright);
+}
+.addon-switch input:checked + .addon-slider:before{
+  transform:translateX(18px);
+}
+
+.price-strike{
+  font-family:'Space Mono',monospace;
+  font-size:.85rem;color:var(--grey2);
+  text-decoration:line-through;
+  margin-right:6px;
+}
+.price-new-badge{
+  display:inline-block;
+  font-family:'Space Mono',monospace;
+  font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;
+  background:rgba(74,222,128,.12);
+  color:#4ade80;
+  border:1px solid rgba(74,222,128,.3);
+  padding:2px 8px;border-radius:999px;
+  margin-left:8px;
+}
+
+/* ADD-ONS MODAL */
+.addon-modal-overlay{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(6px);
+  display:none;
+  align-items:center;justify-content:center;
+  padding:24px;
+}
+.addon-modal-overlay.open{display:flex}
+.addon-modal{
+  background:var(--card2);
+  border:1px solid var(--red);
+  box-shadow:0 0 60px rgba(209,18,27,.2);
+  border-radius:16px;
+  padding:36px 32px;
+  max-width:520px;width:100%;
+  max-height:85vh;overflow-y:auto;
+  position:relative;
+}
+.addon-modal-close{
+  position:absolute;top:16px;right:16px;
+  width:28px;height:28px;
+  border-radius:50%;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  color:var(--white);
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;line-height:1;
+  transition:all .2s;
+}
+.addon-modal-close:hover{background:var(--red);border-color:var(--red-bright)}
+.addon-modal-eyebrow{
+  font-family:'Space Mono',monospace;
+  font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--red-bright);
+  margin-bottom:10px;
+}
+.addon-modal h3{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.9rem;letter-spacing:.05em;
+  margin-bottom:18px;
+  color:var(--white);
+}
+.addon-modal-list{
+  list-style:none;
+  display:flex;flex-direction:column;
+  gap:14px;
+  margin-bottom:24px;
+}
+.addon-modal-list li{
+  font-size:.86rem;line-height:1.6;
+  color:rgba(240,237,236,.85);
+  display:flex;align-items:flex-start;gap:10px;
+}
+.addon-modal-list li span.chk{
+  flex-shrink:0;color:var(--red-bright);font-size:.95rem;
+}
+.addon-modal-price{
+  border-top:1px solid var(--border2);
+  padding-top:18px;
+  display:flex;align-items:baseline;gap:10px;
+  margin-bottom:20px;
+}
+.addon-modal-close-btn{
+  display:block;width:100%;
+  padding:12px;text-align:center;
+  font-family:'Space Mono',monospace;
+  font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
+  background:var(--red);border:1px solid var(--red-bright);
+  color:var(--white);border-radius:8px;cursor:pointer;
+  transition:background .2s;
+}
+.addon-modal-close-btn:hover{background:var(--red-bright)}
+
 /* FEATURES TABLE */
 .table-section{
   position:relative;z-index:1;
@@ -608,6 +746,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
+<!-- ADD-ONS MODAL -->
+<div class="addon-modal-overlay" id="addonModalOverlay">
+  <div class="addon-modal">
+    <button class="addon-modal-close" id="addonModalCloseX" aria-label="Cerrar">&times;</button>
+    <div class="addon-modal-eyebrow">Add-ons activados</div>
+    <h3>Esto es lo que incluye</h3>
+    <ul class="addon-modal-list">
+      <li><span class="chk">✅</span> Señales y alertas en vivo: mis puntos de entrada, stops y objetivos en tiempo real.</li>
+      <li><span class="chk">✅</span> Análisis diario y listas de seguimiento: mi estrategia premercado y los niveles que estoy monitoreando.</li>
+      <li><span class="chk">✅</span> Sesiones de trading en vivo: observa cómo opero con NQ/DJI en directo.</li>
+      <li><span class="chk">✅</span> Chat y preguntas y respuestas premium: canales exclusivos para miembros con acceso directo a mi operativa y responder sus dudas.</li>
+      <li><span class="chk">✅</span> Clases educativas en vivo cuatro veces al mes: análisis más profundo de la configuración, el riesgo y la psicología.</li>
+      <li><span class="chk">✅</span> Cómo operar order flow de forma correcta y set-up de configuración.</li>
+    </ul>
+    <div class="addon-modal-price">
+      <span class="price-strike">$150</span>
+      <span class="plan-amount" style="font-size:2rem">$99</span>
+      <span class="plan-unit">USD/mes</span>
+    </div>
+    <button class="addon-modal-close-btn" id="addonModalCloseBtn">Entendido</button>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div class="nav-logo" onclick="window.location.href='index.html'" style="cursor:pointer">Quant<span style="color:var(--red-bright)">Lab</span></div>
@@ -620,10 +781,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>
 /* ---- DATA ---- */
 const pricing = {
-  monthly:   { basic: 25, standard: 50, advanced: 99 },
-  quarterly: { basic: 20, standard: 40, advanced: 99 },
-  annually:  { basic: 15, standard: 35, advanced: 99 }
+  monthly:   { basic: 25, standard: 50, advanced: 70 },
+  quarterly: { basic: 20, standard: 40, advanced: 70 },
+  annually:  { basic: 15, standard: 35, advanced: 70 }
 };
+const ADDON_PRICE = 150;
+const ADDON_DISCOUNT_PRICE = 99;
+let advancedAddonsActive = false;
+let currentPeriod = 'monthly';
 const billedNote = {
   monthly:   { basic: '', standard: '', advanced: '' },
   quarterly: { basic: '', standard: '', advanced: '' },
@@ -677,24 +842,53 @@ function checkSvg() {
 }
 
 function renderPlans(period) {
+  currentPeriod = period;
   const grid = document.getElementById('plansGrid');
   grid.innerHTML = plans.map(p => {
     const price = pricing[period][p.key];
     const note = billedNote[period][p.key];
     const save = savings[period][p.key];
     const billedHTML = save ? '<span class="save">' + save + '</span>' : '&nbsp;';
+
+    const isAdvanced = p.key === 'advanced';
+    const showAddonPrice = isAdvanced && advancedAddonsActive;
+
+    const priceHTML = showAddonPrice
+      ? `<span class="plan-currency">$</span>
+         <span class="plan-amount">${ADDON_DISCOUNT_PRICE}</span>
+         <span class="plan-unit">USD</span>`
+      : `<span class="plan-currency">$</span>
+         <span class="plan-amount">${price}</span>
+         <span class="plan-unit">USD</span>`;
+
+    const strikeHTML = showAddonPrice
+      ? `<div class="plan-billed"><span class="price-strike">$${ADDON_PRICE}</span><span class="price-new-badge">Descuento</span></div>`
+      : `<div class="plan-billed">${billedHTML}</div>`;
+
+    const addonToggleHTML = isAdvanced ? `
+      <div class="addon-box">
+        <div class="addon-label-wrap">
+          <span class="addon-label">Add-ons</span>
+          <span class="addon-sublabel">Señales, sesiones en vivo y más</span>
+        </div>
+        <label class="addon-switch">
+          <input type="checkbox" class="addon-checkbox" ${advancedAddonsActive ? 'checked' : ''}>
+          <span class="addon-slider"></span>
+        </label>
+      </div>
+    ` : '';
+
     return `
       <div class="plan-card${p.featured ? ' featured' : ''}">
         ${p.featured ? '<div class="badge-popular">Más popular</div>' : ''}
         <div class="plan-name">${p.name}</div>
         <div class="plan-price-wrap">
-          <span class="plan-currency">$</span>
-          <span class="plan-amount">${price}</span>
-          <span class="plan-unit">USD</span>
+          ${priceHTML}
         </div>
         <div class="plan-period">por mes</div>
-        <div class="plan-billed">${billedHTML}</div>
-        <button class="btn-start ${p.featured ? 'btn-filled' : 'btn-outline'}" data-plan="${p.key}" data-period="${period}">Get started</button>
+        ${strikeHTML}
+        ${addonToggleHTML}
+        <button class="btn-start ${p.featured ? 'btn-filled' : 'btn-outline'}" data-plan="${p.key}" data-period="${period}" data-addons="${isAdvanced && advancedAddonsActive}">Get started</button>
         <div class="features-divider"></div>
         <ul class="features-list">
           ${p.features.map(f => `<li><div class="feat-check">${checkSvg()}</div>${f}</li>`).join('')}
@@ -707,16 +901,44 @@ function renderPlans(period) {
   document.querySelectorAll('.btn-start').forEach(btn => {
     btn.addEventListener('click', handlePlanSelection);
   });
+
+  // Add-ons toggle handler (only exists on Advanced card)
+  const addonCheckbox = document.querySelector('.addon-checkbox');
+  if (addonCheckbox) {
+    addonCheckbox.addEventListener('change', (e) => {
+      advancedAddonsActive = e.target.checked;
+      renderPlans(currentPeriod);
+      if (advancedAddonsActive) {
+        openAddonModal();
+      }
+    });
+  }
 }
+
+/* ---- ADD-ONS MODAL ---- */
+function openAddonModal() {
+  document.getElementById('addonModalOverlay').classList.add('open');
+}
+function closeAddonModal() {
+  document.getElementById('addonModalOverlay').classList.remove('open');
+}
+document.getElementById('addonModalCloseX').addEventListener('click', closeAddonModal);
+document.getElementById('addonModalCloseBtn').addEventListener('click', closeAddonModal);
+document.getElementById('addonModalOverlay').addEventListener('click', (e) => {
+  if (e.target.id === 'addonModalOverlay') closeAddonModal();
+});
 
 function handlePlanSelection(e) {
   const plan = e.target.dataset.plan;
   const period = e.target.dataset.period;
+  const addons = e.target.dataset.addons === 'true';
 
   let url = '';
 
   if (plan === 'advanced') {
-    url = 'https://whop.com/checkout/plan_FgHRXzVbcAiMK';
+    url = addons
+      ? 'https://quantlab-five.vercel.app/web/addons.html'
+      : 'https://whop.com/checkout/plan_FgHRXzVbcAiMK';
   } else if (plan === 'basic') {
     if (period === 'annually') {
       url = 'https://whop.com/checkout/plan_xUo0AWuond26H';
