@@ -62,6 +62,20 @@ nav{
   padding:16px 48px;
   display:flex;align-items:center;justify-content:space-between;
 }
+.promo-ticker{
+  position:fixed;top:61px;left:0;width:100%;height:34px;z-index:190;
+  overflow:hidden;background:var(--red);color:#fff;
+  border-bottom:1px solid var(--red-bright);
+  display:flex;align-items:center;
+  font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;
+  letter-spacing:.08em;white-space:nowrap;
+}
+.promo-track{
+  display:flex;flex-shrink:0;min-width:max-content;
+  animation:promo-scroll 22s linear infinite;
+}
+.promo-track span{padding-right:3.5rem}
+@keyframes promo-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:.1em;cursor:pointer;text-decoration:none;color:var(--white)}
 .nav-logo span{color:var(--red-bright)}
 .nav-links{display:flex;gap:32px}
@@ -173,6 +187,40 @@ nav{
   margin-bottom:80px;
 }
 @media(max-width:860px){.plans-grid{grid-template-columns:1fr}}
+
+/* JOURNAL FEATURE */
+.journal-feature{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,440px);
+  gap:42px;align-items:center;
+  background:linear-gradient(115deg,rgba(209,18,27,.12),rgba(10,10,10,.95) 52%);
+  border:1px solid rgba(209,18,27,.42);border-radius:16px;
+  padding:28px;margin-bottom:48px;overflow:hidden;
+  box-shadow:0 0 46px rgba(209,18,27,.08);
+}
+.journal-feature-copy{padding:8px 0 8px 8px}
+.journal-kicker{
+  font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--red-bright);margin-bottom:10px;
+}
+.journal-feature h2{
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3.2rem);
+  letter-spacing:.06em;line-height:1;margin-bottom:12px;
+}
+.journal-feature h2 em{color:var(--red-bright);font-style:normal}
+.journal-feature-copy p{max-width:570px;color:var(--grey);font-size:.92rem;line-height:1.65;margin-bottom:18px}
+.journal-list{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;list-style:none;margin-bottom:24px}
+.journal-list li{display:flex;gap:9px;align-items:flex-start;color:rgba(240,237,236,.84);font-size:.8rem;line-height:1.45}
+.journal-list li::before{content:'✓';color:var(--red-bright);font-weight:700}
+.journal-cta{display:inline-block;background:var(--red);border:1px solid var(--red-bright);color:#fff;border-radius:8px;padding:12px 20px;text-decoration:none;font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:background .2s,transform .2s}
+.journal-cta:hover{background:var(--red-bright);transform:translateY(-2px)}
+.journal-feature-media{min-width:0;border:1px solid rgba(255,255,255,.12);border-radius:10px;overflow:hidden;background:#000;box-shadow:0 16px 34px rgba(0,0,0,.35)}
+.journal-feature-media img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover}
+@media(max-width:760px){
+  .promo-ticker{top:57px}
+  .journal-feature{grid-template-columns:1fr;gap:24px;padding:22px;margin-bottom:36px}
+  .journal-feature-copy{padding:0}
+  .journal-list{grid-template-columns:1fr}
+}
 
 .plan-card{
   background:var(--card);
@@ -587,6 +635,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   " onmouseover="this.style.background='#FF2030'" onmouseout="this.style.background='#D1121B'">Get started</a>
 </nav>
 
+<!-- PROMO TICKER -->
+<div class="promo-ticker" aria-label="Promoción: 20% de descuento con el código Loyalty">
+  <div class="promo-track">
+    <span>20% Descuento — Code 'Loyalty'</span>
+    <span>20% Descuento — Code 'Loyalty'</span>
+    <span>20% Descuento — Code 'Loyalty'</span>
+    <span>20% Descuento — Code 'Loyalty'</span>
+    <span>20% Descuento — Code 'Loyalty'</span>
+    <span>20% Descuento — Code 'Loyalty'</span>
+  </div>
+</div>
+
 <!-- HERO HEADER -->
 <div class="page-hero">
   <div class="hero-grid"></div>
@@ -599,6 +659,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- PRICING SECTION -->
 <section class="pricing-section" id="planes">
+
+  <article class="journal-feature reveal">
+    <div class="journal-feature-copy">
+      <div class="journal-kicker">Nuevo en QuantLab</div>
+      <h2>Tu trading, <em>mejor documentado</em></h2>
+      <p>Journal convierte cada operación en información útil para entender tu proceso, medir tu progreso y operar con más claridad.</p>
+      <ul class="journal-list">
+        <li>Calendario de operaciones y rendimiento</li>
+        <li>Reportes automáticos de tu cuenta</li>
+        <li>QuantLab IA para analizar tus patrones</li>
+        <li>Bitácora para registrar cada trade</li>
+      </ul>
+      <a class="journal-cta" href="https://whop.com/checkout/plan_mTGQn42oC1gBn">Unirme a Journal</a>
+    </div>
+    <div class="journal-feature-media">
+      <img src="https://github.com/Physclab/quantlab/blob/main/web/bienvenida.png?raw=true" alt="Bienvenida a QuantLab Journal" loading="lazy">
+    </div>
+  </article>
 
   <div class="toggle-wrap">
     <div class="toggle-group">
