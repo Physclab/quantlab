@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>QuantLab — Términos y Condiciones</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --red:#D1121B;
+  --red-bright:#FF2030;
+  --black:#000000;
+  --card:#0a0a0a;
+  --card2:#0f0f0f;
+  --border:rgba(209,18,27,0.14);
+  --border2:rgba(255,255,255,0.06);
+  --white:#F0EDEC;
+  --grey:#888;
+  --grey2:#444;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--black);
+  color:var(--white);
+  font-family:'Syne',sans-serif;
+  overflow-x:hidden;
+  line-height:1.7;
+}
+
+/* ---- SCROLLBAR ---- */
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(209,18,27,.3);border-radius:3px}
+
+/* ---- NAV ---- */
+nav{
+  position:fixed;top:0;width:100%;z-index:200;
+  background:rgba(0,0,0,.95);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(14px);
+  padding:16px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{
+  font-family:'Bebas Neue',sans-serif;font-size:1.7rem;
+  letter-spacing:.1em;text-decoration:none;color:var(--white);
+}
+.nav-logo span{color:var(--red-bright)}
+.nav-right{
+  font-family:'Space Mono',monospace;font-size:.6rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--grey);
+}
+@media(max-width:700px){nav{padding:14px 20px}}
+
+/* ---- HERO ---- */
+.hero{
+  padding:130px 24px 60px;
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(209,18,27,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(209,18,27,.025) 1px,transparent 1px);
+  background-size:80px 80px;
+  animation:grid-move 55s linear infinite;
+  pointer-events:none;
+}
+@keyframes grid-move{from{background-position:0 0}to{background-position:80px 80px}}
+
+.doc-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Space Mono',monospace;font-size:.6rem;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--red-bright);
+  border:1px solid rgba(209,18,27,.35);
+  background:rgba(209,18,27,.08);
+  padding:6px 18px;border-radius:999px;
+  margin-bottom:22px;
+}
+.doc-badge svg{width:12px;height:12px;stroke:var(--red-bright);fill:none;stroke-width:2}
+.hero h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.6rem,6vw,4.8rem);
+  letter-spacing:.06em;line-height:1;
+  margin-bottom:16px;
+}
+.hero h1 em{color:var(--red-bright);font-style:normal}
+.hero-meta{
+  display:flex;align-items:center;justify-content:center;
+  gap:24px;flex-wrap:wrap;
+  margin-top:18px;
+}
+.hero-meta-item{
+  font-family:'Space Mono',monospace;font-size:.6rem;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--grey2);
+  display:flex;align-items:center;gap:6px;
+}
+.hero-meta-item svg{width:12px;height:12px;stroke:var(--grey2);fill:none;stroke-width:1.8}
+
+/* ---- LAYOUT ---- */
+.doc-wrap{
+  max-width:980px;
+  margin:0 auto;
+  padding:0 24px 100px;
+  display:grid;
+  grid-template-columns:240px 1fr;
+  gap:48px;
+  align-items:start;
+}
+@media(max-width:860px){
+  .doc-wrap{grid-template-columns:1fr}
+}
+
+/* ---- SIDEBAR / TOC ---- */
+.toc{
+  position:sticky;top:90px;
+  padding:20px 0;
+}
+.toc-label{
+  font-family:'Space Mono',monospace;font-size:.58rem;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--red-bright);margin-bottom:16px;display:block;
+}
+.toc-list{list-style:none;display:flex;flex-direction:column;gap:2px}
+.toc-list a{
+  display:flex;align-items:center;gap:10px;
+  font-family:'Space Mono',monospace;font-size:.62rem;
+  letter-spacing:.06em;text-transform:uppercase;
+  color:var(--grey);text-decoration:none;
+  padding:7px 10px;border-radius:7px;
+  border:1px solid transparent;
+  transition:all .2s;
+  line-height:1.4;
+}
+.toc-list a:hover{color:var(--white);background:rgba(255,255,255,.03);border-color:var(--border2)}
+.toc-list a.active{color:var(--red-bright);background:rgba(209,18,27,.06);border-color:rgba(209,18,27,.15)}
+.toc-num{
+  font-size:.5rem;color:var(--grey2);
+  min-width:18px;
+}
+.toc-divider{height:1px;background:var(--border2);margin:10px 0}
+
+/* ---- CONTENT ---- */
+.doc-content{padding-top:8px}
+
+.section{
+  margin-bottom:56px;
+  scroll-margin-top:100px;
+}
+
+.section-header{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:22px;
+  padding-bottom:16px;
+  border-bottom:1px solid var(--border2);
+}
+.section-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2rem;letter-spacing:.05em;
+  color:rgba(209,18,27,.25);
+  line-height:1;
+  min-width:44px;
+}
+.section-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.55rem;letter-spacing:.07em;
+  color:var(--white);line-height:1.1;
+}
+.section-icon{
+  width:34px;height:34px;
+  background:rgba(209,18,27,.08);
+  border:1px solid rgba(209,18,27,.18);
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.section-icon svg{width:16px;height:16px;stroke:var(--red-bright);fill:none;stroke-width:1.8}
+
+.doc-p{
+  font-size:.875rem;color:rgba(240,237,236,.68);
+  margin-bottom:14px;line-height:1.85;
+}
+.doc-p strong{color:rgba(240,237,236,.92);font-weight:600}
+.doc-p .hl{color:var(--red-bright);font-weight:600}
+
+/* ALERT BOX */
+.alert-box{
+  background:rgba(209,18,27,.05);
+  border:1px solid rgba(209,18,27,.2);
+  border-left:3px solid var(--red-bright);
+  border-radius:0 10px 10px 0;
+  padding:16px 20px;
+  margin:20px 0;
+}
+.alert-box-title{
+  font-family:'Space Mono',monospace;font-size:.62rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--red-bright);margin-bottom:8px;
+  display:flex;align-items:center;gap:7px;
+}
+.alert-box-title svg{width:12px;height:12px;stroke:var(--red-bright);fill:none;stroke-width:2}
+.alert-box p{font-size:.82rem;color:rgba(240,237,236,.7);line-height:1.75}
+.alert-box p strong{color:rgba(240,237,236,.92)}
+
+/* INFO BOX */
+.info-box{
+  background:rgba(255,255,255,.02);
+  border:1px solid var(--border2);
+  border-radius:10px;
+  padding:16px 20px;
+  margin:20px 0;
+}
+.info-box p{font-size:.82rem;color:rgba(240,237,236,.65);line-height:1.75}
+.info-box p strong{color:rgba(240,237,236,.88)}
+
+/* PROHIBITION LIST */
+.prohib-list{
+  list-style:none;display:flex;flex-direction:column;gap:12px;
+  margin:16px 0;
+}
+.prohib-list li{
+  display:flex;align-items:flex-start;gap:12px;
+  font-size:.84rem;color:rgba(240,237,236,.7);
+  line-height:1.7;
+}
+.prohib-icon{
+  width:20px;height:20px;
+  background:rgba(209,18,27,.1);
+  border:1px solid rgba(209,18,27,.25);
+  border-radius:5px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:2px;
+}
+.prohib-icon svg{width:10px;height:10px;stroke:var(--red-bright);fill:none;stroke-width:2.5}
+.prohib-label{font-weight:700;color:rgba(240,237,236,.9)}
+
+/* CONSEQUENCE CARDS */
+.consequence-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:12px;margin:16px 0;
+}
+@media(max-width:540px){.consequence-grid{grid-template-columns:1fr}}
+.consequence-card{
+  background:var(--card);
+  border:1px solid var(--border2);
+  border-radius:10px;
+  padding:16px;
+  transition:border-color .2s;
+}
+.consequence-card:hover{border-color:rgba(209,18,27,.2)}
+.consequence-card-head{
+  display:flex;align-items:center;gap:8px;
+  margin-bottom:8px;
+}
+.consequence-card-head svg{width:14px;height:14px;stroke:var(--red-bright);fill:none;stroke-width:1.8;flex-shrink:0}
+.consequence-card h4{
+  font-family:'Space Mono',monospace;
+  font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--red-bright);
+}
+.consequence-card p{font-size:.78rem;color:rgba(240,237,236,.6);line-height:1.65}
+
+/* CHECK LIST */
+.check-list{
+  list-style:none;display:flex;flex-direction:column;gap:10px;
+  margin:14px 0;
+}
+.check-list li{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:.85rem;color:rgba(240,237,236,.72);line-height:1.6;
+}
+.check-dot{
+  width:18px;height:18px;border-radius:50%;
+  background:rgba(209,18,27,.1);
+  border:1px solid rgba(209,18,27,.3);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:1px;
+}
+.check-dot svg{width:9px;height:9px;stroke:var(--red-bright);fill:none;stroke-width:2.5}
+
+/* REFUND POLICY BOX */
+.refund-box{
+  background:var(--card2);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:22px 22px;
+  margin:20px 0;
+}
+.refund-box-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.1rem;letter-spacing:.07em;
+  color:var(--white);margin-bottom:14px;
+  display:flex;align-items:center;gap:10px;
+}
+.refund-box-title svg{width:18px;height:18px;stroke:var(--red-bright);fill:none;stroke-width:1.8}
+.refund-row{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:12px 0;
+  border-bottom:1px solid rgba(255,255,255,.04);
+}
+.refund-row:last-child{border-bottom:none;padding-bottom:0}
+.refund-tag{
+  font-family:'Space Mono',monospace;font-size:.55rem;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 10px;border-radius:999px;
+  flex-shrink:0;margin-top:2px;
+}
+.refund-tag.no{background:rgba(209,18,27,.15);color:var(--red-bright);border:1px solid rgba(209,18,27,.25)}
+.refund-tag.yes{background:rgba(74,222,128,.1);color:#4ade80;border:1px solid rgba(74,222,128,.2)}
+.refund-tag.info{background:rgba(255,255,255,.04);color:var(--grey);border:1px solid var(--border2)}
+.refund-row p{font-size:.82rem;color:rgba(240,237,236,.7);line-height:1.7}
+.refund-row p strong{color:rgba(240,237,236,.9)}
+
+/* DIVIDER */
+.section-divider{
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--border),rgba(209,18,27,.2),var(--border),transparent);
+  margin:48px 0;
+}
+
+/* LAST UPDATED FOOTER */
+.doc-footer{
+  background:var(--card);
+  border:1px solid var(--border2);
+  border-radius:12px;
+  padding:22px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px;flex-wrap:wrap;
+  margin-top:40px;
+}
+.doc-footer-left{
+  font-family:'Space Mono',monospace;font-size:.62rem;
+  letter-spacing:.08em;color:var(--grey);
+  line-height:1.7;
+}
+.doc-footer-left strong{color:var(--white)}
+.doc-footer-right{
+  font-family:'Bebas Neue',sans-serif;font-size:1.2rem;
+  letter-spacing:.1em;color:var(--grey2);
+}
+
+/* FOOTER */
+footer{
+  border-top:1px solid var(--border);
+  padding:28px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;
+}
+@media(max-width:600px){footer{padding:24px 20px}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Quant<span>Lab</span></a>
+  <span class="nav-right">Términos Legales</span>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="doc-badge">
+    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+    Documento Legal
+  </div>
+  <h1>Términos y <em>Condiciones</em><br>de Uso</h1>
+  <div class="hero-meta">
+    <span class="hero-meta-item">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      Vigente desde: Enero 2025
+    </span>
+    <span class="hero-meta-item">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      QuantLab · Geremy Gomez
+    </span>
+    <span class="hero-meta-item">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      Lectura obligatoria antes de suscribirse
+    </span>
+  </div>
+</div>
+
+<!-- MAIN DOC LAYOUT -->
+<div class="doc-wrap">
+
+  <!-- SIDEBAR TOC -->
+  <aside class="toc">
+    <span class="toc-label">Contenido</span>
+    <ul class="toc-list" id="tocList">
+      <li><a href="#s1" class="active"><span class="toc-num">01</span>Naturaleza del Servicio</a></li>
+      <li><a href="#s2"><span class="toc-num">02</span>Riesgo de Capital</a></li>
+      <li><a href="#s3"><span class="toc-num">03</span>Propiedad Intelectual</a></li>
+      <li><a href="#s4"><span class="toc-num">04</span>Consecuencias</a></li>
+      <li><a href="#s5"><span class="toc-num">05</span>Licencia de Uso</a></li>
+      <li><a href="#s6"><span class="toc-num">06</span>Cancelaciones & Pagos</a></li>
+      <li><a href="#s7"><span class="toc-num">07</span>Privacidad de Datos</a></li>
+      <li><a href="#s8"><span class="toc-num">08</span>Modificaciones</a></li>
+      <li><a href="#s9"><span class="toc-num">09</span>Jurisdicción Legal</a></li>
+      <li><a href="#s10"><span class="toc-num">10</span>Aceptación</a></li>
+    </ul>
+    <div class="toc-divider"></div>
+    <div style="font-family:'Space Mono',monospace;font-size:.56rem;letter-spacing:.08em;color:var(--grey2);line-height:1.7;padding:0 10px">
+      Al suscribirte a cualquier plan de QuantLab, aceptas todos los términos aquí descritos en su totalidad.
+    </div>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="doc-content">
+
+    <!-- S1: NATURALEZA -->
+    <section class="section" id="s1">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <h2 class="section-title">Naturaleza del Servicio —<br>No Asesoría de Inversión</h2>
+      </div>
+
+      <p class="doc-p"><strong>QuantLab</strong> es una plataforma de <strong>análisis cuantitativo</strong> diseñada exclusivamente como herramienta tecnológica de referencia estadística. Todo el contenido generado por la plataforma —señales, módulos, indicadores, datos, gráficos, proyecciones, niveles de soporte y resistencia, detección de anomalías, predicción de ciclos institucionales, análisis de patrones— tiene carácter <strong>meramente informativo y educativo</strong>.</p>
+
+      <div class="alert-box">
+        <div class="alert-box-title">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Aviso importante
+        </div>
+        <p><strong>QuantLab NO es un asesor de inversiones, corredor de bolsa, gestor de fondos, analista financiero registrado ni proveedor de servicios de inversión regulado</strong> bajo ninguna legislación local, federal, internacional o tratado aplicable. El uso de QuantLab no constituye ni debe interpretarse como asesoramiento financiero, de inversión, fiscal, legal o de ningún otro tipo.</p>
+      </div>
+
+      <p class="doc-p">Las herramientas de QuantLab no predicen el futuro ni garantizan rendimientos. Los mercados financieros son inherentemente volátiles e impredecibles. Cualquier decisión de compra, venta, tenencia o gestión de activos financieros —incluyendo acciones, índices, futuros, criptomonedas, materias primas u otros instrumentos— es <span class="hl">responsabilidad exclusiva del usuario</span>.</p>
+
+      <p class="doc-p">Se recomienda encarecidamente consultar a un asesor financiero, legal o fiscal independiente y debidamente calificado antes de tomar cualquier decisión de inversión.</p>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- S2: RIESGO -->
+    <section class="section" id="s2">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <h2 class="section-title">Riesgo de Pérdida<br>de Capital</h2>
+      </div>
+
+      <p class="doc-p">El trading y la inversión en mercados financieros conllevan un <strong>riesgo real y sustancial de pérdida de capital</strong>, incluyendo la pérdida total del capital invertido. El rendimiento pasado, simulado o proyectado no garantiza resultados futuros.</p>
+
+      <div class="alert-box">
+        <div class="alert-box-title">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Limitación de responsabilidad
+        </div>
+        <p>El usuario acepta que QuantLab y sus operadores, empleados, afiliados o representantes <strong>no serán responsables bajo ningún concepto</strong> por pérdidas financieras, daños directos, indirectos, incidentales, especiales o consecuentes derivados del uso de la plataforma o de decisiones tomadas con base en sus outputs.</p>
+      </div>
+
+      <p class="doc-p">Los análisis cuantitativos son herramientas de apoyo estadístico. Su precisión no puede garantizarse en ningún escenario de mercado. El usuario asume plena conciencia de los riesgos inherentes a la actividad de trading y libera a QuantLab de toda responsabilidad derivada de sus decisiones financieras.</p>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- S3: PROPIEDAD INTELECTUAL -->
+    <section class="section" id="s3">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        </div>
+        <h2 class="section-title">Propiedad Intelectual<br>& Restricciones de Uso</h2>
+      </div>
+
+      <p class="doc-p">Todo el software, algoritmos, código fuente, metodologías, modelos cuantitativos, sistemas de predicción de ciclos institucionales, interfaces, diseños visuales, bases de datos, documentación y cualquier otro componente de QuantLab constituyen <strong>propiedad intelectual exclusiva</strong> de Geremy Gomez / QuantLab, protegidos por las leyes de derechos de autor, marcas registradas, secretos comerciales y demás normativas de propiedad intelectual aplicables a nivel nacional e internacional.</p>
+
+      <p class="doc-p">Al suscribirse y utilizar QuantLab, el usuario reconoce expresamente que <span class="hl">quedan estrictamente prohibidas</span> las siguientes acciones, sin excepción ni justificación alguna:</p>
+
+      <ul class="prohib-list">
+        <li>
+          <div class="prohib-icon"><svg viewBox="0 0 12 12"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg></div>
+          <div><span class="prohib-label">Distribución:</span> Compartir, distribuir, sublicenciar, revender, ceder, transmitir o poner a disposición de terceros, de forma gratuita u onerosa, el acceso a la plataforma, sus módulos, outputs, señales, predicciones o cualquier contenido generado por QuantLab.</div>
+        </li>
+        <li>
+          <div class="prohib-icon"><svg viewBox="0 0 12 12"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg></div>
+          <div><span class="prohib-label">Reproducción y Copia:</span> Copiar, reproducir, digitalizar, imprimir, capturar, grabar o almacenar en cualquier medio el contenido, código o interfaz de la plataforma con fines distintos al uso personal autorizado.</div>
+        </li>
+        <li>
+          <div class="prohib-icon"><svg viewBox="0 0 12 12"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg></div>
+          <div><span class="prohib-label">Modificación y Obras Derivadas:</span> Alterar, adaptar, traducir, editar, combinar, transformar o crear obras derivadas basadas total o parcialmente en QuantLab sin autorización escrita previa.</div>
+        </li>
+        <li>
+          <div class="prohib-icon"><svg viewBox="0 0 12 12"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg></div>
+          <div><span class="prohib-label">Ingeniería Inversa:</span> Realizar ingeniería inversa, descompilar, desensamblar, descifrar, extraer el código fuente, analizar la arquitectura interna o la lógica de funcionamiento de la plataforma, ya sea de forma manual, automatizada, con herramientas de terceros o mediante cualquier otro método.</div>
+        </li>
+        <li>
+          <div class="prohib-icon"><svg viewBox="0 0 12 12"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg></div>
+          <div><span class="prohib-label">Uso Comercial No Autorizado:</span> Utilizar la plataforma, sus datos o cualquier output generado con fines comerciales, incluyendo la prestación de servicios de señales, copy-trading, gestión de cuentas de terceros o cualquier actividad remunerada que implique el uso directo o indirecto de los análisis de QuantLab.</div>
+        </li>
+        <li>
+          <div class="prohib-icon"><svg viewBox="0 0 12 12"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg></div>
+          <div><span class="prohib-label">Scraping y Extracción Automatizada:</span> Utilizar bots, scripts, crawlers, spiders u otras herramientas automatizadas para extraer, monitorear o recopilar datos, contenido o señales de la plataforma de forma masiva o sistemática.</div>
+        </li>
+      </ul>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- S4: CONSECUENCIAS -->
+    <section class="section" id="s4">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <h2 class="section-title">Consecuencias del<br>Incumplimiento</h2>
+      </div>
+
+      <p class="doc-p">Cualquier violación de las restricciones establecidas en este acuerdo podrá dar lugar, de forma <strong>inmediata y sin previo aviso</strong>, a las siguientes consecuencias:</p>
+
+      <div class="consequence-grid">
+        <div class="consequence-card">
+          <div class="consequence-card-head">
+            <svg viewBox="0 0 24 24"><path d="M18.36 6.64a9 9 0 11-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
+            <h4>Baneo Permanente</h4>
+          </div>
+          <p>Suspensión o cancelación definitiva del acceso a la plataforma sin derecho a reembolso, ante el primer indicio de incumplimiento.</p>
+        </div>
+        <div class="consequence-card">
+          <div class="consequence-card-head">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+            <h4>Demanda Civil</h4>
+          </div>
+          <p>Acciones legales civiles por daños y perjuicios: daños emergentes, lucro cesante, daño moral y daños punitivos según la jurisdicción aplicable.</p>
+        </div>
+        <div class="consequence-card">
+          <div class="consequence-card-head">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+            <h4>Sanciones Monetarias</h4>
+          </div>
+          <p>Reclamación judicial de compensación económica: valor de licencias no pagadas, ingresos obtenidos ilícitamente y costos de defensa legal.</p>
+        </div>
+        <div class="consequence-card">
+          <div class="consequence-card-head">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <h4>Acciones Penales</h4>
+          </div>
+          <p>En jurisdicciones donde aplique, denuncias ante autoridades por violación de derechos de propiedad intelectual o acceso no autorizado a sistemas informáticos.</p>
+        </div>
+      </div>
+
+      <div class="info-box" style="margin-top:8px">
+        <p>Adicionalmente, QuantLab podrá <strong>notificar a plataformas, intercambios, brokers o cualquier tercero relevante</strong> sobre el comportamiento infractor del usuario a efectos de proteger la integridad de la plataforma y su comunidad.</p>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- S5: LICENCIA -->
+    <section class="section" id="s5">
+      <div class="section-header">
+        <span class="section-num">05</span>
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
+        </div>
+        <h2 class="section-title">Licencia de Uso<br>Personal y Limitado</h2>
+      </div>
+
+      <p class="doc-p">Sujeto al cumplimiento íntegro de los presentes términos y al pago vigente de la suscripción correspondiente, QuantLab otorga al usuario una licencia con las siguientes características:</p>
+
+      <ul class="check-list">
+        <li><div class="check-dot"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div><strong>Personal:</strong> Exclusivamente para el uso individual del suscriptor. No transferible a terceros bajo ningún concepto.</li>
+        <li><div class="check-dot"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div><strong>No exclusiva:</strong> QuantLab puede otorgar licencias similares a otros usuarios simultáneamente.</li>
+        <li><div class="check-dot"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div><strong>Revocable:</strong> QuantLab puede revocar la licencia en cualquier momento ante incumplimiento de estos términos.</li>
+        <li><div class="check-dot"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div><strong>Limitada:</strong> Restringida al acceso y uso de las funciones habilitadas para el plan suscrito.</li>
+        <li><div class="check-dot"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div><strong>Para fines propios:</strong> Solo para análisis e investigación personal del usuario. No para uso comercial o de terceros.</li>
+      </ul>
+
+      <div class="info-box">
+        <p>Esta licencia <strong>no implica la transferencia de ningún derecho de propiedad intelectual</strong> ni otorga al usuario ningún derecho sobre el código fuente, los algoritmos, los modelos de predicción o la arquitectura de la plataforma.</p>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- S6: CANCELACIONES Y PAGOS -->
+    <section class="section" id="s6">
+      <div class="section-header">
+        <span class="section-num">06</span>
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        </div>
+        <h2 class="section-title">Cancelaciones, Pagos<br>& Política de Reembolsos</h2>
+      </div>
+
+      <p class="doc-p">Al suscribirse a cualquier plan de QuantLab, el usuario acepta de forma expresa e informada la presente política de cancelaciones y pagos. Esta política es condición indispensable para el acceso a la plataforma.</p>
+
+      <div class="refund-box">
+        <div class="refund-box-title">
+          <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          Resumen de la Política
+        </div>
+
+        <div class="refund-row">
+          <span class="refund-tag yes">Permitido</span>
+          <p><strong>Cancelación de suscripción:</strong> El usuario puede cancelar su suscripción en cualquier momento desde su cuenta de PayPal o contactando al soporte de QuantLab. La cancelación detiene futuros cobros automáticos.</p>
+        </div>
+
+        <div class="refund-row">
+          <span class="refund-tag no">No aplica</span>
+          <p><strong>Reembolsos:</strong> Una vez procesado un pago, <strong>no se realizarán devoluciones bajo ninguna circunstancia</strong>, incluyendo cancelación anticipada de la suscripción, desacuerdo con el servicio, falta de uso de la plataforma o cualquier otro motivo.</p>
+        </div>
+
+        <div class="refund-row">
+          <span class="refund-tag info">Importante</span>
+          <p><strong>Acceso a fondos:</strong> QuantLab no tiene acceso inmediato a los pagos procesados por el usuario. Los fondos están sujetos a los plazos de retención y liberación establecidos por el procesador de pagos (PayPal), los cuales pueden extenderse durante un período determinado tras la transacción. Este plazo es definido exclusivamente por el proveedor del servicio de procesamiento y escapa al control de QuantLab.</p>
+        </div>
+
+        <div class="refund-row">
+          <span class="refund-tag info">Acceso</span>
+          <p><strong>Acceso tras cancelación:</strong> Al cancelar la suscripción, el usuario conservará acceso a la plataforma hasta la fecha de vencimiento del período de facturación ya pagado. Transcurrido ese período, el acceso será revocado automáticamente.</p>
+        </div>
+      </div>
+
+      <div class="alert-box">
+        <div class="alert-box-title">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Política de no reembolso
+        </div>
+        <p>La suscripción a QuantLab da acceso inmediato a contenido digital y herramientas de análisis propietarias. Por la naturaleza del servicio, <strong>todos los pagos son finales y no reembolsables</strong> una vez procesados. Al completar el pago, el usuario acepta irrevocablemente esta política.</p>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- S7: PRIVACIDAD -->
+    <section class="section" id="s7">
+      <div class="section-header">
+        <span class="section-num">07</span>
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h2 class="section-title">Privacidad y<br>Tratamiento de Datos</h2>
+      </div>
+
+      <p class="doc-p">Al suscribirse a QuantLab, el usuario consiente el tratamiento de sus datos personales con los fines descritos a continuación. QuantLab se compromete a gestionar esta información con la máxima diligencia y confidencialidad.</p>
+
+      <ul class="check-list">
+        <li><div class="check-dot"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>Los datos recopilados (nombre, correo electrónico, información de pago) se utilizan exclusivamente para gestionar la suscripción, brindar soporte y cumplir con obligaciones legales.</li>
+        <li><div class="check-dot"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>Los datos personales <strong>no serán vendidos ni cedidos a terceros</strong> con fines comerciales sin consentimiento expreso del usuario.</li>
+        <li><div class="check-dot"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>QuantLab puede compartir datos con proveedores de servicios necesarios para el funcionamiento de la plataforma (procesadores de pago, servidores, soporte técnico) bajo acuerdos de confidencialidad.</li>
+        <li><div class="check-dot"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>El registro de la firma electrónica del disclaimer queda almacenado como evidencia legal de aceptación de estos términos.</li>
+        <li><div class="check-dot"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>El usuario tiene derecho a solicitar información sobre sus datos personales almacenados contactando al soporte de QuantLab.</li>
+      </ul>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- S8: MODIFICACIONES -->
+    <section class="section" id="s8">
+      <div class="section-header">
+        <span class="section-num">08</span>
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <h2 class="section-title">Modificaciones del<br>Servicio y los Términos</h2>
+      </div>
+
+      <p class="doc-p">QuantLab se reserva el derecho de modificar, actualizar, suspender o discontinuar la plataforma o cualquiera de sus características en cualquier momento, con o sin previo aviso, incluyendo:</p>
+
+      <ul class="check-list">
+        <li><div class="check-dot"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>Cambios en los módulos de análisis disponibles, funcionalidades o mercados cubiertos.</li>
+        <li><div class="check-dot"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>Actualizaciones en la estructura de precios de los planes de suscripción.</li>
+        <li><div class="check-dot"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>Modificaciones en estos Términos y Condiciones de Uso.</li>
+        <li><div class="check-dot"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>Suspensión temporal o permanente de la plataforma por razones técnicas, legales o comerciales.</li>
+      </ul>
+
+      <div class="info-box">
+        <p>El <strong>uso continuado de la plataforma tras la publicación de cambios</strong> en estos términos implicará la aceptación automática de los nuevos términos por parte del usuario. Se recomienda revisar periódicamente este documento.</p>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- S9: JURISDICCION -->
+    <section class="section" id="s9">
+      <div class="section-header">
+        <span class="section-num">09</span>
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        </div>
+        <h2 class="section-title">Jurisdicción y<br>Ley Aplicable</h2>
+      </div>
+
+      <p class="doc-p">Este acuerdo se rige por las leyes aplicables en la jurisdicción donde opera QuantLab. Cualquier disputa, controversia o reclamación derivada del uso de la plataforma, la interpretación de estos términos o su incumplimiento será resuelta conforme al siguiente procedimiento:</p>
+
+      <ul class="check-list">
+        <li><div class="check-dot"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div><strong>Primer paso:</strong> Negociación directa y de buena fe entre las partes, con un plazo razonable para alcanzar una solución amistosa.</li>
+        <li><div class="check-dot"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div><strong>Segundo paso:</strong> En caso de no llegar a un acuerdo, las partes se someten a la jurisdicción de los tribunales competentes según la legislación aplicable.</li>
+        <li><div class="check-dot"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>El usuario acepta que la sola presentación de una disputa no le otorga derecho a suspender el cumplimiento de sus obligaciones de pago pendientes.</li>
+      </ul>
+
+      <p class="doc-p">La firma electrónica registrada al momento de la suscripción constituye evidencia válida de la aceptación de estos términos en cualquier procedimiento legal.</p>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- S10: ACEPTACION -->
+    <section class="section" id="s10">
+      <div class="section-header">
+        <span class="section-num">10</span>
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <h2 class="section-title">Cláusula de Aceptación<br>Voluntaria e Informada</h2>
+      </div>
+
+      <p class="doc-p">Al firmar el disclaimer electrónico durante el proceso de suscripción, o al completar cualquier pago a QuantLab, el usuario declara de forma expresa, voluntaria e irrevocable que:</p>
+
+      <ul class="check-list">
+        <li><div class="check-dot"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>Ha leído y comprendido en su totalidad los Términos y Condiciones de Uso de QuantLab aquí descritos.</li>
+        <li><div class="check-dot"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>Acepta voluntaria e irrevocablemente todas las condiciones, restricciones y obligaciones establecidas en este documento.</li>
+        <li><div class="check-dot"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>Confirma tener la capacidad legal plena para suscribir este acuerdo en su jurisdicción.</li>
+        <li><div class="check-dot"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>Comprende que QuantLab es una herramienta de análisis cuantitativo y no un asesor de inversiones, y que las decisiones financieras son de su exclusiva responsabilidad.</li>
+        <li><div class="check-dot"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>Acepta la política de no reembolso y entiende que los pagos procesados son finales e irreversibles.</li>
+        <li><div class="check-dot"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>Entiende que su firma electrónica constituye evidencia de aceptación con pleno valor legal, equivalente a una firma manuscrita.</li>
+      </ul>
+
+      <div class="alert-box" style="margin-top:24px">
+        <div class="alert-box-title">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Registro de aceptación
+        </div>
+        <p>La fecha, hora y nombre completo ingresados durante la firma del disclaimer son registrados automáticamente como evidencia de aceptación. Este registro es almacenado de forma segura y podrá ser utilizado en procedimientos legales como prueba de la aceptación voluntaria e informada de estos términos.</p>
+      </div>
+    </section>
+
+    <!-- DOC FOOTER -->
+    <div class="doc-footer">
+      <div class="doc-footer-left">
+        <strong>QuantLab — Términos y Condiciones de Uso</strong><br>
+        Versión vigente · Enero 2025<br>
+        Documento sujeto a actualización. Última revisión: 2025.
+      </div>
+      <div class="doc-footer-right">© 2025<br>Geremy Gomez</div>
+    </div>
+
+  </main>
+</div>
+
+<!-- SITE FOOTER -->
+<footer>
+  <a class="nav-logo" href="#" style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.1em;text-decoration:none;color:var(--white)">Quant<span style="color:var(--red-bright)">Lab</span></a>
+  <div style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.08em;color:var(--grey2)">© 2025 Geremy Gomez · QuantLab · Todos los derechos reservados</div>
+</footer>
+
+<script>
+/* ---- ACTIVE TOC ON SCROLL ---- */
+const sections = document.querySelectorAll('.section');
+const tocLinks = document.querySelectorAll('.toc-list a');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      tocLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+      });
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+
+sections.forEach(s => observer.observe(s));
+
+/* ---- SMOOTH SCROLL FOR TOC ---- */
+tocLinks.forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+</body>
+</html>
