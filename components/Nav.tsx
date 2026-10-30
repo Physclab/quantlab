@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 
-const LINKS = [["Plataforma", "#plataforma"], ["Qué es", "#que-es"], ["Planes", "#planes"], ["Contacto", "#contacto"]];
+const LINKS = [["Plataforma", "#plataforma"], ["Qué es", "#que-es"], ["Planes", "#planes"], ["Academy", "https://quantlab-academy.vercel.app/"]];
 
 export function Logo({ mark = false }: { mark?: boolean }) {
   if (mark) return <svg width="56" height="56" viewBox="0 0 22 22" aria-hidden><rect width="22" height="22" rx="4" fill="#e11d2a" /><path d="M5 15l4-5 3 3 5-7" fill="none" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>;
