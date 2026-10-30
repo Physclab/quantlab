@@ -8,32 +8,30 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-P2P3RW8F');</script>
 
-<meta property="og:title" content="QuantLab" />
-<meta property="og:description" content="Haciendo que las herramientas cuantitativas a nivel institucional esten al alcance de todos los traders que se toman en serio su trabajo." />
+<meta property="og:title" content="QuantLab Black Friday — Plan Fundador por $53" />
+<meta property="og:description" content="QuantLab Standard + Journal, guía para operar como trader cuantitativo y Rol Fundador. $53 en lugar de $120. Válido hasta el 30 de noviembre." />
 <meta property="og:image" content="https://github.com/Physclab/quantlab/blob/main/web/img/content.png?raw=true" />
-<meta property="og:url" content="https://quantlab-five.vercel.app/web/quantlab.html" />
+<meta property="og:url" content="https://quantlab-five.vercel.app/web/blackfriday.html" />
 <meta property="og:type" content="website" />
 <!-- End Google Tag Manager -->
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<link rel="shortcut icon" href="ico.ico" />
-<title>QuantLab — Planes y Precios</title>
+<title>QuantLab Black Friday — Plan Fundador</title>
 <link rel="shortcut icon" href="ico.ico"/>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-T5TCQ0Q5K5"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-T5TCQ0Q5K5');
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<script>document.documentElement.classList.add('js');</script>
 <style>
 :root {
   --red: #D1121B;
   --red-bright: #FF2030;
   --red-dim: #6B0810;
   --black: #000000;
-  --near-black: #000000;
   --card: #0a0a0a;
   --card2: #0f0f0f;
   --border: rgba(209,18,27,0.14);
@@ -41,41 +39,56 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   --white: #F0EDEC;
   --grey: #888;
   --grey2: #555;
+  --green: #4ade80;
+  --banner-h: 44px;
+  --nav-h: 62px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--banner-h) + var(--nav-h) + 12px)}
 body{
   background:var(--black);
   color:var(--white);
   font-family:'Syne',sans-serif;
   overflow-x:hidden;
 }
+a{color:inherit}
+:focus-visible{outline:2px solid var(--red-bright);outline-offset:3px}
 
+/* ============ BANNER FIJO ============ */
+.promo-bar{
+  position:fixed;top:0;left:0;width:100%;height:var(--banner-h);z-index:300;
+  background:linear-gradient(90deg,var(--red-dim),var(--red) 30%,var(--red) 70%,var(--red-dim));
+  border-bottom:1px solid var(--red-bright);
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  padding:0 16px;
+  font-family:'Space Mono',monospace;
+  font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--white);
+  white-space:nowrap;
+}
+.promo-bar strong{font-weight:700}
+.promo-bar .promo-sep{width:1px;height:16px;background:rgba(255,255,255,.35)}
+.promo-bar .promo-count{font-weight:700;letter-spacing:.08em}
+.promo-bar .pulse{
+  width:8px;height:8px;border-radius:50%;background:var(--white);
+  animation:pulse 1.6s ease-in-out infinite;flex-shrink:0;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+@media(max-width:640px){
+  .promo-bar{font-size:.58rem;letter-spacing:.08em;gap:8px}
+  .promo-bar .promo-date{display:none}
+  .promo-bar .promo-sep{display:none}
+}
 
-
-/* NAV */
+/* ============ NAV ============ */
 nav{
-  position:fixed;top:0;width:100%;z-index:200;
+  position:fixed;top:var(--banner-h);width:100%;z-index:200;height:var(--nav-h);
   background:rgba(0,0,0,.95);
   border-bottom:1px solid var(--border);
   backdrop-filter:blur(14px);
-  padding:16px 48px;
+  padding:0 48px;
   display:flex;align-items:center;justify-content:space-between;
 }
-.promo-ticker{
-  position:fixed;top:61px;left:0;width:100%;height:34px;z-index:190;
-  overflow:hidden;background:var(--red);color:#fff;
-  border-bottom:1px solid var(--red-bright);
-  display:flex;align-items:center;
-  font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;
-  letter-spacing:.08em;white-space:nowrap;
-}
-.promo-track{
-  display:flex;flex-shrink:0;min-width:max-content;
-  animation:promo-scroll 22s linear infinite;
-}
-.promo-track span{padding-right:3.5rem}
-@keyframes promo-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:.1em;cursor:pointer;text-decoration:none;color:var(--white)}
 .nav-logo span{color:var(--red-bright)}
 .nav-links{display:flex;gap:32px}
@@ -86,17 +99,27 @@ nav{
   transition:color .2s;
 }
 .nav-links a:hover{color:var(--red-bright)}
-@media(max-width:700px){nav{padding:14px 16px}.nav-links{display:none}}
+.nav-cta{
+  font-family:'Space Mono',monospace;font-size:.65rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  background:var(--red);color:var(--white);
+  padding:8px 20px;border-radius:6px;
+  text-decoration:none;transition:background .2s;
+}
+.nav-cta:hover{background:var(--red-bright)}
+@media(max-width:700px){nav{padding:0 16px}.nav-links{display:none}}
 
-/* HERO HEADER */
+/* ============ HERO ============ */
 .page-hero{
-  min-height:38vh;
-  display:flex;align-items:center;justify-content:center;
-  flex-direction:column;
-  padding:120px 48px 60px;
-  position:relative;z-index:1;
-  text-align:center;
-  overflow:hidden;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+  padding:calc(var(--banner-h) + var(--nav-h) + 64px) 24px 72px;
+  position:relative;z-index:1;text-align:center;overflow:hidden;
+}
+.page-hero::before{
+  content:"";position:absolute;left:50%;top:38%;
+  width:900px;height:600px;transform:translate(-50%,-50%);
+  background:radial-gradient(ellipse at center,rgba(209,18,27,.22),transparent 65%);
+  pointer-events:none;
 }
 .hero-grid{
   position:absolute;inset:0;
@@ -114,502 +137,289 @@ nav{
   font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;
   color:var(--red-bright);
   margin-bottom:18px;
-  opacity:0;transform:translateY(12px);transition:opacity .5s,transform .5s;
+  position:relative;
 }
-.section-label.on{opacity:1;transform:none}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--white);
+  border:1px solid var(--red);background:rgba(209,18,27,.12);
+  padding:7px 16px;border-radius:999px;margin-bottom:26px;position:relative;
+}
+.hero-badge i{width:6px;height:6px;border-radius:50%;background:var(--red-bright);display:block}
 
 .page-hero h1{
   font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(2.8rem,6vw,5rem);
-  letter-spacing:.06em;
-  line-height:1;
-  margin-bottom:16px;
-  opacity:0;transform:translateY(20px);transition:opacity .6s .1s,transform .6s .1s;
+  font-size:clamp(3rem,8vw,6.4rem);
+  letter-spacing:.05em;line-height:.95;
+  margin-bottom:22px;position:relative;
 }
 .page-hero h1 em{color:var(--red-bright);font-style:normal}
-.page-hero h1.on{opacity:1;transform:none}
-.page-hero p{
-  font-size:1rem;color:var(--grey);max-width:520px;line-height:1.7;
-  opacity:0;transform:translateY(16px);transition:opacity .6s .2s,transform .6s .2s;
+.page-hero .hero-sub{
+  font-size:1.05rem;color:#a8a3a2;max-width:640px;line-height:1.7;
+  margin-bottom:44px;position:relative;
 }
-.page-hero p.on{opacity:1;transform:none}
+.page-hero .hero-sub b{color:var(--white);font-weight:700}
 
-/* SECTION DIVIDER */
+/* COUNTDOWN (elemento protagonista) */
+.countdown-wrap{position:relative;margin-bottom:40px}
+.countdown-title{
+  font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--grey);margin-bottom:18px;
+}
+.countdown{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;
+  width:min(640px,92vw);margin:0 auto;
+}
+.cd-box{
+  background:var(--card2);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:22px 8px 16px;
+  box-shadow:0 0 40px rgba(209,18,27,.08);
+}
+.cd-box:first-child{border-color:var(--red);box-shadow:0 0 50px rgba(209,18,27,.2)}
+.cd-num{
+  display:block;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.6rem,9vw,4.8rem);
+  line-height:1;letter-spacing:.03em;
+  font-variant-numeric:tabular-nums;
+}
+.cd-box:first-child .cd-num{color:var(--red-bright)}
+.cd-label{
+  display:block;margin-top:8px;
+  font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--grey);
+}
+.countdown-end{
+  margin-top:16px;font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.1em;color:var(--grey2);
+}
+
+.hero-price{
+  display:flex;align-items:baseline;justify-content:center;gap:14px;flex-wrap:wrap;
+  margin-bottom:26px;position:relative;
+}
+.hero-price .was{font-family:'Space Mono',monospace;font-size:1.1rem;color:var(--grey2);text-decoration:line-through}
+.hero-price .now{font-family:'Bebas Neue',sans-serif;font-size:3.4rem;letter-spacing:.03em;line-height:1}
+.hero-price .now small{font-size:1.3rem;color:var(--grey);margin-left:4px}
+.save-pill{
+  font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;
+  background:rgba(74,222,128,.12);color:var(--green);
+  border:1px solid rgba(74,222,128,.3);
+  padding:4px 12px;border-radius:999px;font-weight:700;
+}
+
+.btn-cta{
+  display:inline-block;
+  padding:16px 40px;
+  font-family:'Space Mono',monospace;font-weight:700;
+  font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;
+  background:var(--red);border:1px solid var(--red-bright);color:var(--white);
+  border-radius:8px;cursor:pointer;text-decoration:none;
+  transition:background .2s, box-shadow .2s;
+  box-shadow:0 0 36px rgba(209,18,27,.35);
+  position:relative;text-align:center;
+}
+.btn-cta:hover{background:var(--red-bright);box-shadow:0 0 56px rgba(255,32,48,.45)}
+.btn-cta.block{display:block;width:100%}
+.btn-cta[aria-disabled="true"]{background:#222;border-color:#333;color:var(--grey);box-shadow:none;pointer-events:none}
+.hero-note{margin-top:16px;font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.1em;color:var(--grey2);position:relative}
+
+/* ============ SECCIONES ============ */
 .section-divider{
   height:1px;
   background:linear-gradient(90deg,transparent,var(--border),rgba(209,18,27,.3),var(--border),transparent);
-  margin:0 48px;
-  position:relative;z-index:1;
+  margin:0 48px;position:relative;z-index:1;
 }
+@media(max-width:700px){.section-divider{margin:0 16px}}
+.section{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:80px 24px}
+.section-head{text-align:center;margin-bottom:48px}
+.section-head .section-label{display:block;margin-bottom:12px}
+.section-head h2{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.2rem,5vw,3.2rem);letter-spacing:.07em;line-height:1.05;margin-bottom:12px;
+}
+.section-head h2 em{color:var(--red-bright);font-style:normal}
+.section-head p{font-size:.95rem;color:var(--grey);max-width:560px;margin:0 auto;line-height:1.7}
 
-/* PRICING SECTION */
-.pricing-section{
-  position:relative;z-index:1;
-  max-width:1100px;
-  margin:0 auto;
-  padding:60px 24px 80px;
-}
-
-/* TOGGLE */
-.toggle-wrap{
-  display:flex;justify-content:center;
-  margin-bottom:48px;
-}
-.toggle-group{
-  display:flex;
-  border:1px solid var(--border);
-  border-radius:999px;
-  overflow:hidden;
-  background:var(--card);
-  padding:4px;
-  gap:4px;
-}
-.toggle-btn{
-  padding:8px 24px;
-  font-family:'Space Mono',monospace;
-  font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;
-  background:transparent;border:none;cursor:pointer;
-  color:var(--grey);
-  border-radius:999px;
-  transition:all .2s;
-}
-.toggle-btn.active{
-  background:var(--red);
-  color:var(--white);
-}
-.toggle-btn:not(.active):hover{color:var(--white)}
-
-/* PLANS GRID */
-.plans-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-  margin-bottom:80px;
-}
-@media(max-width:860px){.plans-grid{grid-template-columns:1fr}}
-
-/* JOURNAL FEATURE */
-.journal-feature{
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,440px);
-  gap:42px;align-items:center;
-  background:linear-gradient(115deg,rgba(209,18,27,.12),rgba(10,10,10,.95) 52%);
-  border:1px solid rgba(209,18,27,.42);border-radius:16px;
-  padding:28px;margin-bottom:48px;overflow:hidden;
-  box-shadow:0 0 46px rgba(209,18,27,.08);
-}
-.journal-feature-copy{padding:8px 0 8px 8px}
-.journal-kicker{
-  font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--red-bright);margin-bottom:10px;
-}
-.journal-feature h2{
-  font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3.2rem);
-  letter-spacing:.06em;line-height:1;margin-bottom:12px;
-}
-.journal-feature h2 em{color:var(--red-bright);font-style:normal}
-.journal-feature-copy p{max-width:570px;color:var(--grey);font-size:.92rem;line-height:1.65;margin-bottom:18px}
-.journal-list{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;list-style:none;margin-bottom:24px}
-.journal-list li{display:flex;gap:9px;align-items:flex-start;color:rgba(240,237,236,.84);font-size:.8rem;line-height:1.45}
-.journal-list li::before{content:'✓';color:var(--red-bright);font-weight:700}
-.journal-cta{display:inline-block;background:var(--red);border:1px solid var(--red-bright);color:#fff;border-radius:8px;padding:12px 20px;text-decoration:none;font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:background .2s,transform .2s}
-.journal-cta:hover{background:var(--red-bright);transform:translateY(-2px)}
-.journal-feature-media{min-width:0;border:1px solid rgba(255,255,255,.12);border-radius:10px;overflow:hidden;background:#000;box-shadow:0 16px 34px rgba(0,0,0,.35)}
-.journal-feature-media img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover}
-@media(max-width:760px){
-  .promo-ticker{top:57px}
-  .journal-feature{grid-template-columns:1fr;gap:24px;padding:22px;margin-bottom:36px}
-  .journal-feature-copy{padding:0}
-  .journal-list{grid-template-columns:1fr}
-}
-
-.plan-card{
-  background:var(--card);
-  border:1px solid var(--border2);
-  border-radius:16px;
-  padding:32px 28px;
-  position:relative;
-  transition:border-color .3s, transform .3s;
-  display:flex;flex-direction:column;
-}
-.plan-card:hover{
-  border-color:rgba(209,18,27,.25);
-  transform:translateY(-4px);
-}
-.plan-card.featured{
+/* ============ OFERTA ============ */
+.offer-card{
   background:var(--card2);
   border:1px solid var(--red);
-  box-shadow:0 0 40px rgba(209,18,27,.12);
+  box-shadow:0 0 60px rgba(209,18,27,.15);
+  border-radius:18px;
+  display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
+  overflow:hidden;
 }
-.plan-card.featured:hover{
-  box-shadow:0 0 60px rgba(209,18,27,.2);
+@media(max-width:860px){.offer-card{grid-template-columns:1fr}}
+.offer-left{
+  padding:44px 36px;
+  background:linear-gradient(160deg,rgba(209,18,27,.14),rgba(209,18,27,.02) 60%);
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;
 }
-
+@media(max-width:860px){.offer-left{border-right:none;border-bottom:1px solid var(--border);padding:36px 24px}}
 .badge-popular{
   display:inline-block;
   font-family:'Space Mono',monospace;
   font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;
   background:var(--red);color:var(--white);
-  padding:4px 12px;border-radius:999px;
-  margin-bottom:16px;
-  width:fit-content;
+  padding:4px 12px;border-radius:999px;margin-bottom:16px;width:fit-content;
 }
+.plan-name{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.1em;margin-bottom:4px}
+.plan-period{font-family:'Space Mono',monospace;font-size:.64rem;letter-spacing:.1em;color:var(--grey);line-height:1.7}
+.offer-price{display:flex;align-items:baseline;gap:6px;margin:26px 0 8px}
+.offer-price .cur{font-family:'Space Mono',monospace;font-size:1.3rem;color:var(--grey);align-self:flex-start;margin-top:10px}
+.offer-price .amt{font-family:'Bebas Neue',sans-serif;font-size:6.2rem;line-height:.9;letter-spacing:.02em}
+.offer-price .unit{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--grey);letter-spacing:.1em}
+.offer-was{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:28px}
+.offer-was .strike{font-family:'Space Mono',monospace;font-size:.95rem;color:var(--grey2);text-decoration:line-through}
+.offer-left .btn-cta{margin-bottom:16px}
+.offer-fine{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.06em;color:var(--grey2);line-height:1.7;text-align:center}
 
-.plan-name{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:1.6rem;letter-spacing:.1em;
-  color:var(--white);
-  margin-bottom:4px;
+.offer-right{padding:44px 36px}
+@media(max-width:860px){.offer-right{padding:36px 24px}}
+.offer-right h3{
+  font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.1em;margin-bottom:20px;
 }
-
-.plan-price-wrap{
-  display:flex;align-items:baseline;gap:4px;
-  margin:20px 0 4px;
-}
-.plan-currency{
-  font-family:'Space Mono',monospace;
-  font-size:1rem;color:var(--grey);
-  align-self:flex-start;margin-top:6px;
-}
-.plan-amount{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:3.2rem;letter-spacing:.02em;
-  color:var(--white);
-  line-height:1;
-}
-.plan-unit{
-  font-family:'Space Mono',monospace;
-  font-size:.65rem;color:var(--grey);
-  letter-spacing:.1em;
-}
-
-.plan-period{
-  font-family:'Space Mono',monospace;
-  font-size:.62rem;letter-spacing:.1em;
-  color:var(--grey);
-  margin-bottom:4px;
-}
-
-.plan-billed{
-  font-family:'Space Mono',monospace;
-  font-size:.6rem;letter-spacing:.08em;
-  color:var(--grey2);
-  min-height:16px;
-  margin-bottom:24px;
-}
-.plan-billed .save{color:#4ade80;font-weight:700}
-
-.btn-start{
-  display:block;width:100%;
-  padding:12px;
-  font-family:'Space Mono',monospace;
-  font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
-  border-radius:8px;cursor:pointer;
-  transition:all .2s;
-  margin-bottom:28px;
-  text-align:center;
-}
-.btn-outline{
-  background:transparent;
-  border:1px solid rgba(255,255,255,.12);
-  color:var(--white);
-}
-.btn-outline:hover{border-color:var(--red);color:var(--red-bright)}
-.btn-filled{
-  background:var(--red);
-  border:1px solid var(--red-bright);
-  color:var(--white);
-}
-.btn-filled:hover{background:var(--red-bright)}
-
-.features-divider{
-  height:1px;
-  background:var(--border2);
-  margin-bottom:20px;
-}
-
-.features-list{
-  list-style:none;
-  display:flex;flex-direction:column;
-  gap:11px;
-  flex:1;
-}
+.features-list{list-style:none;display:flex;flex-direction:column;gap:14px}
 .features-list li{
-  font-size:.82rem;color:rgba(240,237,236,.7);
-  display:flex;align-items:flex-start;gap:10px;
-  line-height:1.5;
+  font-size:.9rem;color:rgba(240,237,236,.82);
+  display:flex;align-items:flex-start;gap:12px;line-height:1.55;
 }
+.features-list li b{color:var(--white)}
 .feat-check{
-  width:16px;height:16px;
-  border-radius:50%;
-  background:rgba(209,18,27,.15);
-  border:1px solid rgba(209,18,27,.4);
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;
-  margin-top:1px;
+  width:18px;height:18px;border-radius:50%;
+  background:rgba(209,18,27,.15);border:1px solid rgba(209,18,27,.4);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;
 }
 .feat-check svg{width:9px;height:9px;stroke:var(--red-bright);fill:none;stroke-width:2.5}
+.features-divider{height:1px;background:var(--border2);margin:24px 0 20px}
+.sub-title{
+  font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--grey);margin-bottom:14px;
+}
+.features-list.small{gap:9px}
+.features-list.small li{font-size:.8rem;color:rgba(240,237,236,.6);gap:10px}
+.features-list.small .feat-check{width:15px;height:15px;margin-top:2px}
+.features-list.small .feat-check svg{width:8px;height:8px}
 
-/* ADD-ONS TOGGLE */
-.addon-box{
-  border:1px solid rgba(209,18,27,.25);
-  background:rgba(209,18,27,.06);
-  border-radius:10px;
-  padding:12px 14px;
-  display:flex;align-items:center;justify-content:space-between;
-  gap:10px;
-  margin:16px 0 4px;
+/* ============ ROL FUNDADOR ============ */
+.founder-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:20px}
+.perk{
+  grid-column:span 2;
+  background:var(--card);border:1px solid var(--border2);border-radius:16px;
+  padding:30px 26px;transition:border-color .3s, transform .3s;
 }
-.addon-label-wrap{display:flex;flex-direction:column;gap:2px}
-.addon-label{
-  font-family:'Space Mono',monospace;
-  font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--white);
+.perk:nth-child(4){grid-column:2 / span 2}
+.perk:nth-child(5){grid-column:4 / span 2}
+@media(max-width:860px){
+  .founder-grid{grid-template-columns:1fr}
+  .perk,.perk:nth-child(4),.perk:nth-child(5){grid-column:auto}
 }
-.addon-sublabel{
-  font-family:'Space Mono',monospace;
-  font-size:.56rem;letter-spacing:.05em;
-  color:var(--grey);
+.perk:hover{border-color:rgba(209,18,27,.3);transform:translateY(-4px)}
+.perk-ico{
+  width:44px;height:44px;border-radius:12px;
+  background:rgba(209,18,27,.12);border:1px solid rgba(209,18,27,.35);
+  display:flex;align-items:center;justify-content:center;margin-bottom:18px;
 }
-.addon-switch{
-  position:relative;display:inline-block;
-  width:40px;height:22px;flex-shrink:0;
+.perk-ico svg{width:22px;height:22px;stroke:var(--red-bright);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.perk h3{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.08em;margin-bottom:8px}
+.perk p{font-size:.85rem;color:var(--grey);line-height:1.7}
+.founder-banner{
+  margin:0 auto 48px;max-width:760px;text-align:center;
+  border:1px solid var(--red);border-radius:14px;
+  background:rgba(209,18,27,.07);
+  padding:20px 24px;
+  font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.1em;line-height:1.8;
+  text-transform:uppercase;color:var(--white);
 }
-.addon-switch input{opacity:0;width:0;height:0}
-.addon-slider{
-  position:absolute;cursor:pointer;inset:0;
-  background:rgba(255,255,255,.12);
-  border:1px solid rgba(255,255,255,.15);
-  transition:.2s;border-radius:999px;
-}
-.addon-slider:before{
-  position:absolute;content:"";
-  height:14px;width:14px;left:3px;top:3px;
-  background:var(--white);
-  transition:.2s;border-radius:50%;
-}
-.addon-switch input:checked + .addon-slider{
-  background:var(--red);border-color:var(--red-bright);
-}
-.addon-switch input:checked + .addon-slider:before{
-  transform:translateX(18px);
-}
+.founder-banner span{color:var(--red-bright);font-weight:700}
 
-.price-strike{
-  font-family:'Space Mono',monospace;
-  font-size:.85rem;color:var(--grey2);
-  text-decoration:line-through;
-  margin-right:6px;
+/* ============ HISTORIA ============ */
+.story{
+  max-width:760px;margin:0 auto;
+  background:var(--card);border:1px solid var(--border);border-radius:18px;
+  padding:48px 44px;position:relative;
 }
-.price-new-badge{
-  display:inline-block;
-  font-family:'Space Mono',monospace;
-  font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;
-  background:rgba(74,222,128,.12);
-  color:#4ade80;
-  border:1px solid rgba(74,222,128,.3);
-  padding:2px 8px;border-radius:999px;
-  margin-left:8px;
+@media(max-width:700px){.story{padding:32px 22px}}
+.story .quote-mark{
+  font-family:'Bebas Neue',sans-serif;font-size:6rem;line-height:.6;color:var(--red);
+  display:block;margin-bottom:10px;
 }
+.story p{font-size:1rem;color:rgba(240,237,236,.82);line-height:1.85;margin-bottom:20px}
+.story p b{color:var(--white)}
+.story .tagline{
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.4rem);letter-spacing:.07em;line-height:1.1;
+  color:var(--white);margin:30px 0;
+}
+.story .tagline em{color:var(--red-bright);font-style:normal}
+.story .sign{
+  border-top:1px solid var(--border2);padding-top:20px;margin-top:8px;
+  font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.1em;color:var(--grey);line-height:1.8;
+}
+.story .sign strong{display:block;color:var(--white);font-size:.78rem;letter-spacing:.14em}
 
-/* ADD-ONS MODAL */
-.addon-modal-overlay{
-  position:fixed;inset:0;z-index:500;
-  background:rgba(0,0,0,.75);
-  backdrop-filter:blur(6px);
-  display:none;
-  align-items:center;justify-content:center;
-  padding:24px;
-}
-.addon-modal-overlay.open{display:flex}
-.addon-modal{
-  background:var(--card2);
-  border:1px solid var(--red);
-  box-shadow:0 0 60px rgba(209,18,27,.2);
-  border-radius:16px;
-  padding:36px 32px;
-  max-width:520px;width:100%;
-  max-height:85vh;overflow-y:auto;
-  position:relative;
-}
-.addon-modal-close{
-  position:absolute;top:16px;right:16px;
-  width:28px;height:28px;
-  border-radius:50%;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.12);
-  color:var(--white);
-  cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  font-size:1rem;line-height:1;
-  transition:all .2s;
-}
-.addon-modal-close:hover{background:var(--red);border-color:var(--red-bright)}
-.addon-modal-eyebrow{
-  font-family:'Space Mono',monospace;
-  font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--red-bright);
-  margin-bottom:10px;
-}
-.addon-modal h3{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:1.9rem;letter-spacing:.05em;
-  margin-bottom:18px;
-  color:var(--white);
-}
-.addon-modal-list{
-  list-style:none;
-  display:flex;flex-direction:column;
-  gap:14px;
-  margin-bottom:24px;
-}
-.addon-modal-list li{
-  font-size:.86rem;line-height:1.6;
-  color:rgba(240,237,236,.85);
-  display:flex;align-items:flex-start;gap:10px;
-}
-.addon-modal-list li span.chk{
-  flex-shrink:0;color:var(--red-bright);font-size:.95rem;
-}
-.addon-modal-price{
-  border-top:1px solid var(--border2);
-  padding-top:18px;
-  display:flex;align-items:baseline;gap:10px;
-  margin-bottom:20px;
-}
-.addon-modal-close-btn{
-  display:block;width:100%;
-  padding:12px;text-align:center;
-  font-family:'Space Mono',monospace;
-  font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
-  background:var(--red);border:1px solid var(--red-bright);
-  color:var(--white);border-radius:8px;cursor:pointer;
-  transition:background .2s;
-}
-.addon-modal-close-btn:hover{background:var(--red-bright)}
-
-/* FEATURES TABLE */
-.table-section{
-  position:relative;z-index:1;
-  max-width:1100px;
-  margin:0 auto;
-  padding:0 24px 80px;
-}
-
-.table-header{
-  text-align:center;
-  margin-bottom:40px;
-}
-.table-header h2{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:2.4rem;letter-spacing:.08em;
-  margin-bottom:8px;
-}
-.table-header p{
-  font-family:'Space Mono',monospace;
-  font-size:.65rem;letter-spacing:.14em;
-  color:var(--grey);text-transform:uppercase;
-}
-
-.feat-table-wrap{overflow-x:auto;}
-.feat-table{
-  width:100%;border-collapse:collapse;
-  font-size:.85rem;
-}
-.feat-table th{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:1.1rem;letter-spacing:.1em;
-  padding:14px 20px;text-align:center;
-  color:var(--grey);
-  border-bottom:1px solid var(--border);
-}
-.feat-table th:first-child{text-align:left;color:var(--white)}
-.feat-table th.col-featured{color:var(--red-bright)}
-
-.feat-table td{
-  padding:13px 20px;text-align:center;
-  border-bottom:1px solid var(--border2);
-  color:var(--grey);
-  font-size:.8rem;
-}
-.feat-table td:first-child{
-  text-align:left;
-  color:rgba(240,237,236,.85);
-  font-size:.82rem;
-}
-.feat-table tr:last-child td{border-bottom:none}
-.feat-table tr:hover td{background:rgba(255,255,255,.015)}
-
-.ico-yes{color:var(--red-bright);font-size:1rem}
-.ico-no{color:var(--grey2);font-size:1rem}
-.ico-num{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:1.1rem;letter-spacing:.06em;
-  color:var(--white);
-}
-
-/* FAQ */
-.faq-section{
-  position:relative;z-index:1;
-  max-width:800px;
-  margin:0 auto;
-  padding:0 24px 80px;
-}
-.faq-header{
-  text-align:center;margin-bottom:40px;
-}
-.faq-header h2{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:2.4rem;letter-spacing:.08em;
-  margin-bottom:8px;
-}
-.faq-header h2 em{color:var(--red-bright);font-style:normal}
-
-.faq-item{
-  border-top:1px solid var(--border2);
-}
-.faq-item:last-child{border-bottom:1px solid var(--border2)}
+/* ============ FAQ ============ */
+.faq-section{max-width:760px;margin:0 auto;padding:80px 24px;position:relative;z-index:1}
+.faq-item{border-bottom:1px solid var(--border2)}
 .faq-question{
-  width:100%;background:transparent;border:none;
-  padding:20px 0;
-  display:flex;align-items:center;justify-content:space-between;
-  font-family:'Syne',sans-serif;
-  font-size:.95rem;font-weight:600;
-  color:var(--white);cursor:pointer;
-  text-align:left;gap:16px;
+  width:100%;background:none;border:none;cursor:pointer;
+  padding:22px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;
+  font-family:'Syne',sans-serif;font-size:.95rem;font-weight:600;color:var(--white);text-align:left;
 }
 .faq-icon{
-  width:24px;height:24px;border-radius:50%;
-  border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;
-  transition:all .2s;
+  width:24px;height:24px;border-radius:50%;border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;
 }
 .faq-icon svg{width:10px;height:10px;stroke:var(--grey);fill:none;stroke-width:2.5;transition:transform .25s}
 .faq-item.open .faq-icon{border-color:var(--red);background:rgba(209,18,27,.12)}
 .faq-item.open .faq-icon svg{transform:rotate(180deg);stroke:var(--red-bright)}
-.faq-answer{
-  font-size:.85rem;color:var(--grey);line-height:1.75;
-  padding-bottom:20px;display:none;
-}
+.faq-answer{font-size:.88rem;color:var(--grey);line-height:1.75;padding-bottom:20px;display:none}
 .faq-item.open .faq-answer{display:block}
 
-/* FOOTER */
-footer{
-  position:relative;z-index:1;
-  border-top:1px solid var(--border);
-  padding:40px 48px;
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:16px;
+/* ============ CTA FINAL ============ */
+.final-cta{
+  position:relative;z-index:1;text-align:center;overflow:hidden;
+  padding:90px 24px;
 }
-.footer-copy{
-  font-family:'Space Mono',monospace;
-  font-size:.62rem;letter-spacing:.08em;
-  color:var(--grey2);
+.final-cta::before{
+  content:"";position:absolute;left:50%;top:50%;width:800px;height:480px;transform:translate(-50%,-50%);
+  background:radial-gradient(ellipse at center,rgba(209,18,27,.2),transparent 65%);pointer-events:none;
+}
+.final-cta h2{
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(2.6rem,6vw,4.4rem);letter-spacing:.06em;line-height:1;
+  margin-bottom:18px;position:relative;
+}
+.final-cta h2 em{color:var(--red-bright);font-style:normal}
+.final-cta p{color:var(--grey);max-width:520px;margin:0 auto 30px;line-height:1.7;position:relative}
+.mini-count{
+  display:inline-flex;gap:10px;align-items:baseline;margin-bottom:30px;position:relative;
+  font-family:'Bebas Neue',sans-serif;font-size:2.4rem;letter-spacing:.04em;font-variant-numeric:tabular-nums;
+}
+.mini-count small{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.14em;color:var(--grey);margin-right:6px;text-transform:uppercase}
+.mini-count .d{color:var(--red-bright)}
+
+/* ============ FOOTER ============ */
+footer{
+  position:relative;z-index:1;border-top:1px solid var(--border);
+  padding:40px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+}
+@media(max-width:700px){footer{padding:32px 16px}}
+.footer-copy{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.08em;color:var(--grey2)}
+.legal{
+  position:relative;z-index:1;max-width:900px;margin:0 auto;padding:0 24px 40px;
+  font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.05em;line-height:1.8;color:var(--grey2);text-align:center;
 }
 
-/* REVEAL ANIMATIONS */
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .55s,transform .55s}
-.reveal.on{opacity:1;transform:none}
+/* ============ ANIMACIONES ============ */
+.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .55s,transform .55s}
+.js .reveal.on{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .js .reveal{opacity:1;transform:none}
+}
 </style>
 </head>
 <body>
@@ -617,162 +427,163 @@ footer{
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P2P3RW8F"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+
+<!-- BANNER FIJO -->
+<div class="promo-bar" id="promoBar" role="region" aria-label="Oferta Black Friday">
+  <span class="pulse" aria-hidden="true"></span>
+  <span>Oferta válida:</span>
+  <strong class="promo-date">hasta el 30 de noviembre</strong>
+  <span class="promo-sep" aria-hidden="true"></span>
+  <span class="promo-count" id="barCount">--d --h --m --s</span>
+</div>
+
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="index.html">Quant<span>Lab</span></a>
   <div class="nav-links">
-    <a href="#">Features</a>
-    <a href="#" style="color:var(--red-bright)">Pricing</a>
+    <a href="#oferta">La oferta</a>
+    <a href="#fundador">Rol Fundador</a>
+    <a href="#historia">Por qué</a>
     <a href="https://discord.gg/yaftTkadHQ">Soporte</a>
-    <a href="https://discord.gg/yaftTkadHQ">Comunidad</a>
   </div>
-  <a href="#planes" style="
-    font-family:'Space Mono',monospace;font-size:.65rem;
-    letter-spacing:.14em;text-transform:uppercase;
-    background:var(--red);color:var(--white);
-    padding:8px 20px;border-radius:6px;
-    text-decoration:none;transition:background .2s;
-  " onmouseover="this.style.background='#FF2030'" onmouseout="this.style.background='#D1121B'">Get started</a>
+  <a class="nav-cta" href="#oferta">Quiero mi lugar</a>
 </nav>
 
-<!-- PROMO TICKER -->
-<div class="promo-ticker" aria-label="Promoción: 20% de descuento con el código Loyalty">
-  <div class="promo-track">
-    <span>20% Descuento — Code 'Loyalty'</span>
-    <span>20% Descuento — Code 'Loyalty'</span>
-    <span>20% Descuento — Code 'Loyalty'</span>
-    <span>20% Descuento — Code 'Loyalty'</span>
-    <span>20% Descuento — Code 'Loyalty'</span>
-    <span>20% Descuento — Code 'Loyalty'</span>
-  </div>
-</div>
-
-<!-- HERO HEADER -->
-<div class="page-hero">
+<!-- HERO -->
+<header class="page-hero">
   <div class="hero-grid"></div>
-  <div class="section-label" id="heroLabel">Planes y precios</div>
-  <h1 id="heroTitle">Elige el plan que mejor<br>se adapta a tus <em>necesidades</em></h1>
-  <p id="heroSub">Accede al mejor sistema de trading cuantitativo del mercado. Independientemente de tu estrategia, tenemos planes que se ajustan a lo que buscas.</p>
-</div>
+  <div class="hero-badge"><i></i> Black Friday · Edición Fundadores</div>
+  <h1>La oportunidad de tu vida<br>para operar como <em>trader cuantitativo</em></h1>
+  <p class="hero-sub">Sistema cuantitativo + Journal, la guía para aprender a operar y un <b>Rol Fundador</b> para operar de la mano de traders profesionales. Todo por <b>$53</b> en lugar de $120.</p>
+
+  <div class="countdown-wrap">
+    <div class="countdown-title">La oferta termina en</div>
+    <div class="countdown" id="heroCountdown" role="timer" aria-label="Tiempo restante de la oferta">
+      <div class="cd-box"><span class="cd-num" data-cd="d">--</span><span class="cd-label">Días</span></div>
+      <div class="cd-box"><span class="cd-num" data-cd="h">--</span><span class="cd-label">Horas</span></div>
+      <div class="cd-box"><span class="cd-num" data-cd="m">--</span><span class="cd-label">Minutos</span></div>
+      <div class="cd-box"><span class="cd-num" data-cd="s">--</span><span class="cd-label">Segundos</span></div>
+    </div>
+    <div class="countdown-end">Cierra el 30 de noviembre a las 11:59 p. m. (hora de República Dominicana)</div>
+  </div>
+
+  <div class="hero-price">
+    <span class="was">$120</span>
+    <span class="now">$53<small>USD</small></span>
+    <span class="save-pill">56% de descuento</span>
+  </div>
+  <a class="btn-cta" data-checkout href="#oferta">Quiero mi lugar fundador</a>
+  <div class="hero-note">Un solo plan · 3 meses de acceso · Rol Fundador incluido</div>
+</header>
 
 <div class="section-divider"></div>
 
-<!-- PRICING SECTION -->
-<section class="pricing-section" id="planes">
-
-  <article class="journal-feature reveal">
-    <div class="journal-feature-copy">
-      <div class="journal-kicker">Nuevo en QuantLab</div>
-      <h2>Tu trading, <em>mejor documentado</em></h2>
-      <p>Journal convierte cada operación en información útil para entender tu proceso, medir tu progreso y operar con más claridad.</p>
-      <ul class="journal-list">
-        <li>Calendario de operaciones y rendimiento</li>
-        <li>Reportes automáticos de tu cuenta</li>
-        <li>QuantLab IA para analizar tus patrones</li>
-        <li>Bitácora para registrar cada trade</li>
-      </ul>
-      <a class="journal-cta" href="/web/QuantLab_Journal.html">Unirme a Journal</a>
-    </div>
-    <div class="journal-feature-media">
-      <img src="https://github.com/Physclab/quantlab/blob/main/web/bienvenida.png?raw=true" alt="Bienvenida a QuantLab Journal" loading="lazy">
-    </div>
-  </article>
-
-  <div class="toggle-wrap">
-    <div class="toggle-group">
-      <button class="toggle-btn active" data-period="monthly">Monthly</button>
-      <button class="toggle-btn" data-period="quarterly">3 Months</button>
-      <button class="toggle-btn" data-period="annually">Annually</button>
-    </div>
+<!-- OFERTA -->
+<section class="section" id="oferta">
+  <div class="section-head reveal">
+    <span class="section-label">La oferta</span>
+    <h2>Un solo plan. <em>Un precio ridículo.</em></h2>
+    <p>Durante este especial solo existe una opción: QuantLab Standard de 3 meses, con todo lo que necesitas para operar de forma cuantitativa y acompañado de expertos.</p>
   </div>
 
-  <div class="plans-grid" id="plansGrid"></div>
+  <div class="offer-card reveal">
+    <div class="offer-left">
+      <div class="badge-popular">Black Friday · Plan único</div>
+      <div class="plan-name">QuantLab Standard</div>
+      <div class="plan-period">3 meses de acceso<br>+ Rol Fundador</div>
 
+      <div class="offer-price">
+        <span class="cur">$</span><span class="amt">53</span><span class="unit">USD</span>
+      </div>
+      <div class="offer-was">
+        <span class="strike">$120</span>
+        <span class="save-pill">56% OFF · ahorras $67</span>
+      </div>
+
+      <a class="btn-cta block" data-checkout href="#oferta">Quiero mi lugar fundador</a>
+      <div class="offer-fine">Oferta válida hasta el 30 de noviembre.<br>Durante este especial no hay otros planes.</div>
+    </div>
+
+    <div class="offer-right">
+      <h3>Todo lo que recibes</h3>
+      <ul class="features-list">
+        <li><div class="feat-check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div><span><b>56% de descuento</b> sobre el precio regular del plan Standard de 3 meses ($120 → $53).</span></li>
+        <li><div class="feat-check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div><span><b>Sistema cuantitativo + Journal</b> por el mejor precio del mercado.</span></li>
+        <li><div class="feat-check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div><span><b>Guía para aprender a operar</b> como trader cuantitativo.</span></li>
+        <li><div class="feat-check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div><span><b>Rol Fundador</b>: un rol especial que se otorga una sola vez en la vida.</span></li>
+      </ul>
+
+      <div class="features-divider"></div>
+      <div class="sub-title">Incluido en QuantLab Standard</div>
+      <ul class="features-list small">
+        <li><div class="feat-check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>8 módulos de análisis cuantitativo integrados</li>
+        <li><div class="feat-check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>Sistemas de predicción cuantitativa — ciclos institucionales ocultos</li>
+        <li><div class="feat-check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>Anomalías estadísticas con ventana móvil</li>
+        <li><div class="feat-check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>Soportes y resistencias con clustering adaptativo</li>
+        <li><div class="feat-check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>6 mercados: NASDAQ, S&amp;P 500, DJI, BTC, Oro, Futuros</li>
+        <li><div class="feat-check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>Dashboard personalizable de favoritos</li>
+        <li><div class="feat-check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>Journal dinámico</li>
+        <li><div class="feat-check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></div>Soporte 24/7</li>
+      </ul>
+    </div>
+  </div>
 </section>
 
 <div class="section-divider"></div>
 
-<!-- FEATURES TABLE -->
-<section class="table-section">
-  <div class="table-header reveal">
-    <div class="section-label on" style="text-align:center;display:block;margin-bottom:12px">Comparación</div>
-    <h2>Planes y <em style="color:var(--red-bright);font-style:normal">características</em></h2>
-    <p>Todo lo que incluye cada plan, de un vistazo</p>
+<!-- ROL FUNDADOR -->
+<section class="section" id="fundador">
+  <div class="section-head reveal">
+    <span class="section-label">Plan fundador</span>
+    <h2>No solo aprendes a operar. <em>Operas con expertos.</em></h2>
+    <p>El Rol Fundador se otorga una sola vez en la vida y te abre la puerta a todo esto:</p>
   </div>
 
-  <div class="feat-table-wrap reveal">
-    <table class="feat-table">
-      <thead>
-        <tr>
-          <th>Features</th>
-          <th>Basic</th>
-          <th class="col-featured">Standard</th>
-          <th>Advanced</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Módulos de análisis cuantitativo</td>
-          <td><span class="ico-num">7</span></td>
-          <td><span class="ico-num">8</span></td>
-          <td><span class="ico-num">8</span></td>
-        </tr>
-        <tr>
-          <td>Sistemas de predicción cuantitativa</td>
-          <td><span class="ico-no">✕</span></td>
-          <td><span class="ico-yes">✓</span></td>
-          <td><span class="ico-yes">✓</span></td>
-        </tr>
-        <tr>
-          <td>Mercados para analizar</td>
-          <td><span class="ico-num">4</span></td>
-          <td><span class="ico-num">6</span></td>
-          <td><span class="ico-num">+10</span></td>
-        </tr>
-        <tr>
-          <td>Anomalías estadísticas con ventana móvil</td>
-          <td><span class="ico-yes">✓</span></td>
-          <td><span class="ico-yes">✓</span></td>
-          <td><span class="ico-yes">✓</span></td>
-        </tr>
-        <tr>
-          <td>Soportes & resistencias con clustering adaptativo</td>
-          <td><span class="ico-yes">✓</span></td>
-          <td><span class="ico-yes">✓</span></td>
-          <td><span class="ico-yes">✓</span></td>
-        </tr>
-        <tr>
-          <td>Dashboard personalizable — favoritos</td>
-          <td><span class="ico-no">✕</span></td>
-          <td><span class="ico-yes">✓</span></td>
-          <td><span class="ico-yes">✓</span></td>
-        </tr>
-        <tr>
-          <td>Alertas de Discord — anomalías, estado</td>
-          <td><span class="ico-no">✕</span></td>
-          <td><span class="ico-no">✕</span></td>
-          <td><span class="ico-yes">✓</span></td>
-        </tr>
-        <tr>
-          <td>Accesoria privada 1:1 + plan de trading</td>
-          <td><span class="ico-no">✕</span></td>
-          <td><span class="ico-no">✕</span></td>
-          <td><span class="ico-yes">✓</span></td>
-        </tr>
-        <tr>
-          <td>Soporte 24/7</td>
-          <td><span class="ico-yes">✓</span></td>
-          <td><span class="ico-yes">✓</span></td>
-          <td><span class="ico-yes">✓</span></td>
-        </tr>
-        <tr>
-          <td>Journal dinámico</td>
-          <td><span class="ico-no">✕</span></td>
-          <td><span class="ico-no">✕</span></td>
-          <td><span class="ico-yes">✓</span></td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="founder-grid">
+    <div class="perk reveal">
+      <div class="perk-ico"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.4"/><path d="M17 14.2c2.4.3 4 2.2 4 4.8"/></svg></div>
+      <h3>Comunidad única</h3>
+      <p>Una comunidad especial de traders que operan, aprenden y crecen juntos.</p>
+    </div>
+    <div class="perk reveal">
+      <div class="perk-ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/><polyline points="6,13 9,10 12,12 17,8"/></svg></div>
+      <h3>Live trading en directo</h3>
+      <p>Opera en vivo junto a traders profesionales y mira cada decisión mientras ocurre.</p>
+    </div>
+    <div class="perk reveal">
+      <div class="perk-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polygon points="15.5,8.5 13.5,13.5 8.5,15.5 10.5,10.5"/></svg></div>
+      <h3>Bias diario</h3>
+      <p>Conoce la dirección del día para planificar tus operaciones con ventaja.</p>
+    </div>
+    <div class="perk reveal">
+      <div class="perk-ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><polygon points="10,9 16,12 10,15"/></svg></div>
+      <h3>Operativas grabadas</h3>
+      <p>Revisa las operativas cuando quieras y aprende de decisiones reales de mercado.</p>
+    </div>
+    <div class="perk reveal">
+      <div class="perk-ico"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg></div>
+      <h3>Llamadas explicativas</h3>
+      <p>Clases en directo donde se explica el porqué detrás de cada operativa.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- HISTORIA -->
+<section class="section" id="historia">
+  <div class="section-head reveal">
+    <span class="section-label">Por qué existe esta oferta</span>
+    <h2>Un regalo para quienes han <em>apoyado QuantLab</em></h2>
+  </div>
+
+  <div class="story reveal">
+    <span class="quote-mark" aria-hidden="true">“</span>
+    <p>Durante este último año, muchos de ustedes han apoyado QuantLab. Esta oferta es mi forma de darles un regalo especial.</p>
+    <p>Si se fijan, el precio no es un número redondo: <b>$53 es lo que cuesta cubrir los gastos</b>. Y contrario a lo que muchos pensarían, <b>en esta oferta no gano dinero; incluso pierdo</b>. Lo que sí gano es una comunidad, que para mí es muy importante.</p>
+    <p>Para QuantLab, lo más importante son los resultados de ustedes.</p>
+    <div class="tagline">QuantLab gana cuando <em>sus traders ganan.</em></div>
+    <div class="sign"><strong>Geremy Gomez</strong>Fundador de QuantLab</div>
   </div>
 </section>
 
@@ -780,271 +591,137 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- FAQ -->
 <section class="faq-section">
-  <div class="faq-header reveal">
-    <div class="section-label on" style="text-align:center;display:block;margin-bottom:12px">FAQ</div>
-    <h2>¿Tienes <em>preguntas?</em></h2>
+  <div class="section-head reveal">
+    <span class="section-label">FAQ</span>
+    <h2>Preguntas <em>frecuentes</em></h2>
   </div>
 
   <div id="faqList">
     <div class="faq-item">
-      <button class="faq-question">
-        ¿Cómo puede esto ayudar a mi trading?
+      <button class="faq-question" aria-expanded="false">
+        ¿Hasta cuándo está disponible la oferta?
         <div class="faq-icon"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></div>
       </button>
-      <div class="faq-answer">Quantlab te brinda confirmaciones cuantitativas que te ayudan a tomar trades de mejor calidad y a entrar antes en los movimientos del mercado para aprovechar al máximo cada oportunidad. Esto se traduce en ratios más altos, un incremento notorio en tu win rate y un análisis más limpio. Es decir, más ganancias y mayor consistencia.</div>
+      <div class="faq-answer">Hasta el 30 de noviembre a las 11:59 p. m., hora de República Dominicana. Cuando el contador llegue a cero, la oferta se cierra.</div>
     </div>
     <div class="faq-item">
-      <button class="faq-question">
-        ¿Cómo sé si el plan Advanced es para mí?
+      <button class="faq-question" aria-expanded="false">
+        ¿Qué incluye exactamente el pago de $53?
         <div class="faq-icon"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></div>
       </button>
-      <div class="faq-answer">Si buscas operar de forma cuantitativa de la mano de un experto que te ayude a evitar errores y te guíe durante todo el proceso, este es tu plan. Obtendrás todas las herramientas de Quantlab y una asesoría 1:1 en la que diseñaremos una estrategia personalizada o adaptaremos Quantlab a tu estrategia actual, además de crear un plan de trading hecho a tu medida.</div>
+      <div class="faq-answer">QuantLab Standard por 3 meses (que normalmente cuesta $120), el sistema cuantitativo con Journal, la guía para aprender a operar como trader cuantitativo y el Rol Fundador con todos sus accesos.</div>
     </div>
     <div class="faq-item">
-      <button class="faq-question">
-        ¿Cuál es la diferencia entre los planes?
+      <button class="faq-question" aria-expanded="false">
+        ¿Qué es el Rol Fundador?
         <div class="faq-icon"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></div>
       </button>
-      <div class="faq-answer">La principal diferencia entre los planes es lo que incluye cada uno. Nuestro plan básico ya te ofrece todas las herramientas que necesitas para operar, pero también puedes pagar un extra por ciertos add-ons que te ayudarán a mejorar y optimizar tu trading.</div>
+      <div class="faq-answer">Es un rol especial que se otorga una sola vez en la vida. Te da acceso a una comunidad única de traders, live trading en directo con traders profesionales, el bias diario, operativas grabadas y llamadas explicativas (clases en directo).</div>
     </div>
     <div class="faq-item">
-      <button class="faq-question">
-        ¿Es para todo el mundo?
+      <button class="faq-question" aria-expanded="false">
+        ¿Hay otros planes durante el especial?
         <div class="faq-icon"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></div>
       </button>
-      <div class="faq-answer">QuantLab está diseñado para traders que quieran complementar su análisis con herramientas cuantitativas. No se necesita experiencia previa en programación ni estadística para usar la plataforma.</div>
+      <div class="faq-answer">No. Durante el especial de Black Friday solo existe un plan: QuantLab Standard de 3 meses por $53.</div>
     </div>
     <div class="faq-item">
-      <button class="faq-question">
-        ¿Puedo cambiar de plan en cualquier momento?
+      <button class="faq-question" aria-expanded="false">
+        ¿Necesito experiencia previa?
         <div class="faq-icon"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></div>
       </button>
-      <div class="faq-answer">Sí. Puedes hacer upgrade o downgrade de tu plan en cualquier momento. Los cambios se aplican al inicio del siguiente ciclo de facturación. Si haces upgrade, el acceso a las nuevas funciones es inmediato.</div>
+      <div class="faq-answer">No. No se necesita experiencia en programación ni en estadística para usar la plataforma, y la guía y la comunidad te acompañan en el proceso de aprender a operar de forma cuantitativa.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        ¿Tengo dudas antes de comprar, con quién hablo?
+        <div class="faq-icon"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></div>
+      </button>
+      <div class="faq-answer">Escríbenos por nuestro <a href="https://discord.gg/yaftTkadHQ" style="color:var(--red-bright)">Discord</a> y te respondemos.</div>
     </div>
   </div>
 </section>
 
-<!-- ADD-ONS MODAL -->
-<div class="addon-modal-overlay" id="addonModalOverlay">
-  <div class="addon-modal">
-    <button class="addon-modal-close" id="addonModalCloseX" aria-label="Cerrar">&times;</button>
-    <div class="addon-modal-eyebrow">Add-ons activados</div>
-    <h3>Esto es lo que incluye</h3>
-    <ul class="addon-modal-list">
-      <li><span class="chk">✅</span> Señales y alertas en vivo: mis puntos de entrada, stops y objetivos en tiempo real.</li>
-      <li><span class="chk">✅</span> Análisis diario y listas de seguimiento: mi estrategia premercado y los niveles que estoy monitoreando.</li>
-      <li><span class="chk">✅</span> Sesiones de trading en vivo: observa cómo opero con NQ/DJI en directo.</li>
-      <li><span class="chk">✅</span> Chat y preguntas y respuestas premium: canales exclusivos para miembros con acceso directo a mi operativa y responder sus dudas.</li>
-      <li><span class="chk">✅</span> Clases educativas en vivo cuatro veces al mes: análisis más profundo de la configuración, el riesgo y la psicología.</li>
-      <li><span class="chk">✅</span> Cómo operar order flow de forma correcta y set-up de configuración.</li>
-    </ul>
-    <div class="addon-modal-price">
-      <span class="price-strike">$150</span>
-      <span class="plan-amount" style="font-size:2rem">$99</span>
-      <span class="plan-unit">USD/mes</span>
-    </div>
-    <button class="addon-modal-close-btn" id="addonModalCloseBtn">Entendido</button>
+<div class="section-divider"></div>
+
+<!-- CTA FINAL -->
+<section class="final-cta">
+  <h2>El 30 de noviembre<br>esta oferta <em>se cierra</em></h2>
+  <p>$53 en lugar de $120, con el Rol Fundador incluido. Asegura tu lugar antes de que el contador llegue a cero.</p>
+  <div class="mini-count" id="miniCount" role="timer" aria-label="Tiempo restante de la oferta">
+    <small>Quedan</small>
+    <span class="d" data-mini="d">--</span><small>días</small>
+    <span data-mini="h">--</span><small>h</small>
+    <span data-mini="m">--</span><small>m</small>
+    <span data-mini="s">--</span><small>s</small>
   </div>
-</div>
+  <div>
+    <a class="btn-cta" data-checkout href="#oferta">Quiero mi lugar fundador</a>
+  </div>
+</section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="nav-logo" onclick="window.location.href='index.html'" style="cursor:pointer">Quant<span style="color:var(--red-bright)">Lab</span></div>
+  <div class="nav-logo" onclick="window.location.href='index.html'">Quant<span>Lab</span></div>
   <div style="font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.08em;color:var(--grey)">
     Quantlab.io / Audiforze / Physco
   </div>
   <div class="footer-copy">© 2026 Geremy Gomez · QuantLab</div>
 </footer>
+<div class="legal">
+  El trading conlleva riesgo de pérdida de capital. QuantLab es una herramienta de análisis y educación; no constituye asesoría financiera ni garantiza resultados.
+</div>
 
 <script>
-/* ---- DATA ---- */
-const pricing = {
-  monthly:   { basic: 25, standard: 50, advanced: 70 },
-  quarterly: { basic: 20, standard: 40, advanced: 70 },
-  annually:  { basic: 15, standard: 35, advanced: 70 }
-};
-const ADDON_PRICE = 150;
-const ADDON_DISCOUNT_PRICE = 99;
-let advancedAddonsActive = false;
-let currentPeriod = 'monthly';
-const billedNote = {
-  monthly:   { basic: '', standard: '', advanced: '' },
-  quarterly: { basic: '', standard: '', advanced: '' },
-  annually:  { basic: '', standard: '', advanced: '' }
-};
-const savings = {
-  monthly:   { basic: null, standard: null, advanced: null },
-  quarterly: { basic: 'Ahorras un 20%', standard: 'Ahorras un 20%', advanced: null },
-  annually:  { basic: 'Ahorras un 30%', standard: 'Ahorras un 30%', advanced: null }
-};
-const plans = [
-  {
-    key: 'basic', name: 'Basic', featured: false,
-    features: [
-      '7 módulos de análisis cuantitativo integrados',
-      'Anomalías estadísticas con ventana móvil',
-      'Soportes & resistencias con clustering adaptativo',
-      '4 mercados: NASDAQ, S&P 500, BTC, Futuros',
-      'Soporte 24/7'
-    ]
-  },
-  {
-    key: 'standard', name: 'Standard', featured: true,
-    features: [
-      '8 módulos de análisis cuantitativo integrados',
-      'Sistemas de predicción cuantitativa — ciclos institucionales ocultos',
-      'Anomalías estadísticas con ventana móvil',
-      'Soportes & resistencias con clustering adaptativo',
-      '6 mercados: NASDAQ, S&P 500, DJI, BTC, Oro, Futuros',
-      'Dashboard personalizable — Dashboard de favoritos',
-      'Soporte 24/7'
-    ]
-  },
-  {
-    key: 'advanced', name: 'Advanced', featured: false,
-    features: [
-      '8 módulos de análisis cuantitativo integrados',
-      'Sistemas de predicción cuantitativa — ciclos institucionales ocultos',
-      '+10 mercados: NASDAQ, S&P 500, DJI, BTC, Oro, etc.',
-      'Dashboard personalizable — Dashboard de favoritos',
-      'Alertas de Discord — anomalías, estado',
-      'Accesoria privada 1:1 — Desarrollo de estrategia + plan de trading',
-      'Journal dinámico',
-      'Soporte 24/7'
-    ]
-  }
-];
+/* ---- CONFIG ---- */
+// Fin de la oferta: 30 de noviembre de 2026, 23:59:59 (hora de República Dominicana, UTC-4)
+const DEADLINE = new Date('2026-11-30T23:59:59-04:00').getTime();
 
-function checkSvg() {
-  return `<svg viewBox="0 0 10 10" width="9" height="9" stroke="#FF2030" fill="none" stroke-width="2.5"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg>`;
-}
+// Enlace de pago del plan Black Friday (Whop). REEMPLAZAR por el checkout real.
+const CHECKOUT_URL = 'https://whop.com/checkout/REEMPLAZA_CON_TU_PLAN_BLACK_FRIDAY';
 
-function renderPlans(period) {
-  currentPeriod = period;
-  const grid = document.getElementById('plansGrid');
-  grid.innerHTML = plans.map(p => {
-    const price = pricing[period][p.key];
-    const note = billedNote[period][p.key];
-    const save = savings[period][p.key];
-    const billedHTML = save ? '<span class="save">' + save + '</span>' : '&nbsp;';
-
-    const isAdvanced = p.key === 'advanced';
-    const showAddonPrice = isAdvanced && advancedAddonsActive;
-
-    const priceHTML = showAddonPrice
-      ? `<span class="plan-currency">$</span>
-         <span class="plan-amount">${ADDON_DISCOUNT_PRICE}</span>
-         <span class="plan-unit">USD</span>`
-      : `<span class="plan-currency">$</span>
-         <span class="plan-amount">${price}</span>
-         <span class="plan-unit">USD</span>`;
-
-    const strikeHTML = showAddonPrice
-      ? `<div class="plan-billed"><span class="price-strike">$${ADDON_PRICE}</span><span class="price-new-badge">Descuento</span></div>`
-      : `<div class="plan-billed">${billedHTML}</div>`;
-
-    const addonToggleHTML = isAdvanced ? `
-      <div class="addon-box">
-        <div class="addon-label-wrap">
-          <span class="addon-label">Add-ons</span>
-          <span class="addon-sublabel">Señales, sesiones en vivo y más</span>
-        </div>
-        <label class="addon-switch">
-          <input type="checkbox" class="addon-checkbox" ${advancedAddonsActive ? 'checked' : ''}>
-          <span class="addon-slider"></span>
-        </label>
-      </div>
-    ` : '';
-
-    return `
-      <div class="plan-card${p.featured ? ' featured' : ''}">
-        ${p.featured ? '<div class="badge-popular">Más popular</div>' : ''}
-        <div class="plan-name">${p.name}</div>
-        <div class="plan-price-wrap">
-          ${priceHTML}
-        </div>
-        <div class="plan-period">por mes</div>
-        ${strikeHTML}
-        ${addonToggleHTML}
-        <button class="btn-start ${p.featured ? 'btn-filled' : 'btn-outline'}" data-plan="${p.key}" data-period="${period}" data-addons="${isAdvanced && advancedAddonsActive}">Get started</button>
-        <div class="features-divider"></div>
-        <ul class="features-list">
-          ${p.features.map(f => `<li><div class="feat-check">${checkSvg()}</div>${f}</li>`).join('')}
-        </ul>
-      </div>
-    `;
-  }).join('');
-
-  // Add click handlers to buttons
-  document.querySelectorAll('.btn-start').forEach(btn => {
-    btn.addEventListener('click', handlePlanSelection);
+/* ---- CHECKOUT ---- */
+document.querySelectorAll('[data-checkout]').forEach(a => {
+  a.href = CHECKOUT_URL;
+  a.addEventListener('click', () => {
+    if (typeof gtag === 'function') {
+      gtag('event', 'begin_checkout', { currency: 'USD', value: 53, items: [{ item_name: 'QuantLab Standard 3M - Black Friday' }] });
+    }
   });
+});
 
-  // Add-ons toggle handler (only exists on Advanced card)
-  const addonCheckbox = document.querySelector('.addon-checkbox');
-  if (addonCheckbox) {
-    addonCheckbox.addEventListener('change', (e) => {
-      advancedAddonsActive = e.target.checked;
-      renderPlans(currentPeriod);
-      if (advancedAddonsActive) {
-        openAddonModal();
-      }
+/* ---- COUNTDOWN ---- */
+const pad = n => String(n).padStart(2, '0');
+const $all = sel => document.querySelectorAll(sel);
+
+function tick() {
+  const diff = DEADLINE - Date.now();
+
+  if (diff <= 0) {
+    document.getElementById('barCount').textContent = 'Oferta finalizada';
+    $all('.promo-date,.promo-sep').forEach(e => e.style.display = 'none');
+    $all('[data-cd],[data-mini]').forEach(e => e.textContent = '00');
+    $all('[data-checkout]').forEach(a => {
+      a.setAttribute('aria-disabled', 'true');
+      a.removeAttribute('href');
+      a.textContent = 'Oferta finalizada';
     });
-  }
-}
-
-/* ---- ADD-ONS MODAL ---- */
-function openAddonModal() {
-  document.getElementById('addonModalOverlay').classList.add('open');
-}
-function closeAddonModal() {
-  document.getElementById('addonModalOverlay').classList.remove('open');
-}
-document.getElementById('addonModalCloseX').addEventListener('click', closeAddonModal);
-document.getElementById('addonModalCloseBtn').addEventListener('click', closeAddonModal);
-document.getElementById('addonModalOverlay').addEventListener('click', (e) => {
-  if (e.target.id === 'addonModalOverlay') closeAddonModal();
-});
-
-function handlePlanSelection(e) {
-  const plan = e.target.dataset.plan;
-  const period = e.target.dataset.period;
-  const addons = e.target.dataset.addons === 'true';
-
-  let url = '';
-
-  if (plan === 'advanced') {
-    url = addons
-      ? 'https://quantlab-five.vercel.app/web/addons.html'
-      : 'https://whop.com/checkout/plan_FgHRXzVbcAiMK';
-  } else if (plan === 'basic') {
-    if (period === 'annually') {
-      url = 'https://whop.com/checkout/plan_xUo0AWuond26H';
-    } else {
-      url = '/web/plans/basic.html';
-    }
-  } else if (plan === 'standard') {
-    if (period === 'annually') {
-      url = 'https://whop.com/checkout/plan_NlABiVE7H8tfT';
-    } else {
-      url = '/web/plans/standard.html';
-    }
+    clearInterval(timer);
+    return;
   }
 
-  if (url) {
-    window.location.href = url;
-  }
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor(diff / 3600000) % 24;
+  const m = Math.floor(diff / 60000) % 60;
+  const s = Math.floor(diff / 1000) % 60;
+  const v = { d: String(d), h: pad(h), m: pad(m), s: pad(s) };
+
+  $all('[data-cd]').forEach(e => e.textContent = (e.dataset.cd === 'd') ? pad(v.d) : v[e.dataset.cd]);
+  $all('[data-mini]').forEach(e => e.textContent = (e.dataset.mini === 'd') ? pad(v.d) : v[e.dataset.mini]);
+  document.getElementById('barCount').textContent = `${v.d}d ${v.h}h ${v.m}m ${v.s}s`;
 }
-
-renderPlans('monthly');
-
-document.querySelectorAll('.toggle-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    renderPlans(btn.dataset.period);
-  });
-});
+tick();
+const timer = setInterval(tick, 1000);
 
 /* ---- FAQ ---- */
 document.getElementById('faqList').addEventListener('click', e => {
@@ -1052,29 +729,17 @@ document.getElementById('faqList').addEventListener('click', e => {
   if (!btn) return;
   const item = btn.closest('.faq-item');
   const wasOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-  if (!wasOpen) item.classList.add('open');
+  $all('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-question').setAttribute('aria-expanded', 'false'); });
+  if (!wasOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
 });
 
 /* ---- SCROLL REVEAL ---- */
-const reveals = document.querySelectorAll('.reveal');
 const ro = new IntersectionObserver(entries => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('on'), (i % 4) * 90);
-      ro.unobserve(e.target);
-    }
+  entries.forEach(en => {
+    if (en.isIntersecting) { en.target.classList.add('on'); ro.unobserve(en.target); }
   });
 }, { threshold: 0.08 });
-reveals.forEach(r => ro.observe(r));
-
-/* ---- HERO ENTRANCE ---- */
-window.addEventListener('load', () => {
-  setTimeout(() => document.getElementById('heroLabel').classList.add('on'), 100);
-  setTimeout(() => document.getElementById('heroTitle').classList.add('on'), 200);
-  setTimeout(() => document.getElementById('heroSub').classList.add('on'), 350);
-});
-
+$all('.reveal').forEach(r => ro.observe(r));
 </script>
 </body>
 </html>
