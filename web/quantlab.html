@@ -54,6 +54,51 @@ body{
 a{color:inherit}
 :focus-visible{outline:2px solid var(--red-bright);outline-offset:3px}
 
+/* ============ MODAL DE DESCUENTO ============ */
+.discount-modal{
+  position:fixed;inset:0;z-index:500;
+  display:flex;align-items:center;justify-content:center;
+  padding:24px;background:rgba(0,0,0,.72);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+}
+.discount-modal[hidden]{display:none}
+.discount-card{
+  position:relative;width:min(460px,100%);padding:44px 32px 32px;
+  text-align:center;background:linear-gradient(145deg,#161616,#080808);
+  border:1px solid var(--red);border-radius:18px;
+  box-shadow:0 24px 80px rgba(0,0,0,.6),0 0 42px rgba(209,18,27,.16);
+}
+.discount-close{
+  position:absolute;top:12px;right:14px;width:32px;height:32px;
+  border:1px solid var(--border2);border-radius:50%;background:transparent;
+  color:var(--grey);font-size:1.35rem;line-height:1;cursor:pointer;
+}
+.discount-close:hover{color:var(--white);border-color:var(--red)}
+.discount-card .section-label{display:block;margin-bottom:12px}
+.discount-card h2{
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,8vw,4rem);
+  letter-spacing:.06em;line-height:1;color:var(--white);margin-bottom:12px;
+}
+.discount-card h2 em{color:var(--red-bright);font-style:normal}
+.discount-card p{color:#aaa;line-height:1.65;margin-bottom:24px}
+.discount-code{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  margin:0 auto 12px;padding:12px 14px 12px 18px;max-width:300px;
+  border:1px dashed var(--red-bright);border-radius:8px;
+  background:rgba(209,18,27,.1);
+}
+.discount-code strong{
+  font-family:'Space Mono',monospace;font-size:1.35rem;letter-spacing:.18em;
+  color:var(--white);
+}
+.copy-code{
+  border:1px solid var(--red);border-radius:5px;padding:8px 10px;
+  background:var(--red);color:var(--white);font-family:'Space Mono',monospace;
+  font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;
+}
+.copy-code:hover{background:var(--red-bright)}
+.copy-status{min-height:1.2em;color:var(--green);font-size:.76rem}
+
 /* ============ BANNER FIJO ============ */
 .promo-bar{
   position:fixed;top:0;left:0;width:100%;height:var(--banner-h);z-index:300;
@@ -672,13 +717,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   El trading conlleva riesgo de pérdida de capital. QuantLab es una herramienta de análisis y educación; no constituye asesoría financiera ni garantiza resultados.
 </div>
 
+<div class="discount-modal" id="discountModal" role="dialog" aria-modal="true" aria-labelledby="discountTitle">
+  <div class="discount-card">
+    <button class="discount-close" id="discountClose" type="button" aria-label="Cerrar anuncio">&times;</button>
+    <span class="section-label">Oferta especial</span>
+    <h2 id="discountTitle">56% de <em>descuento</em></h2>
+    <p>Usa este código durante el checkout para obtener tu precio especial en QuantLab.</p>
+    <div class="discount-code">
+      <strong id="discountCode">YEAR</strong>
+      <button class="copy-code" id="copyCode" type="button">Copiar</button>
+    </div>
+    <div class="copy-status" id="copyStatus" role="status" aria-live="polite"></div>
+  </div>
+</div>
+
 <script>
 /* ---- CONFIG ---- */
 // Fin de la oferta: 30 de noviembre de 2026, 23:59:59 (hora de República Dominicana, UTC-4)
 const DEADLINE = new Date('2026-11-30T23:59:59-04:00').getTime();
 
-// Enlace de pago del plan Black Friday (Whop). REEMPLAZAR por el checkout real.
-const CHECKOUT_URL = 'https://whop.com/checkout/REEMPLAZA_CON_TU_PLAN_BLACK_FRIDAY';
+// Enlace de pago del plan Black Friday.
+const CHECKOUT_URL = 'https://whop.com/checkout/plan_85MILu3xBaw41';
+const DISCOUNT_CODE = 'YEAR';
 
 /* ---- CHECKOUT ---- */
 document.querySelectorAll('[data-checkout]').forEach(a => {
@@ -687,6 +747,40 @@ document.querySelectorAll('[data-checkout]').forEach(a => {
     if (typeof gtag === 'function') {
       gtag('event', 'begin_checkout', { currency: 'USD', value: 53, items: [{ item_name: 'QuantLab Standard 3M - Black Friday' }] });
     }
+  });
+
+  /* ---- MODAL DE DESCUENTO ---- */
+  const discountModal = document.getElementById('discountModal');
+  const discountClose = document.getElementById('discountClose');
+  const copyCode = document.getElementById('copyCode');
+  const copyStatus = document.getElementById('copyStatus');
+  document.body.style.overflow = 'hidden';
+  discountClose.focus();
+
+  function closeDiscountModal() {
+    discountModal.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  discountClose.addEventListener('click', closeDiscountModal);
+  discountModal.addEventListener('click', e => {
+    if (e.target === discountModal) closeDiscountModal();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && !discountModal.hidden) closeDiscountModal();
+  });
+  copyCode.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(DISCOUNT_CODE);
+    } catch {
+      const textArea = document.createElement('textarea');
+      textArea.value = DISCOUNT_CODE;
+      textArea.select();
+      document.execCommand('copy');
+      textArea.remove();
+    }
+    copyStatus.textContent = 'Código copiado';
+    copyCode.textContent = 'Copiado';
   });
 });
 
