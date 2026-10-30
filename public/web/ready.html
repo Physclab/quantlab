@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gracias — QuantLab</title>
+  <link rel="shortcut icon" href="ico.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
+  
+  <style>
+    :root {
+      --bg: #050505;
+      --surface: #0a0a0a;
+      --card: #0f0f0f;
+      --border: #1a1a1a;
+      --accent: #D1121B;
+      --accent-glow: rgba(209, 18, 27, 0.25);
+      --text: #F0EDED;
+      --muted: #888;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-mono: 'Space Mono', monospace;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Grid background */
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Glow */
+    .hero-glow {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+    }
+
+    /* Card */
+    .thanks-card {
+      position: relative;
+      z-index: 1;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 56px 48px;
+      max-width: 560px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 0 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04);
+      animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    @keyframes slideUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(209, 18, 27, 0.3);
+      padding: 6px 14px;
+      border-radius: 4px;
+      margin-bottom: 28px;
+      background: rgba(209, 18, 27, 0.06);
+    }
+
+    .thanks-card h1 {
+      font-family: var(--font-display);
+      font-size: 3.2rem;
+      line-height: 1;
+      letter-spacing: 0.02em;
+      margin-bottom: 16px;
+      background: linear-gradient(180deg, #fff 0%, #aaa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .thanks-card .subtitle {
+      font-family: var(--font-body);
+      font-size: 1.15rem;
+      color: var(--text);
+      margin-bottom: 32px;
+      font-weight: 400;
+    }
+
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--accent);
+      margin: 0 auto 32px;
+      opacity: 0.6;
+    }
+
+    .info-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      text-align: left;
+      margin-bottom: 24px;
+    }
+
+    .info-block p {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .info-block p strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .info-block .highlight {
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      display: block;
+      margin-top: 12px;
+      padding: 10px 14px;
+      background: rgba(209, 18, 27, 0.08);
+      border-left: 2px solid var(--accent);
+      border-radius: 0 4px 4px 0;
+    }
+
+    .footer-note {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: #555;
+      margin-top: 8px;
+    }
+
+    .logo {
+      position: fixed;
+      top: 32px;
+      left: 40px;
+      z-index: 2;
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: #fff;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .logo span { color: var(--accent); }
+
+    /* Custom cursor */
+    #cursor, #cursor-ring {
+      position: fixed;
+      top: 0; left: 0;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+    }
+    #cursor {
+      width: 6px; height: 6px;
+      background: var(--accent);
+      transition: width 0.2s, height 0.2s;
+    }
+    #cursor-ring {
+      width: 32px; height: 32px;
+      border: 1px solid rgba(209, 18, 27, 0.4);
+      transition: all 0.15s ease-out;
+    }
+
+    @media (max-width: 640px) {
+      .thanks-card { padding: 40px 28px; }
+      .thanks-card h1 { font-size: 2.4rem; }
+      .logo { top: 20px; left: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grid-bg"></div>
+  <div class="hero-glow"></div>
+
+  <a href="quantlab.html" class="logo">Quant<span>Lab</span></a>
+
+  <div class="thanks-card">
+    <div class="badge">Compra Confirmada</div>
+    
+    <h1>GRACIAS POR<br>TU COMPRA</h1>
+    
+    <p class="subtitle">Bienvenido a la familia QuantLab.</p>
+    
+    <div class="divider"></div>
+    
+    <div class="info-block">
+      <p>
+        En tu <strong>correo electrónico</strong> encontrarás todo lo necesario para comenzar:
+      </p>
+      <span class="highlight">
+        • Link de descarga único<br>
+        • License Key exclusiva (1 dispositivo)
+      </span>
+    </div>
+    
+    <p class="footer-note">
+      Si no recibes el email en los próximos 5 minutos,<br>
+      revisa tu carpeta de spam o contacta soporte.
+    </p>
+  </div>
+
+  <!-- Custom cursor elements -->
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <script>
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    const cursorRing = document.getElementById('cursor-ring');
+
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+      setTimeout(() => {
+        cursorRing.style.left = e.clientX + 'px';
+        cursorRing.style.top = e.clientY + 'px';
+      }, 80);
+    });
+
+    document.addEventListener('mousedown', () => {
+      cursor.style.width = '4px';
+      cursor.style.height = '4px';
+      cursorRing.style.transform = 'translate(-50%, -50%) scale(0.8)';
+    });
+
+    document.addEventListener('mouseup', () => {
+      cursor.style.width = '6px';
+      cursor.style.height = '6px';
+      cursorRing.style.transform = 'translate(-50%, -50%) scale(1)';
+    });
+  </script>
+
+</body>
+</html>
